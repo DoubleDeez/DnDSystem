@@ -4,7 +4,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<link rel="stylesheet" type="text/css" href="style.css">
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
-        <title>DoubleDeez's DnD Management System</title>
+        <title>DnD Manager System</title>
     </head>
     <body>
 		<div id='menu'></div>
