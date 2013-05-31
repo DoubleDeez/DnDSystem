@@ -19,6 +19,7 @@ var dnd = {
 			$("#info").hide();
 			$("#addChar").hide();
 			$("#editChar").show();
+			$("#editCharList").load("calls/charList.php");
 			$("#manageEnemies").hide();
 		});
 		$("#manageEnemiesBtn").click(function() {
@@ -29,6 +30,22 @@ var dnd = {
 		});
 		$("#logoutBtn").click(function() {
 			window.location.replace("logout.php");
+		});
+		$("#addCharAction").click(function() {
+			var dataD = {
+				name: $("#name").val(),
+				class: $("#class").val(),
+				hp: $("#maxhp").val(),
+				ac: $("#ac").val(),
+				fort: $("#fort").val(),
+				will: $("#will").val(),
+				reflex: $("#reflex").val()
+			};
+			$("#addCharAction").attr("disabled", "disabled");
+			$.post("calls/addChar.php", JSON.stringify(dataD), function(data, status) {
+				alert(data);
+				$("#addCharAction").removeAttr("disabled");
+			});
 		});
 	}
 };
