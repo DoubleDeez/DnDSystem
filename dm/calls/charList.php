@@ -45,6 +45,7 @@ while ($row = mysql_fetch_array($result)) {
 	?>
 	<script>
 		$("#edit<?php echo $row['id']; ?>").click(function() {
+			$("#editid").val("<?php echo $row['id']; ?>");
 			$("#editname").val("<?php echo $row['name']; ?>");
 			$("#editclass").val("<?php echo $row['class']; ?>");
 			$("#edithp").val("<?php echo $row['hp']; ?>");

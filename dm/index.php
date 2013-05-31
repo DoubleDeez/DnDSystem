@@ -63,6 +63,7 @@ if (isset($_SESSION['sid']) && isset($_SESSION['id'])) {
 				<div id="editCharList">
 				</div>
 				<br />
+				<input type="hidden" id="editid" />
 				<label for="name">Name: </label>
 				<input type="text" id="editname" />
 				<br />
@@ -91,6 +92,9 @@ if (isset($_SESSION['sid']) && isset($_SESSION['id'])) {
 				<input type="text" id="editexp" />
 				<br />
 				<input type="button" id="editCharAction" value="Update Character" />
+				<br />
+				<br />
+				<input type="button" id="delCharAction" value="Delete Character" />
 			</div>
 			<div id='manageEnemies'></div>
 		</div>

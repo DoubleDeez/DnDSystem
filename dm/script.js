@@ -47,5 +47,25 @@ var dnd = {
 				$("#addCharAction").removeAttr("disabled");
 			});
 		});
+		$("#editCharAction").click(function() {
+			var dataD = {
+				id: $("#editid").val(),
+				name: $("#editname").val(),
+				class: $("#editclass").val(),
+				maxhp: $("#editmaxhp").val(),
+				hp: $("#edithp").val(),
+				ac: $("#editac").val(),
+				fort: $("#editfort").val(),
+				will: $("#editwill").val(),
+				reflex: $("#editreflex").val(),
+				exp: $("#editexp").val()
+			};
+			$("#editCharAction").attr("disabled", "disabled");
+			$.post("calls/editChar.php", JSON.stringify(dataD), function(data, status) {
+				$("#editCharList").load("calls/charList.php");
+				alert(data);
+				$("#editCharAction").removeAttr("disabled");
+			});
+		});
 	}
 };
