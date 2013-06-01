@@ -40,6 +40,7 @@ var dnd = {
 			$("#editChar").hide();
 			$("#addEnemies").hide();
 			$("#editEnemies").show();
+			$("#editEnemyList").load("calls/enemyList.php");
 		});
 		$("#logoutBtn").click(function() {
 			window.location.replace("logout.php");
@@ -134,6 +135,25 @@ var dnd = {
 			$.post("calls/addEnemy.php", JSON.stringify(dataD), function(data, status) {
 				alert(data);
 				$("#addEnemyAction").removeAttr("disabled");
+			});
+		});
+		$("#editEnemyAction").click(function() {
+			var dataD = {
+				id: $("#editEid").val(),
+				name: $("#editEname").val(),
+				type: $("#editEtype").val(),
+				maxhp: $("#editEmaxhp").val(),
+				hp: $("#editEhp").val(),
+				hide: $("#editEhide").is(":checked"),
+				mask: $("#editEmaskDmg").is(":checked"),
+				disable: $("#editEdisable").is(":checked")
+			};
+			$("#editEnemyAction").attr("disabled", "disabled");
+			$.post("calls/editEnemy.php", JSON.stringify(dataD), function(data, status) {
+				$("#editEnemyList").load("calls/enemyList.php");
+				
+				alert(data);
+				$("#editEnemyAction").removeAttr("disabled");
 			});
 		});
 	}

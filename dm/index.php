@@ -169,7 +169,7 @@ if (isset($_SESSION['sid']) && isset($_SESSION['id'])) {
 				<br style="clear: both;" />
 				<br/>
 				<div style="float:left;">
-					<input type="button" id="editCharAction" value="Update Character" />
+					<input type="button" id="editEnemyAction" value="Update Enemy" />
 				</div>
 				<br style="clear: both;" />
 				<br />

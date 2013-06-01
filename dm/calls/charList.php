@@ -6,7 +6,7 @@ mysql_select_db("$db") or die(mysql_error());
 
 $result = mysql_query("SELECT * FROM characters") or die(mysql_error());
 ?>
-<table cellpadding="0" cellspacing="0" style="width:50%;border-width: 1px; border-style: solid; text-align: left;">
+<table cellpadding="0" cellspacing="0" style="width:75%;border-width: 1px; border-style: solid; text-align: left;">
 	<tr style="border-width: 1px; border-style: solid; text-align: left;">
 		<th>ID</th>
 		<th>Class</th>
