@@ -3,31 +3,43 @@ var dnd = {
 	init: function() {
 		$("#addChar").hide();
 		$("#editChar").hide();
-		$("#manageEnemies").hide();
+		$("#addEnemies").hide();
+		$("#editEnemies").hide();
 		$("#infoBtn").click(function() {
 			$("#info").show();
 			$("#addChar").hide();
 			$("#editChar").hide();
-			$("#manageEnemies").hide();
+			$("#addEnemies").hide();
+			$("#editEnemies").hide();
 		});
 		$("#addCharBtn").click(function() {
 			$("#info").hide();
 			$("#addChar").show();
 			$("#editChar").hide();
-			$("#manageEnemies").hide();
+			$("#addEnemies").hide();
+			$("#editEnemies").hide();
 		});
 		$("#editCharBtn").click(function() {
 			$("#info").hide();
 			$("#addChar").hide();
 			$("#editChar").show();
 			$("#editCharList").load("calls/charList.php");
-			$("#manageEnemies").hide();
+			$("#addEnemies").hide();
+			$("#editEnemies").hide();
 		});
-		$("#manageEnemiesBtn").click(function() {
+		$("#addEnemiesBtn").click(function() {
 			$("#info").hide();
 			$("#addChar").hide();
 			$("#editChar").hide();
-			$("#manageEnemies").show();
+			$("#addEnemies").show();
+			$("#editEnemies").hide();
+		});
+		$("#editEnemiesBtn").click(function() {
+			$("#info").hide();
+			$("#addChar").hide();
+			$("#editChar").hide();
+			$("#addEnemies").hide();
+			$("#editEnemies").show();
 		});
 		$("#logoutBtn").click(function() {
 			window.location.replace("logout.php");
@@ -108,6 +120,20 @@ var dnd = {
 				
 				alert(data);
 				$("#editInvAction").removeAttr("disabled");
+			});
+		});
+		$("#addEnemyAction").click(function() {
+			var dataD = {
+				name: $("#addEname").val(),
+				type: $("#addEtype").val(),
+				hp: $("#addEmaxhp").val(),
+				hide: $("#addEhide").is(":checked"),
+				mask: $("#addEmaskDmg").is(":checked")
+			};
+			$("#addEnemyAction").attr("disabled", "disabled");
+			$.post("calls/addEnemy.php", JSON.stringify(dataD), function(data, status) {
+				alert(data);
+				$("#addEnemyAction").removeAttr("disabled");
 			});
 		});
 	}
