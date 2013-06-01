@@ -68,13 +68,28 @@ var dnd = {
 				item.quantity = $("#invQuantity"+item.id).val();
 				dnd.inventory[i] = item;
 			}
-			dataD.inventory = new Array();
-			dataD.inventory = dnd.inventory;
 			$("#editCharAction").attr("disabled", "disabled");
 			$.post("calls/editChar.php", JSON.stringify(dataD), function(data, status) {
 				$("#editCharList").load("calls/charList.php");
 				alert(data);
 				$("#editCharAction").removeAttr("disabled");
+			});
+		});
+		$("#addInvAction").click(function() {
+			var dataD = {
+				charID: $("#invAddCharID").val(),
+				name: $("#invAddName").val(),
+				desc: $("#invAddDesc").val(),
+				qty: $("#invAddQty").val()
+			};
+			$("#addInvAction").attr("disabled", "disabled");
+			$.post("calls/addInv.php", JSON.stringify(dataD), function(data, status) {
+				$("#editCharList").load("calls/charList.php", function() {
+					$("#edit" + $("#invAddCharID").val()).trigger("click");
+				});
+				
+				alert(data);
+				$("#addInvAction").removeAttr("disabled");
 			});
 		});
 	}

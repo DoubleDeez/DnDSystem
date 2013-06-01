@@ -19,14 +19,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	$will = $in->will;
 	$exp = $in->exp;
 
-	$inv = $in->inventory;
-	foreach ($inv as $item) {
-		$invName = $item->name;
-		$invDesc = $item->desc;
-		$invQuantity = $item->quantity;
-		$invID = $item->id;
-		mysql_query("UPDATE `inventory` SET `name` = '".$invName."', `desc` = '".$invDesc."', `qty` = '".$invQuantity."' WHERE  `id` = '".$invID."'") or die(mysql_error());
-	}
+//	$inv = $in->inventory;
+//	foreach ($inv as $item) {
+//		$invName = $item->name;
+//		$invDesc = $item->desc;
+//		$invQuantity = $item->quantity;
+//		$invID = $item->id;
+//		mysql_query("UPDATE `inventory` SET `name` = '".$invName."', `desc` = '".$invDesc."', `qty` = '".$invQuantity."' WHERE  `id` = '".$invID."'") or die(mysql_error());
+//	}
 
 	mysql_query("UPDATE characters SET name='$name', maxhp='$maxhp', hp='$hp', class='$class', ac='$ac', fortitude='$fort', reflex='$reflex', will='$will', exp='$exp' WHERE id='$id'") or die(mysql_error());
 

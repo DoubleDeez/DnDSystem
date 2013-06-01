@@ -63,43 +63,60 @@ if (isset($_SESSION['sid']) && isset($_SESSION['id'])) {
 				<div id="editCharList">
 				</div>
 				<br />
-				<div style="float:left;"
-				<input type="hidden" id="editid" />
-				<label for="name">Name: </label>
-				<input type="text" id="editname" />
-				<br />
-				<label for="name">Class: </label>
-				<input type="text" id="editclass" />
-				<br />
-				<label for="name">Current Health Points: </label>
-				<input type="text" id="edithp" />
-				<br />
-				<label for="name">Max Health Points: </label>
-				<input type="text" id="editmaxhp" />
-				<br />
-				<label for="name">AC: </label>
-				<input type="text" id="editac" />
-				<br />
-				<label for="name">Fortitude: </label>
-				<input type="text" id="editfort" />
-				<br />
-				<label for="name">Reflex: </label>
-				<input type="text" id="editreflex" />
-				<br />
-				<label for="name">Will: </label>
-				<input type="text" id="editwill" />
-				<br />
-				<label for="name">EXP: </label>
-				<input type="text" id="editexp" />
+				<div style="float:left;">
+					<input type="hidden" id="editid" />
+					<label for="name">Name: </label>
+					<input type="text" id="editname" />
+					<br />
+					<label for="name">Class: </label>
+					<input type="text" id="editclass" />
+					<br />
+					<label for="name">Current Health Points: </label>
+					<input type="text" id="edithp" />
+					<br />
+					<label for="name">Max Health Points: </label>
+					<input type="text" id="editmaxhp" />
+					<br />
+					<label for="name">AC: </label>
+					<input type="text" id="editac" />
+					<br />
+					<label for="name">Fortitude: </label>
+					<input type="text" id="editfort" />
+					<br />
+					<label for="name">Reflex: </label>
+					<input type="text" id="editreflex" />
+					<br />
+					<label for="name">Will: </label>
+					<input type="text" id="editwill" />
+					<br />
+					<label for="name">EXP: </label>
+					<input type="text" id="editexp" />
 				</div>
 				<div id="inventoryList" style="float:left;">
 				</div>
 				<br style="clear: both;" />
 				<br/>
-				<input type="button" id="editCharAction" value="Update Character" />
+				<div style="float:left;">
+					<input type="button" id="editCharAction" value="Update Character" />
+				</div>
+				<div style="float:left;">
+					<input type="button" id="editInvAction" value="Update Inventory" />
+					<br />
+				</div>
+				<br style="clear: both;" />
 				<br />
 				<br />
-				<input type="button" id="delCharAction" value="Delete Character" />
+				<div>
+					<label for="invAddName">Name</label>
+					<input type="text" id="invAddName">&nbsp;
+					<input type="hidden" id="invAddCharID">
+					<label for="invAddDesc">Desc</label>
+					<input type="text" id="invAddDesc">&nbsp;
+					<label for="invAddQty">Quantity</label>
+					<input type="text" id="invAddQty"><br />
+					<input type="button" id="addInvAction" value="Add to Inventory" />
+					<br />
+				</div>
 			</div>
 			<div id='manageEnemies'></div>
 		</div>
