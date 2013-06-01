@@ -55,6 +55,28 @@ while ($row = mysql_fetch_array($result)) {
 			$("#editreflex").val("<?php echo $row['reflex']; ?>");
 			$("#editwill").val("<?php echo $row['will']; ?>");
 			$("#editexp").val("<?php echo $row['exp']; ?>");
+			<?php
+				$invresult = mysql_query("SELECT * FROM inventory WHERE charid='".$row['id']."'") or die(mysql_error());
+				?>
+						$("#inventoryList").html("");
+				<?php
+				while ($invrow = mysql_fetch_array($invresult)) {
+					?>
+						$("#inventoryList").append("<input type=\"text\" id=\"invName<?php echo $invrow['id']; ?>\" value=\"<?php echo $invrow['name']; ?>\" >&nbsp;");
+						$("#inventoryList").append("<input type=\"text\" id=\"invDesc<?php echo $invrow['id']; ?>\" value=\"<?php echo $invrow['desc']; ?>\" >&nbsp;");
+						$("#inventoryList").append("<input type=\"text\" id=\"invQuantity<?php echo $invrow['id']; ?>\" value=\"<?php echo $invrow['qty']; ?>\" ><br />");
+						
+						dnd.inventory = new Array();
+						
+						dnd.inventory.push({
+							"id": "<?php echo $invrow['id']; ?>",
+							"name": "<?php echo $invrow['name']; ?>",
+							"desc": "<?php echo $invrow['desc']; ?>",
+							"quantity": "<?php echo $invrow['quantity']; ?>"
+						});
+					<?php
+				}
+			?>
 		});
 	</script>
 	<?php

@@ -63,6 +63,7 @@ if (isset($_SESSION['sid']) && isset($_SESSION['id'])) {
 				<div id="editCharList">
 				</div>
 				<br />
+				<div style="float:left;"
 				<input type="hidden" id="editid" />
 				<label for="name">Name: </label>
 				<input type="text" id="editname" />
@@ -90,7 +91,11 @@ if (isset($_SESSION['sid']) && isset($_SESSION['id'])) {
 				<br />
 				<label for="name">EXP: </label>
 				<input type="text" id="editexp" />
-				<br />
+				</div>
+				<div id="inventoryList" style="float:left;">
+				</div>
+				<br style="clear: both;" />
+				<br/>
 				<input type="button" id="editCharAction" value="Update Character" />
 				<br />
 				<br />

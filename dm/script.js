@@ -1,4 +1,5 @@
 var dnd = {
+	inventory: new Array(),
 	init: function() {
 		$("#addChar").hide();
 		$("#editChar").hide();
@@ -60,6 +61,15 @@ var dnd = {
 				reflex: $("#editreflex").val(),
 				exp: $("#editexp").val()
 			};
+			for (var i = 0; i < dnd.inventory.length; i++) {
+				var item = dnd.inventory[i];
+				item.name = $("#invName"+item.id).val();
+				item.desc = $("#invDesc"+item.id).val();
+				item.quantity = $("#invQuantity"+item.id).val();
+				dnd.inventory[i] = item;
+			}
+			dataD.inventory = new Array();
+			dataD.inventory = dnd.inventory;
 			$("#editCharAction").attr("disabled", "disabled");
 			$.post("calls/editChar.php", JSON.stringify(dataD), function(data, status) {
 				$("#editCharList").load("calls/charList.php");
