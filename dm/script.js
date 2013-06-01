@@ -92,5 +92,23 @@ var dnd = {
 				$("#addInvAction").removeAttr("disabled");
 			});
 		});
+		$("#editInvAction").click(function() {
+			for (var i = 0; i < dnd.inventory.length; i++) {
+				var item = dnd.inventory[i];
+				item.name = $("#invName"+item.id).val();
+				item.desc = $("#invDesc"+item.id).val();
+				item.quantity = $("#invQuantity"+item.id).val();
+				dnd.inventory[i] = item;
+			}
+			$("#editInvAction").attr("disabled", "disabled");
+			$.post("calls/editInv.php", JSON.stringify(dnd.inventory), function(data, status) {
+				$("#editCharList").load("calls/charList.php", function() {
+					$("#edit" + $("#invAddCharID").val()).trigger("click");
+				});
+				
+				alert(data);
+				$("#editInvAction").removeAttr("disabled");
+			});
+		});
 	}
 };

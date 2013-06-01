@@ -35,6 +35,7 @@ if (isset($_SESSION['sid']) && isset($_SESSION['id'])) {
 		<div id='menu'><a href='#' id='infoBtn'>Info</a> | <a href='#' id='addCharBtn'>Add a Character</a> | <a href='#' id='editCharBtn'>Edit a Character</a> | <a href='#' id='manageEnemiesBtn'>Manage Enemies</a> | <a href='#' id='logoutBtn'>Log Out</a></div>
 		<div id='main'>
 			<div id='info'>This is basic as shit for now, I'll work on making the entire thing better later.</div>
+			<!-- Add Character Page -->
 			<div id='addChar'>
 				<label for="name">Name: </label>
 				<input type="text" id="name" />
@@ -59,6 +60,7 @@ if (isset($_SESSION['sid']) && isset($_SESSION['id'])) {
 				<br />
 				<input type="button" id="addCharAction" value="Create Character" />
 			</div>
+			<!-- Edit Character Page -->
 			<div id='editChar'>
 				<div id="editCharList">
 				</div>
@@ -118,7 +120,10 @@ if (isset($_SESSION['sid']) && isset($_SESSION['id'])) {
 					<br />
 				</div>
 			</div>
-			<div id='manageEnemies'></div>
+			<!-- Manage Enemies Page -->
+			<div id='manageEnemies'>
+				<div id="editEnemyList"></div>
+			</div>
 		</div>
 		<div id='footer'></div>
 		<script>
