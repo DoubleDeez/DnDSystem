@@ -45,7 +45,7 @@ $charRes = mysql_query("SELECT * FROM characters WHERE disable='0'") or die(mysq
 							<span class="charExpToLevel">EXP to Level: <?php echo getExpToLevel($exp); ?></span>
 						</div>
 						<div style="float: right;">
-							<span class="charHP" style="color: <?php echo $hpcolour; ?>;"><?php echo $hp . "/" . $maxhp; ?></span>
+							<span class="charHP" style="color: <?php echo $hpcolour; ?>;"><?php echo $hp . "/" . $maxhp; echo ($row['temphp'] == 0) ? "" : " + ".$row['temphp']; ?></span>
 						</div>
 						<br style="clear: both;" />
 						<div style="float: left;" />
@@ -86,32 +86,32 @@ $charRes = mysql_query("SELECT * FROM characters WHERE disable='0'") or die(mysq
 						<span class="statHeading">Ability Scores:</span><br />
 						<table style="font-family: Verdana,Arial,sans-serif;border:0px;width:300px;padding-top:5px;">
 							<tr>
-								<th style="font-size:14px;width:25%;">Str</th>
+								<th style="font-size:14px;width:25%;">Str:</th>
 								<td style="font-size:13px;width:25%;"><?php echo $row['str']; ?></td>
 								<td style="font-size:13px;width:25%;">+<?php echo $row['strMod']; ?></td>
 							</tr>
 							<tr>
-								<th style="font-size:14px;width:25%;">Con</th>
+								<th style="font-size:14px;width:25%;">Con:</th>
 								<td style="font-size:13px;width:25%;"><?php echo $row['con']; ?></td>
 								<td style="font-size:13px;width:25%;">+<?php echo $row['conMod']; ?></td>
 							</tr>
 							<tr>
-								<th style="font-size:14px;width:25%;">Dex</th>
+								<th style="font-size:14px;width:25%;">Dex:</th>
 								<td style="font-size:13px;width:25%;"><?php echo $row['dex']; ?></td>
 								<td style="font-size:13px;width:25%;">+<?php echo $row['dexMod']; ?></td>
 							</tr>
 							<tr>
-								<th style="font-size:14px;width:25%;">Int</th>
+								<th style="font-size:14px;width:25%;">Int:</th>
 								<td style="font-size:13px;width:25%;"><?php echo $row['int']; ?></td>
 								<td style="font-size:13px;width:25%;">+<?php echo $row['intMod']; ?></td>
 							</tr>
 							<tr>
-								<th style="font-size:14px;width:25%;">Wis</th>
+								<th style="font-size:14px;width:25%;">Wis:</th>
 								<td style="font-size:13px;width:25%;"><?php echo $row['wis']; ?></td>
 								<td style="font-size:13px;width:25%;">+<?php echo $row['wisMod']; ?></td>
 							</tr>
 							<tr>
-								<th style="font-size:14px;width:25%;">Cha</th>
+								<th style="font-size:14px;width:25%;">Cha:</th>
 								<td style="font-size:13px;width:25%;"><?php echo $row['cha']; ?></td>
 								<td style="font-size:13px;width:25%;">+<?php echo $row['chaMod']; ?></td>
 							</tr>
