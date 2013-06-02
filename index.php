@@ -18,7 +18,34 @@ mysql_select_db("$db") or die(mysql_error());
         <title>DnD Manager System</title>
     </head>
     <body onload='setTimeout("location.reload(true);", 60000);'>
-		<div id='menu'></div>
+		<div id='menu'>
+			<div style="display: inline-block;width:10%;">
+				<a id="collAll" class="linkBtn">Collapse All</a>
+			</div>
+			<div style="display: inline-block;width:70%;">
+			<?php 
+				$menuRes = mysql_query("SELECT * FROM characters WHERE disable='0'") or die(mysql_error());
+				$menuCount = 0;
+				while ($mrow = mysql_fetch_array($menuRes)) {
+					$mhp = $mrow['hp'];
+					$mmaxhp = $mrow['maxhp'];
+					$mhpcolour = "#006400";
+					if ($mhp <= 0) {
+						$mhpcolour = "#FF0000";
+					} else if ($mhp <= ($mmaxhp / 2)) {
+						$mhpcolour = "#FFA500";
+					}
+			?>
+				<a href="#<?php echo $menuCount; ?>" class="linkBtn" style="font-size:14px;"><?php echo $mrow['name']; ?></a>
+				<span style="color:<?php echo $mhpcolour; ?>;font-weight:bold;font-size:14px;"> (<?php echo $mhp . "/" . $mmaxhp; echo ($mrow['temphp'] == 0) ? "" : " + ".$mrow['temphp']; ?>)</span>
+			<?php $menuCount++;} ?>
+			</div>
+			<div style="display: inline-block;width:10%;">
+				<a href="#top" class="linkBtn">Top of Page</a>
+			</div>
+			<br style="clear:both;" />
+		</div>
+		<a name="top" />
 		<div id='main'>
 			<div id='content'>
 				<?php
@@ -51,6 +78,7 @@ mysql_select_db("$db") or die(mysql_error());
 						<span class='charHP' style="color: <?php echo $hpcolour; ?>;"><?php echo $enHPmsg; ?></span>
 					</div>
 					<br style='clear: both;' />
+					<a name="0" />
 				</div>
 				<?php
 					if((($enNum % 2) == 1) || (($enNum + 1) == mysql_num_rows($enRes))) {
@@ -60,6 +88,7 @@ mysql_select_db("$db") or die(mysql_error());
 					$enNum++;
 				}
 				$charRes = mysql_query("SELECT * FROM characters WHERE disable='0'") or die(mysql_error());
+				$charCount = 1;
 				while ($row = mysql_fetch_array($charRes)) {
 					$hp = $row['hp'];
 					$maxhp = $row['maxhp'];
@@ -74,7 +103,7 @@ mysql_select_db("$db") or die(mysql_error());
 					?>
 					<div class="charInfo">
 						<div style="float: left;">
-							<span class="charName"><?php echo $row['name']; ?></span>
+							<span class="charName"><?php echo $row['name']; ?></span>&nbsp;<a class="linkBtn toggleChar" id="toggleChar<?php echo $row['id']; ?>">(collapse)</a>
 							<br/>
 							<span class="charType"><?php echo $row['class'] ?></span>
 							<br/>
@@ -86,6 +115,7 @@ mysql_select_db("$db") or die(mysql_error());
 							<span class="charHP" style="color: <?php echo $hpcolour; ?>;"><?php echo $hp . "/" . $maxhp; echo ($row['temphp'] == 0) ? "" : " + ".$row['temphp']; ?></span>
 						</div>
 						<br style="clear: both;" />
+						<div class="charBox" id="char<?php echo $row['id']; ?>">
 						<div style="float: left;" />
 						<br />
 						<table style="font-family: Verdana,Arial,sans-serif;border:0px;width:300px;padding-top:5px;">
@@ -155,11 +185,11 @@ mysql_select_db("$db") or die(mysql_error());
 							</tr>
 						</table>
 					</div>
-					<div style="float: left;padding-left:25px;" />
+					<div style="float: left;padding-left:25px;">
 					<br />
 					<span class="statHeading">Inventory: </span><a class="linkBtn" id="toggleInv<?php echo $row['id']; ?>">(hide)</a><br />
 					<div id="inv<?php echo $row['id']; ?>">
-					<table style="font-family: Verdana,Arial,sans-serif;border-width:0px;width:auto;max-width:350px;padding-top:5px;" cellspacing="0">
+					<table style="font-family: Verdana,Arial,sans-serif;border-width:0px;width:auto;width:350px;padding-top:5px;" cellspacing="0">
 						<?php
 						$invRes = mysql_query("SELECT * FROM inventory WHERE charid='" . $row['id'] . "'") or die(mysql_error());
 
@@ -189,6 +219,7 @@ mysql_select_db("$db") or die(mysql_error());
 	?>
 					</table>
 					</div>
+					</div>
 					<script>
 						$("#toggleInv<?php echo $row['id']; ?>").click(function() {
 							if($(this).html() === "(hide)") {
@@ -200,15 +231,128 @@ mysql_select_db("$db") or die(mysql_error());
 							}
 						});
 					</script>
+					<div style="float: left;padding-left:30px;">
+					<br />
+					<span class="statHeading">Skills: </span><a class="linkBtn" id="toggleSkill<?php echo $row['id']; ?>">(hide)</a><br />
+					<div id="skl<?php echo $row['id']; ?>">
+					<table style="font-family: Verdana,Arial,sans-serif;border-width:0px;width:auto;width:300px;padding-top:5px;" cellspacing="0">
+						<tr>
+							<th style="font-size:14px;width:75%;">Acrobatics (Dex)</th>
+							<td style="font-size:13px;width:25%;"><?php echo ($row['acr'] >= 0) ? "+" : ""; echo $row['acr']; ?></td>
+						</tr>
+						<tr>
+							<th style="font-size:14px;width:75%;">Arcana (Int)</th>
+							<td style="font-size:13px;width:25%;"><?php echo ($row['arc'] >= 0) ? "+" : ""; echo $row['arc']; ?></td>
+						</tr>
+						<tr>
+							<th style="font-size:14px;width:75%;">Athletics (Str)</th>
+							<td style="font-size:13px;width:25%;"><?php echo ($row['ath'] >= 0) ? "+" : ""; echo $row['ath']; ?></td>
+						</tr>
+						<tr>
+							<th style="font-size:14px;width:75%;">Bluff (Cha)</th>
+							<td style="font-size:13px;width:25%;"><?php echo ($row['blu'] >= 0) ? "+" : ""; echo $row['blu']; ?></td>
+						</tr>
+						<tr>
+							<th style="font-size:14px;width:75%;">Diplomacy (Cha)</th>
+							<td style="font-size:13px;width:25%;"><?php echo ($row['dip'] >= 0) ? "+" : ""; echo $row['dip']; ?></td>
+						</tr>
+						<tr>
+							<th style="font-size:14px;width:75%;">Dungeoneering (Wis)</th>
+							<td style="font-size:13px;width:25%;"><?php echo ($row['dun'] >= 0) ? "+" : ""; echo $row['dun']; ?></td>
+						</tr>
+						<tr>
+							<th style="font-size:14px;width:75%;">Endurance (Con)</th>
+							<td style="font-size:13px;width:25%;"><?php echo ($row['end'] >= 0) ? "+" : ""; echo $row['end']; ?></td>
+						</tr>
+						<tr>
+							<th style="font-size:14px;width:75%;">Heal (Wis)</th>
+							<td style="font-size:13px;width:25%;"><?php echo ($row['hea'] >= 0) ? "+" : ""; echo $row['hea']; ?></td>
+						</tr>
+						<tr>
+							<th style="font-size:14px;width:75%;">History (Int)</th>
+							<td style="font-size:13px;width:25%;"><?php echo ($row['his'] >= 0) ? "+" : ""; echo $row['his']; ?></td>
+						</tr>
+						<tr>
+							<th style="font-size:14px;width:75%;">Insight (Wis)</th>
+							<td style="font-size:13px;width:25%;"><?php echo ($row['ins'] >= 0) ? "+" : ""; echo $row['ins']; ?></td>
+						</tr>
+						<tr>
+							<th style="font-size:14px;width:75%;">Intimidate (Cha)</th>
+							<td style="font-size:13px;width:25%;"><?php echo ($row['itd'] >= 0) ? "+" : ""; echo $row['itd']; ?></td>
+						</tr>
+						<tr>
+							<th style="font-size:14px;width:75%;">Nature (Wis)</th>
+							<td style="font-size:13px;width:25%;"><?php echo ($row['nat'] >= 0) ? "+" : ""; echo $row['nat']; ?></td>
+						</tr>
+						<tr>
+							<th style="font-size:14px;width:75%;">Perception (Wis)</th>
+							<td style="font-size:13px;width:25%;"><?php echo ($row['per'] >= 0) ? "+" : ""; echo $row['per']; ?></td>
+						</tr>
+						<tr>
+							<th style="font-size:14px;width:75%;">Religion (Int)</th>
+							<td style="font-size:13px;width:25%;"><?php echo ($row['rel'] >= 0) ? "+" : ""; echo $row['rel']; ?></td>
+						</tr>
+						<tr>
+							<th style="font-size:14px;width:75%;">Stealth (Dex)</th>
+							<td style="font-size:13px;width:25%;"><?php echo ($row['ste'] >= 0) ? "+" : ""; echo $row['ste']; ?></td>
+						</tr>
+						<tr>
+							<th style="font-size:14px;width:75%;">Streetwise (Cha)</th>
+							<td style="font-size:13px;width:25%;"><?php echo ($row['stw'] >= 0) ? "+" : ""; echo $row['stw']; ?></td>
+						</tr>
+						<tr>
+							<th style="font-size:14px;width:75%;">Thievery (Dex)</th>
+							<td style="font-size:13px;width:25%;"><?php echo ($row['thi'] >= 0) ? "+" : ""; echo $row['thi']; ?></td>
+						</tr>
+					</table>
+					</div>
+					<script>
+						$("#toggleSkill<?php echo $row['id']; ?>").click(function() {
+							if($(this).html() === "(hide)") {
+								$(this).html("(show)");
+								$("#skl<?php echo $row['id']; ?>").slideUp();
+							} else {
+								$(this).html("(hide)");
+								$("#skl<?php echo $row['id']; ?>").slideDown();
+							}
+						});
+					</script>
 				</div>
-				<br style="clear: both;" />
+				<br style="clear: both;" />	
+			<a name="<?php echo $charCount; ?>" />
 			</div>
-	<?php
+					<script>
+						$("#toggleChar<?php echo $row['id']; ?>").click(function() {
+							if($(this).html() === "(collapse)") {
+								$(this).html("(open)");
+								$("#char<?php echo $row['id']; ?>").slideUp();
+							} else {
+								$(this).html("(collapse)");
+								$("#char<?php echo $row['id']; ?>").slideDown();
+							}
+						});
+					</script>
+				</div><?php
+			$charCount++;
 }
 ?>
+
 	</div>
 	<div id='sidebar'></div>
 </div>
 <div id='footer'></div>
+<script>
+	$("#collAll").click(function() {
+		if($(this).html() === "Collapse All") {
+			$(this).html("Open All");
+			$(".toggleChar").html("(open)");
+			$(".charBox").slideUp();
+		} else {
+			$(this).html("Collapse All");
+			$(".toggleChar").html("(collapse)");
+			$(".charBox").slideDown();
+		}
+	});
+</script>
 </body>
 </html>
