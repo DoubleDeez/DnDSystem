@@ -6,7 +6,7 @@ include("include/funcs.php");
 mysql_connect("$host", "$user", "$pass") or die(mysql_error());
 mysql_select_db("$db") or die(mysql_error());
 
-$charRes = mysql_query("SELECT * FROM characters WHERE disable='0'") or die(mysql_error());
+
 ?>
 
 <!DOCTYPE html>
@@ -22,6 +22,43 @@ $charRes = mysql_query("SELECT * FROM characters WHERE disable='0'") or die(mysq
 		<div id='main'>
 			<div id='content'>
 				<?php
+					$enRes = mysql_query("SELECT * FROM enemies WHERE disable='0' AND hide='0'") or die(mysql_error());
+					$enNum = 0;
+					while ($enrow = mysql_fetch_array($enRes)) {
+						$enFloat = (($enNum % 2) == 0 ? "left" : "right");
+						$hpcolour = "#006400";
+						$enhp = $enrow['hp'];
+						$enmaxhp = $enrow['maxhp'];
+						
+						if($enrow['mask'] == 1) {
+							$enHPmsg = "Health Masked";
+						} else {
+							$enHPmsg = ($enmaxhp - $enhp) . " damage taken";
+						}
+						
+						if ($enhp <= 0) {
+							$hpcolour = "#FF0000";
+							$enHPmsg = "Slain";
+						} else if ($enhp <= ($enmaxhp / 2)) {
+							$hpcolour = "#FFA500";
+						}
+				?>
+				<div class="charInfo" style='width:45%;float:<?php echo $enFloat;?>'>
+					<div style='float: left;'>
+						<span class='enName'><?php echo $enrow['name'] . ": " . $enrow['type']; ?></span>
+					</div>
+					<div style='float: right;'>
+						<span class='charHP' style="color: <?php echo $hpcolour; ?>;"><?php echo $enHPmsg; ?></span>
+					</div>
+					<br style='clear: both;' />
+				</div>
+				<?php
+					if((($enNum % 2) == 1) || (($enNum + 1) == mysql_num_rows($enRes))) {
+						echo "<br style='clear: both;' />";
+					}
+						$enNum++;
+					}
+				$charRes = mysql_query("SELECT * FROM characters WHERE disable='0'") or die(mysql_error());
 				while ($row = mysql_fetch_array($charRes)) {
 					$hp = $row['hp'];
 					$maxhp = $row['maxhp'];

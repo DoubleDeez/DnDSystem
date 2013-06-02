@@ -17,6 +17,13 @@ body {
 	width: 85%;
 }
 
+.enName {
+	font-family: Verdana,Arial,sans-serif;
+	font-weight: bold;
+	font-size: 22px;
+	color: #660000;
+}
+
 .charInfo {
     border:1px solid #333;
     background-color:#eee;
