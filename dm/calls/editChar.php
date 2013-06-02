@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	$vision = $in->vision;
 	$initiative = $in->initiative;
 	$str = $in->str;
-	$strMod = $in->strMode;
+	$strMod = $in->strMod;
 	$con = $in->con;
 	$conMod = $in->conMod;
 	$dex = $in->dex;

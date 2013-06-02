@@ -17,7 +17,7 @@ $charRes = mysql_query("SELECT * FROM characters WHERE disable='0'") or die(mysq
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
         <title>DnD Manager System</title>
     </head>
-    <body>
+    <body onload='setTimeout("location.reload(true);", 120000);'>
 		<div id='menu'></div>
 		<div id='main'>
 			<div id='content'>
