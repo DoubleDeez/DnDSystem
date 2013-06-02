@@ -88,32 +88,32 @@ $charRes = mysql_query("SELECT * FROM characters WHERE disable='0'") or die(mysq
 							<tr>
 								<th style="font-size:14px;width:25%;">Str:</th>
 								<td style="font-size:13px;width:25%;"><?php echo $row['str']; ?></td>
-								<td style="font-size:13px;width:25%;">+<?php echo $row['strMod']; ?></td>
+								<td style="font-size:13px;width:25%;"><?php echo ($row['strMod'] >= 0) ? "+" : ""; echo $row['strMod']; ?></td>
 							</tr>
 							<tr>
 								<th style="font-size:14px;width:25%;">Con:</th>
 								<td style="font-size:13px;width:25%;"><?php echo $row['con']; ?></td>
-								<td style="font-size:13px;width:25%;">+<?php echo $row['conMod']; ?></td>
+								<td style="font-size:13px;width:25%;"><?php echo ($row['conMod'] >= 0) ? "+" : ""; echo $row['conMod']; ?></td>
 							</tr>
 							<tr>
 								<th style="font-size:14px;width:25%;">Dex:</th>
 								<td style="font-size:13px;width:25%;"><?php echo $row['dex']; ?></td>
-								<td style="font-size:13px;width:25%;">+<?php echo $row['dexMod']; ?></td>
+								<td style="font-size:13px;width:25%;"><?php echo ($row['dexMod'] >= 0) ? "+" : ""; echo $row['dexMod']; ?></td>
 							</tr>
 							<tr>
 								<th style="font-size:14px;width:25%;">Int:</th>
 								<td style="font-size:13px;width:25%;"><?php echo $row['int']; ?></td>
-								<td style="font-size:13px;width:25%;">+<?php echo $row['intMod']; ?></td>
+								<td style="font-size:13px;width:25%;"><?php echo ($row['intMod'] >= 0) ? "+" : ""; echo $row['intMod']; ?></td>
 							</tr>
 							<tr>
 								<th style="font-size:14px;width:25%;">Wis:</th>
 								<td style="font-size:13px;width:25%;"><?php echo $row['wis']; ?></td>
-								<td style="font-size:13px;width:25%;">+<?php echo $row['wisMod']; ?></td>
+								<td style="font-size:13px;width:25%;"><?php echo ($row['wisMod'] >= 0) ? "+" : ""; echo $row['wisMod']; ?></td>
 							</tr>
 							<tr>
 								<th style="font-size:14px;width:25%;">Cha:</th>
 								<td style="font-size:13px;width:25%;"><?php echo $row['cha']; ?></td>
-								<td style="font-size:13px;width:25%;">+<?php echo $row['chaMod']; ?></td>
+								<td style="font-size:13px;width:25%;"><?php echo ($row['chaMod'] >= 0) ? "+" : ""; echo $row['chaMod']; ?></td>
 							</tr>
 						</table>
 					</div>
