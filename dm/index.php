@@ -79,6 +79,9 @@ if (isset($_SESSION['sid']) && isset($_SESSION['id'])) {
 					<label for="editmaxhp">Max Health Points: </label>
 					<input type="text" id="editmaxhp" />
 					<br />
+					<label for="edittemphp">Temporary Health Points: </label>
+					<input type="text" id="edittemphp" />
+					<br />
 					<label for="editac">AC: </label>
 					<input type="text" id="editac" />
 					<br />
@@ -93,6 +96,54 @@ if (isset($_SESSION['sid']) && isset($_SESSION['id'])) {
 					<br />
 					<label for="editexp">EXP: </label>
 					<input type="text" id="editexp" />
+					<br />
+					<label for="editap">Action Points: </label>
+					<input type="text" id="editap" />
+					<br />
+					<label for="editinit">Initiative: </label>
+					<input type="text" id="editinit" />
+					<br />
+					<label for="editspeed">Speed: </label>
+					<input type="text" id="editspeed" />
+					<br />
+					<label for="editvision">Vision: </label>
+					<input type="text" id="editvision" />
+					<br />
+					<label for="editstr">Base Strength: </label>
+					<input type="text" id="editstr" />
+					<br />
+					<label for="editstrMod">Strength Modifier: </label>
+					<input type="text" id="editstrMod" />
+					<br />
+					<label for="editcon">Base Constitution: </label>
+					<input type="text" id="editcon" />
+					<br />
+					<label for="editconMod">Constitution Modifier: </label>
+					<input type="text" id="editconMod" />
+					<br />
+					<label for="editdex">Base Dexterity: </label>
+					<input type="text" id="editdex" />
+					<br />
+					<label for="editdexMod">Dexterity Modifier: </label>
+					<input type="text" id="editdexMod" />
+					<br />
+					<label for="editint">Base Intelligence: </label>
+					<input type="text" id="editint" />
+					<br />
+					<label for="editintMod">Intelligence Modifier: </label>
+					<input type="text" id="editintMod" />
+					<br />
+					<label for="editwis">Base Wisdom: </label>
+					<input type="text" id="editwis" />
+					<br />
+					<label for="editwisMod">Wisdom Modifier: </label>
+					<input type="text" id="editwisMod" />
+					<br />
+					<label for="editcha">Base Charisma: </label>
+					<input type="text" id="editcha" />
+					<br />
+					<label for="editchaMod">Charisma Modifier: </label>
+					<input type="text" id="editchaMod" />
 				</div>
 				<div id="inventoryList" style="float:left;">
 				</div>

@@ -72,7 +72,24 @@ var dnd = {
 				fort: $("#editfort").val(),
 				will: $("#editwill").val(),
 				reflex: $("#editreflex").val(),
-				exp: $("#editexp").val()
+				exp: $("#editexp").val(),
+				speed: $("#editspeed").val(),
+				temphp: $("#edittemphp").val(),
+				vision: $("#editvision").val(),
+				ap: $("#editap").val(),
+				initiative: $("#editinit").val(),
+				str: $("#editstr").val(),
+				strMod: $("#editstrMod").val(),
+				con: $("#editcon").val(),
+				conMod: $("#editconMod").val(),
+				dex: $("#editdex").val(),
+				dexMod: $("#editdexMod").val(),
+				int: $("#editint").val(),
+				intMod: $("#editintMod").val(),
+				wis: $("#editwis").val(),
+				wisMod: $("#editwisMod").val(),
+				cha: $("#editcha").val(),
+				chaMod: $("#editchaMod").val()
 			};
 			for (var i = 0; i < dnd.inventory.length; i++) {
 				var item = dnd.inventory[i];
