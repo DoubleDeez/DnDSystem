@@ -33,6 +33,8 @@ if (isset($_SESSION['sid']) && isset($_SESSION['id'])) {
     </head>
     <body>
 		<div id='menu'><a href='#' id='infoBtn'>Info</a> | <a href='#' id='addCharBtn'>Add a Character</a> | <a href='#' id='editCharBtn'>Edit a Character</a> | <a href='#' id='addEnemiesBtn'>Add an Enemy</a> | <a href='#' id='editEnemiesBtn'>Edit Enemies</a> | <a href='#' id='logoutBtn'>Log Out</a></div>
+		<span id='message' class='errMsg'></span>
+		<br/>
 		<div id='main'>
 			<div id='info'>This is basic as shit for now, I'll work on making the entire thing better later.</div>
 			<!-- Add Character Page -->

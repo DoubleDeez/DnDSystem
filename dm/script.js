@@ -57,7 +57,13 @@ var dnd = {
 			};
 			$("#addCharAction").attr("disabled", "disabled");
 			$.post("calls/addChar.php", JSON.stringify(dataD), function(data, status) {
-				alert(data);
+				$("#message").html(data);
+				window.setTimeout(function() {
+					$("#message").fadeOut(null, function() {
+						$("#message").html("");
+						$("#message").fadeIn();
+					});
+				}, 10000);
 				$("#addCharAction").removeAttr("disabled");
 			});
 		});
@@ -101,7 +107,13 @@ var dnd = {
 			$("#editCharAction").attr("disabled", "disabled");
 			$.post("calls/editChar.php", JSON.stringify(dataD), function(data, status) {
 				$("#editCharList").load("calls/charList.php");
-				alert(data);
+				$("#message").html(data);
+				window.setTimeout(function() {
+					$("#message").fadeOut(null, function() {
+						$("#message").html("");
+						$("#message").fadeIn();
+					});
+				}, 10000);
 				$("#editCharAction").removeAttr("disabled");
 			});
 		});
@@ -118,7 +130,13 @@ var dnd = {
 					$("#edit" + $("#invAddCharID").val()).trigger("click");
 				});
 				
-				alert(data);
+				$("#message").html(data);
+				window.setTimeout(function() {
+					$("#message").fadeOut(null, function() {
+						$("#message").html("");
+						$("#message").fadeIn();
+					});
+				}, 10000);
 				$("#addInvAction").removeAttr("disabled");
 			});
 		});
@@ -136,7 +154,13 @@ var dnd = {
 					$("#edit" + $("#invAddCharID").val()).trigger("click");
 				});
 				
-				alert(data);
+				$("#message").html(data);
+				window.setTimeout(function() {
+					$("#message").fadeOut(null, function() {
+						$("#message").html("");
+						$("#message").fadeIn();
+					});
+				}, 10000);
 				$("#editInvAction").removeAttr("disabled");
 			});
 		});
@@ -150,7 +174,14 @@ var dnd = {
 			};
 			$("#addEnemyAction").attr("disabled", "disabled");
 			$.post("calls/addEnemy.php", JSON.stringify(dataD), function(data, status) {
-				alert(data);
+				
+				$("#message").html(data);
+				window.setTimeout(function() {
+					$("#message").fadeOut(null, function() {
+						$("#message").html("");
+						$("#message").fadeIn();
+					});
+				}, 10000);
 				$("#addEnemyAction").removeAttr("disabled");
 			});
 		});
@@ -169,7 +200,13 @@ var dnd = {
 			$.post("calls/editEnemy.php", JSON.stringify(dataD), function(data, status) {
 				$("#editEnemyList").load("calls/enemyList.php");
 				
-				alert(data);
+				$("#message").html(data);
+				window.setTimeout(function() {
+					$("#message").fadeOut(null, function() {
+						$("#message").html("");
+						$("#message").fadeIn();
+					});
+				}, 10000);
 				$("#editEnemyAction").removeAttr("disabled");
 			});
 		});

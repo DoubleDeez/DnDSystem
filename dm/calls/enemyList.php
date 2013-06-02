@@ -17,8 +17,15 @@ $result = mysql_query("SELECT * FROM enemies WHERE disable='0' ORDER BY id DESC"
 		<th>edit</th>
 	</tr>
 	<?php
+	$rowBG = 0;
 	while ($row = mysql_fetch_array($result)) {
-		echo "<tr style=\"border-width: 1px; border-style: solid; text-align: left;\"><td>";
+		$rowBG++;
+		if (($rowBG % 2) == 1) {
+			$rowColour = "#D1D1D1";
+		} else {
+			$rowColour = "#F3F3F3";
+		}
+		echo "<tr style=\"border-width: 1px; border-style: solid; text-align: left; background-color:".$rowColour.";\"><td>";
 		echo $row['id'];
 		echo "</td><td>";
 		echo $row['name'];
