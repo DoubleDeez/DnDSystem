@@ -14,7 +14,7 @@ body {
 #content {
     margin:0px auto;
     text-align:left;
-	width: 75%;
+	width: 85%;
 }
 
 .charInfo {
@@ -78,4 +78,9 @@ body {
 .itemDesc {
 	font-family: Verdana,Arial,sans-serif;
 	font-size: 12px;
+}
+
+.linkBtn:hover {
+	text-decoration: underline;
+	cursor: pointer;
 }

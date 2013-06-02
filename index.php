@@ -49,60 +49,93 @@ $charRes = mysql_query("SELECT * FROM characters WHERE disable='0'") or die(mysq
 						</div>
 						<br style="clear: both;" />
 						<div style="float: left;" />
-							<br />
-							<span class="statHeading">Defenses:</span><br />
-							<table style="font-family: Verdana,Arial,sans-serif;border:0px;max-width:250px;">
-								<tr>
-									<th style="font-size:14px;">AC</th>
-									<th style="font-size:14px;">Fortitude</th>
-									<th style="font-size:14px;">Reflex</th>
-									<th style="font-size:14px;">Will</th>
-								</tr>
-								<tr>
-									<td><?php echo $row['ac'] ?></td>
-									<td><?php echo $row['fortitude'] ?></td>
-									<td><?php echo $row['reflex'] ?></td>
-									<td><?php echo $row['will'] ?></td>
-								</tr>
-							</table>
-						</div>
-						<div style="float: left;padding-left:25px;" />
-							<br />
-							<span class="statHeading">Inventory:</span><br />
-							<table style="font-family: Verdana,Arial,sans-serif;border:0px;max-width:400px;">
-								<tr>
-									<th style="font-size:14px;">Qty</th>
-									<th style="font-size:14px;">Item & Description</th>
-								</tr>
-								<?php
-									$invRes = mysql_query("SELECT * FROM inventory WHERE charid='".$row['id']."'") or die(mysql_error());
-									while ($invRow = mysql_fetch_array($invRes)) {
-								?>
-								<tr>
-									<td style="padding-right:10px;"><span class="itemQty" style="vertical-align: top;"><?php echo $invRow['qty']; ?>x</span></td>
-									<td>
-										<span class="itemName"><?php echo $invRow['name']; ?></span>
-									</td>
-								</tr>
-								<tr>
-									<td style="padding-right:10px;"></td>
-									<td>
-										<span class="itemDesc"><?php echo $invRow['desc']; ?></span>
-									</td>
-								</tr>
-								<?php 
-									}
-								?>
-							</table>
-						</div>
-						<br style="clear: both;" />
+						<br />
+						<table style="font-family: Verdana,Arial,sans-serif;border:0px;width:300px;padding-top:5px;">
+							<tr>
+								<th style="font-size:14px;width:25%;">Speed</th>
+								<th style="font-size:14px;width:25%;">Initiative</th>
+								<th style="font-size:14px;width:25%;">Action</th>
+								<th style="font-size:14px;width:25%;">Vision</th>
+							</tr>
+							<tr>
+								<td><?php echo $row['speed']; ?></td>
+								<td><?php echo $row['initiative']; ?></td>
+								<td><?php echo $row['ap']; ?></td>
+								<td><?php echo $row['vision']; ?></td>
+							</tr>
+						</table>
+						<br />
+						<br />
+						<span class="statHeading">Defenses:</span><br />
+						<table style="font-family: Verdana,Arial,sans-serif;border:0px;width:300px;padding-top:5px;">
+							<tr>
+								<th style="font-size:14px;width:25%;">AC</th>
+								<th style="font-size:14px;width:25%;">Fortitude</th>
+								<th style="font-size:14px;width:25%;">Reflex</th>
+								<th style="font-size:14px;width:25%;">Will</th>
+							</tr>
+							<tr>
+								<td><?php echo $row['ac']; ?></td>
+								<td><?php echo $row['fortitude']; ?></td>
+								<td><?php echo $row['reflex']; ?></td>
+								<td><?php echo $row['will']; ?></td>
+							</tr>
+						</table>
 					</div>
-				<?php
-			}
-			?>
-		</div>
-		<div id='sidebar'></div>
+					<div style="float: left;padding-left:25px;" />
+					<br />
+					<span class="statHeading">Inventory: </span><a class="linkBtn" id="toggleInv<?php echo $row['id']; ?>">(hide)</a><br />
+					<div id="inv<?php echo $row['id']; ?>">
+					<table style="font-family: Verdana,Arial,sans-serif;border-width:0px;width:auto;max-width:350px;padding-top:5px;" cellspacing="0">
+						<?php
+						$invRes = mysql_query("SELECT * FROM inventory WHERE charid='" . $row['id'] . "'") or die(mysql_error());
+
+						$invRowBG = 0;
+						while ($invRow = mysql_fetch_array($invRes)) {
+							$invRowBG++;
+							if (($invRowBG % 2) == 1) {
+								$invRowColour = "#D1D1D1";
+							} else {
+								$invRowColour = "#E3E3E3";
+							}
+							?>
+							<tr style="background-color:<?php echo $invRowColour; ?>;">
+								<td style="padding-right:5px;"><span class="itemQty" style="vertical-align: top;"><?php echo $invRow['qty']; ?>x</span></td>
+								<td style="padding-left:5px;">
+									<span class="itemName"><?php echo $invRow['name']; ?></span>
+								</td>
+							</tr>
+							<tr style="background-color:<?php echo $invRowColour; ?>;">
+								<td style="padding-right:5px;"></td>
+								<td style="padding-left:5px;">
+									<span class="itemDesc"><?php echo $invRow['desc']; ?></span>
+								</td>
+							</tr>
+		<?php
+	}
+	?>
+					</table>
+					</div>
+					<script>
+						$("#toggleInv<?php echo $row['id']; ?>").click(function() {
+							if($(this).html() === "(hide)") {
+								$(this).html("(show)");
+								$("#inv<?php echo $row['id']; ?>").slideUp();
+							} else {
+								$(this).html("(hide)");
+								$("#inv<?php echo $row['id']; ?>").slideDown();
+							}
+						});
+					</script>
+				</div>
+				<br style="clear: both;" />
+			</div>
+	<?php
+}
+?>
 	</div>
-	<div id='footer'></div>
+	<div id='sidebar'></div>
+</div>
+<div id='footer'></div>
 </body>
 </html>
