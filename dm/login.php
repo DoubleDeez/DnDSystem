@@ -1,6 +1,6 @@
 <?php
 include("../include/vars.php");
-include("../include/func.php");
+include("../include/funcs.php");
 
 mysql_connect("$host", "$user", "$pass") or die(mysql_error());
 mysql_select_db("$db") or die(mysql_error());
@@ -28,8 +28,8 @@ if (isset($_SESSION['sid']) && isset($_SESSION['id'])) {
 		if (isset($_POST['submit'])) {
 			$error = "";
 
-			$user = ($_POST['user']);
-			$pass = ($_POST['pass']);
+			$user = clean($_POST['user']);
+			$pass = clean($_POST['pass']);
 
 			if (!isset($user) || !isset($pass) || ($user == "") || ($pass == "") || ($user == "Username")) {
 				$error = "Please enter your username and password.";
