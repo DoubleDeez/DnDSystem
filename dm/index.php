@@ -32,7 +32,11 @@ if (isset($_SESSION['sid']) && isset($_SESSION['id'])) {
         <title>DnD Manager System</title>
     </head>
     <body>
-		<div id='menu'><a href='#' id='infoBtn'>Info</a> | <a href='#' id='addCharBtn'>Add a Character</a> | <a href='#' id='editCharBtn'>Edit a Character</a> | <a href='#' id='addEnemiesBtn'>Add an Enemy</a> | <a href='#' id='editEnemiesBtn'>Edit Enemies</a> | <a href='#' id='logoutBtn'>Log Out</a></div>
+		<script>
+			var rank = <?php echo $_SESSION['rank'];?>;
+			var id = <?php echo $_SESSION['id'];?>;
+		</script>
+		<div id='menu'><a href='#' id='infoBtn'>Info</a> | <a href='#' id='addCharBtn'>Add a Character</a> | <a href='#' id='editCharBtn'>Edit a Character</a><?php if($_SESSION['rank'] >= 10) { ?> | <a href='#' id='addEnemiesBtn'>Add an Enemy</a> | <a href='#' id='editEnemiesBtn'>Edit Enemies</a> | <a href='#' id='userListBtn'>User List</a><?php } ?> | <a href='#' id='logoutBtn'>Log Out</a></div>
 		<span id='message' class='errMsg'></span>
 		<br/>
 		<div id='main'>
@@ -60,6 +64,13 @@ if (isset($_SESSION['sid']) && isset($_SESSION['id'])) {
 				<label for="name">Will: </label>
 				<input type="text" id="will" />
 				<br />
+				<?php if($_SESSION['rank'] >= 10) { ?>
+					<label for="name">User ID: </label>
+					<input type="text" id="userid" />
+					<br />
+				<?php } else { ?>
+					<input type="hidden" id="userid" value="<?php echo $_SESSION['id']; ?>" />
+				<?php } ?>
 				<input type="button" id="addCharAction" value="Create Character" />
 			</div>
 			<!-- Edit Character Page -->
@@ -69,85 +80,137 @@ if (isset($_SESSION['sid']) && isset($_SESSION['id'])) {
 				<br />
 				<div style="float:left;">
 					<input type="hidden" id="editid" />
-					<label for="name">Name: </label>
-					<input type="text" id="editname" />
-					<br />
-					<label for="editclass">Class: </label>
-					<input type="text" id="editclass" />
-					<br />
-					<label for="edithp">Current Health Points: </label>
-					<input type="text" id="edithp" />
-					<br />
-					<label for="editmaxhp">Max Health Points: </label>
-					<input type="text" id="editmaxhp" />
-					<br />
-					<label for="edittemphp">Temporary Health Points: </label>
-					<input type="text" id="edittemphp" />
-					<br />
-					<label for="editac">AC: </label>
-					<input type="text" id="editac" />
-					<br />
-					<label for="editfort">Fortitude: </label>
-					<input type="text" id="editfort" />
-					<br />
-					<label for="editreflex">Reflex: </label>
-					<input type="text" id="editreflex" />
-					<br />
-					<label for="editwill">Will: </label>
-					<input type="text" id="editwill" />
-					<br />
-					<label for="editexp">EXP: </label>
-					<input type="text" id="editexp" />
-					<br />
-					<label for="editap">Action Points: </label>
-					<input type="text" id="editap" />
-					<br />
-					<label for="editinit">Initiative: </label>
-					<input type="text" id="editinit" />
-					<br />
-					<label for="editspeed">Speed: </label>
-					<input type="text" id="editspeed" />
-					<br />
-					<label for="editvision">Vision: </label>
-					<input type="text" id="editvision" />
-					<br />
-					<label for="editstr">Base Strength: </label>
-					<input type="text" id="editstr" />
-					<br />
-					<label for="editstrMod">Strength Modifier: </label>
-					<input type="text" id="editstrMod" />
-					<br />
-					<label for="editcon">Base Constitution: </label>
-					<input type="text" id="editcon" />
-					<br />
-					<label for="editconMod">Constitution Modifier: </label>
-					<input type="text" id="editconMod" />
-					<br />
-					<label for="editdex">Base Dexterity: </label>
-					<input type="text" id="editdex" />
-					<br />
-					<label for="editdexMod">Dexterity Modifier: </label>
-					<input type="text" id="editdexMod" />
-					<br />
-					<label for="editint">Base Intelligence: </label>
-					<input type="text" id="editint" />
-					<br />
-					<label for="editintMod">Intelligence Modifier: </label>
-					<input type="text" id="editintMod" />
-					<br />
-					<label for="editwis">Base Wisdom: </label>
-					<input type="text" id="editwis" />
-					<br />
-					<label for="editwisMod">Wisdom Modifier: </label>
-					<input type="text" id="editwisMod" />
-					<br />
-					<label for="editcha">Base Charisma: </label>
-					<input type="text" id="editcha" />
-					<br />
-					<label for="editchaMod">Charisma Modifier: </label>
-					<input type="text" id="editchaMod" />
+					<label style="float:left;" for="name">Name: </label>
+					<input style="float:right;" type="text" id="editname" />
+					<br style="clear:both;" />
+					<label style="float:left;" for="editclass">Class: </label>
+					<input style="float:right;" type="text" id="editclass" />
+					<br style="clear:both;" />
+					<label style="float:left;" for="edithp">Current Health Points: </label>
+					<input style="float:right;" type="text" id="edithp" />
+					<br style="clear:both;" />
+					<label style="float:left;" for="editmaxhp">Max Health Points: </label>
+					<input style="float:right;" type="text" id="editmaxhp" />
+					<br style="clear:both;" />
+					<label style="float:left;" for="edittemphp">Temporary Health Points: </label>
+					<input style="float:right;" type="text" id="edittemphp" />
+					<br style="clear:both;" />
+					<label style="float:left;" for="editac">AC: </label>
+					<input style="float:right;" type="text" id="editac" />
+					<br style="clear:both;" />
+					<label style="float:left;" for="editfort">Fortitude: </label>
+					<input style="float:right;" type="text" id="editfort" />
+					<br style="clear:both;" />
+					<label style="float:left;" for="editreflex">Reflex: </label>
+					<input style="float:right;" type="text" id="editreflex" />
+					<br style="clear:both;" />
+					<label style="float:left;" for="editwill">Will: </label>
+					<input style="float:right;" type="text" id="editwill" />
+					<br style="clear:both;" />
+					<label style="float:left;" for="editexp">Total EXP: </label>
+					<input style="float:right;" type="text" id="editexp" />
+					<br style="clear:both;" />
+					<label style="float:left;" for="editap">Action Points: </label>
+					<input style="float:right;" type="text" id="editap" />
+					<br style="clear:both;" />
+					<label style="float:left;" for="editinit">Initiative Bonus: </label>
+					<input style="float:right;" type="text" id="editinit" />
+					<br style="clear:both;" />
+					<label style="float:left;" for="editspeed">Speed: </label>
+					<input style="float:right;" type="text" id="editspeed" />
+					<br style="clear:both;" />
+					<label style="float:left;" for="editvision">Vision: </label>
+					<input style="float:right;" type="text" id="editvision" />
+					<br style="clear:both;" />
+					<label style="float:left;" for="editstr">Base Strength: </label>
+					<input style="float:right;" type="text" id="editstr" />
+					<br style="clear:both;" />
+					<label style="float:left;" for="editstrMod">Strength Modifier: </label>
+					<input style="float:right;" type="text" id="editstrMod" />
+					<br style="clear:both;" />
+					<label style="float:left;" for="editcon">Base Constitution: </label>
+					<input style="float:right;" type="text" id="editcon" />
+					<br style="clear:both;" />
+					<label style="float:left;" for="editconMod">Constitution Modifier: </label>
+					<input style="float:right;" type="text" id="editconMod" />
+					<br style="clear:both;" />
+					<label style="float:left;" for="editdex">Base Dexterity: </label>
+					<input style="float:right;" type="text" id="editdex" />
+					<br style="clear:both;" />
+					<label style="float:left;" for="editdexMod">Dexterity Modifier: </label>
+					<input style="float:right;" type="text" id="editdexMod" />
+					<br style="clear:both;" />
+					<label style="float:left;" for="editint">Base Intelligence: </label>
+					<input style="float:right;" type="text" id="editint" />
+					<br style="clear:both;" />
+					<label style="float:left;" for="editintMod">Intelligence Modifier: </label>
+					<input style="float:right;" type="text" id="editintMod" />
+					<br style="clear:both;" />
+					<label style="float:left;" for="editwis">Base Wisdom: </label>
+					<input style="float:right;" type="text" id="editwis" />
+					<br style="clear:both;" />
+					<label style="float:left;" for="editwisMod">Wisdom Modifier: </label>
+					<input style="float:right;" type="text" id="editwisMod" />
+					<br style="clear:both;" />
+					<label style="float:left;" for="editcha">Base Charisma: </label>
+					<input style="float:right;" type="text" id="editcha" />
+					<br style="clear:both;" />
+					<label style="float:left;" for="editchaMod">Charisma Modifier: </label>
+					<input style="float:right;" type="text" id="editchaMod" />
+					<br style="clear:both;" />
+					<label style="float:left;" for="editacr">Acrobatics: </label>
+					<input style="float:right;" type="text" id="editacr" />
+					<br style="clear:both;" />
+					<label style="float:left;" for="editarc">Arcana: </label>
+					<input style="float:right;" type="text" id="editarc" />
+					<br style="clear:both;" />
+					<label style="float:left;" for="editath">Athletics: </label>
+					<input style="float:right;" type="text" id="editath" />
+					<br style="clear:both;" />
+					<label style="float:left;" for="editblu">Bluff: </label>
+					<input style="float:right;" type="text" id="editblu" />
+					<br style="clear:both;" />
+					<label style="float:left;" for="editdip">Diplomacy: </label>
+					<input style="float:right;" type="text" id="editdip" />
+					<br style="clear:both;" />
+					<label style="float:left;" for="editdun">Dungeoneering: </label>
+					<input style="float:right;" type="text" id="editdun" />
+					<br style="clear:both;" />
+					<label style="float:left;" for="editend">Endurance: </label>
+					<input style="float:right;" type="text" id="editend" />
+					<br style="clear:both;" />
+					<label style="float:left;" for="edithea">Heal: </label>
+					<input style="float:right;" type="text" id="edithea" />
+					<br style="clear:both;" />
+					<label style="float:left;" for="edithis">History: </label>
+					<input style="float:right;" type="text" id="edithis" />
+					<br style="clear:both;" />
+					<label style="float:left;" for="editins">Insight: </label>
+					<input style="float:right;" type="text" id="editins" />
+					<br style="clear:both;" />
+					<label style="float:left;" for="edititd">Intimidate: </label>
+					<input style="float:right;" type="text" id="edititd" />
+					<br style="clear:both;" />
+					<label style="float:left;" for="editnat">Nature: </label>
+					<input style="float:right;" type="text" id="editnat" />
+					<br style="clear:both;" />
+					<label style="float:left;" for="editper">Perception: </label>
+					<input style="float:right;" type="text" id="editper" />
+					<br style="clear:both;" />
+					<label style="float:left;" for="editrel">Religion: </label>
+					<input style="float:right;" type="text" id="editrel" />
+					<br style="clear:both;" />
+					<label style="float:left;" for="editste">Stealth: </label>
+					<input style="float:right;" type="text" id="editste" />
+					<br style="clear:both;" />
+					<label style="float:left;" for="editstw">Streetwise: </label>
+					<input style="float:right;" type="text" id="editstw" />
+					<br style="clear:both;" />
+					<label style="float:left;" for="editthi">Thievery: </label>
+					<input style="float:right;" type="text" id="editthi" />
+					<br style="clear:both;" />
 				</div>
-				<div id="inventoryList" style="float:left;">
+				<div id="inventoryList" style="float:left;padding-left:20px;">
 				</div>
 				<br style="clear: both;" />
 				<br/>
@@ -173,6 +236,7 @@ if (isset($_SESSION['sid']) && isset($_SESSION['id'])) {
 					<br />
 				</div>
 			</div>
+			<?php if($_SESSION['rank'] >= 10) { ?>
 			<!-- Add Enemy Page -->
 			<div id='addEnemies'>
 				<label for="addEname">Name: </label>
@@ -227,6 +291,7 @@ if (isset($_SESSION['sid']) && isset($_SESSION['id'])) {
 				<br style="clear: both;" />
 				<br />
 			</div>
+			<?php } ?>
 		</div>
 		<div id='footer'></div>
 		<script>

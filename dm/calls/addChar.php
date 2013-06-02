@@ -15,8 +15,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	$fort = ($in->fort);
 	$reflex = ($in->reflex);
 	$will = ($in->will);
+	$userid = ($in->userid);
 
-	mysql_query("INSERT INTO characters (name, maxhp, hp, class, ac, fortitude, reflex, will, exp) VALUES('$name', '$hp', '$hp', '$class', '$ac', '$fort', '$reflex', '$will', '0') ") or die(mysql_error());
+	mysql_query("INSERT INTO characters (name, maxhp, hp, class, ac, fortitude, reflex, will, exp, userid) VALUES('$name', '$hp', '$hp', '$class', '$ac', '$fort', '$reflex', '$will', '0', '$userid') ") or die(mysql_error());
 	
 	echo "Character created!";
 }

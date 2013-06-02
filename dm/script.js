@@ -23,7 +23,7 @@ var dnd = {
 			$("#info").hide();
 			$("#addChar").hide();
 			$("#editChar").show();
-			$("#editCharList").load("calls/charList.php");
+			$("#editCharList").load("calls/charList.php?id=" + id + "&r=" + rank);
 			$("#addEnemies").hide();
 			$("#editEnemies").hide();
 		});
@@ -53,7 +53,8 @@ var dnd = {
 				ac: $("#ac").val(),
 				fort: $("#fort").val(),
 				will: $("#will").val(),
-				reflex: $("#reflex").val()
+				reflex: $("#reflex").val(),
+				userid: $("#userid").val()
 			};
 			$("#addCharAction").attr("disabled", "disabled");
 			$.post("calls/addChar.php", JSON.stringify(dataD), function(data, status) {
@@ -95,7 +96,24 @@ var dnd = {
 				wis: $("#editwis").val(),
 				wisMod: $("#editwisMod").val(),
 				cha: $("#editcha").val(),
-				chaMod: $("#editchaMod").val()
+				chaMod: $("#editchaMod").val(),
+				acr: $("#editacr").val(),
+				arc: $("#editarc").val(),
+				ath: $("#editath").val(),
+				blu: $("#editblu").val(),
+				dip: $("#editdip").val(),
+				dun: $("#editdun").val(),
+				end: $("#editend").val(),
+				hea: $("#edithea").val(),
+				his: $("#edithis").val(),
+				ins: $("#editins").val(),
+				itd: $("#edititd").val(),
+				nat: $("#editnat").val(),
+				per: $("#editper").val(),
+				rel: $("#editrel").val(),
+				ste: $("#editste").val(),
+				stw: $("#editstw").val(),
+				thi: $("#editthi").val()
 			};
 			for (var i = 0; i < dnd.inventory.length; i++) {
 				var item = dnd.inventory[i];
@@ -106,7 +124,7 @@ var dnd = {
 			}
 			$("#editCharAction").attr("disabled", "disabled");
 			$.post("calls/editChar.php", JSON.stringify(dataD), function(data, status) {
-				$("#editCharList").load("calls/charList.php");
+				$("#editCharList").load("calls/charList.php?id=" + id + "&r=" + rank);
 				$("#message").html(data);
 				window.setTimeout(function() {
 					$("#message").fadeOut(null, function() {
@@ -126,7 +144,7 @@ var dnd = {
 			};
 			$("#addInvAction").attr("disabled", "disabled");
 			$.post("calls/addInv.php", JSON.stringify(dataD), function(data, status) {
-				$("#editCharList").load("calls/charList.php", function() {
+				$("#editCharList").load("calls/charList.php?id=" + id + "&r=" + rank, function() {
 					$("#edit" + $("#invAddCharID").val()).trigger("click");
 				});
 				
@@ -150,7 +168,7 @@ var dnd = {
 			}
 			$("#editInvAction").attr("disabled", "disabled");
 			$.post("calls/editInv.php", JSON.stringify(dnd.inventory), function(data, status) {
-				$("#editCharList").load("calls/charList.php", function() {
+				$("#editCharList").load("calls/charList.php?id=" + id + "&r=" + rank, function() {
 					$("#edit" + $("#invAddCharID").val()).trigger("click");
 				});
 				

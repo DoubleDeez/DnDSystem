@@ -39,7 +39,7 @@ if (isset($_SESSION['sid']) && isset($_SESSION['id'])) {
 				$result = mysql_query($query) or die(mysql_error());
 				$row = mysql_fetch_array($result);
 
-				if ($row['rank'] <= 9) {
+				if ($row['rank'] <= 4) {
 					$error = "You do not have access to the DM Panel.";
 				} else {
 					$ipass = sha1($row['salt'] . $pass);

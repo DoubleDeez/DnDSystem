@@ -56,8 +56,9 @@ mysql_select_db("$db") or die(mysql_error());
 					if((($enNum % 2) == 1) || (($enNum + 1) == mysql_num_rows($enRes))) {
 						echo "<br style='clear: both;' />";
 					}
-						$enNum++;
-					}
+					
+					$enNum++;
+				}
 				$charRes = mysql_query("SELECT * FROM characters WHERE disable='0'") or die(mysql_error());
 				while ($row = mysql_fetch_array($charRes)) {
 					$hp = $row['hp'];

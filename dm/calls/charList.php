@@ -3,8 +3,11 @@ include("../../include/vars.php");
 
 mysql_connect("$host", "$user", "$pass") or die(mysql_error());
 mysql_select_db("$db") or die(mysql_error());
-
-$result = mysql_query("SELECT * FROM characters") or die(mysql_error());
+if($_GET['r'] >= 10) {
+	$result = mysql_query("SELECT * FROM characters") or die(mysql_error());
+} else {
+	$result = mysql_query("SELECT * FROM characters WHERE userid='".$_GET['id']."'") or die(mysql_error());
+}
 ?>
 <table cellpadding="0" cellspacing="0" style="width:75%;border-width: 1px; border-style: solid; text-align: left;">
 	<tr style="border-width: 1px; border-style: solid; text-align: left;">
@@ -17,6 +20,7 @@ $result = mysql_query("SELECT * FROM characters") or die(mysql_error());
 		<th>Reflex</th>
 		<th>Will</th>
 		<th>EXP</th>
+		<th>Status</th>
 		<th>edit</th>
 	</tr>
 	<?php
@@ -46,6 +50,8 @@ $result = mysql_query("SELECT * FROM characters") or die(mysql_error());
 		echo $row['will'];
 		echo "</td><td>";
 		echo $row['exp'];
+		echo "</td><td>";
+		echo ($row['disable'] == 0) ? "Active" : "Excluded";
 		echo "</td><td>";
 		echo "<a href=\"#\" id=\"edit" . $row['id'] . "\">Edit</a>";
 		echo "</td></tr>";
@@ -80,6 +86,23 @@ $result = mysql_query("SELECT * FROM characters") or die(mysql_error());
 				$("#editwisMod").val("<?php echo $row['wisMod']; ?>");
 				$("#editcha").val("<?php echo $row['cha']; ?>");
 				$("#editchaMod").val("<?php echo $row['chaMod']; ?>");
+				$("#editacr").val("<?php echo $row['acr']; ?>");
+				$("#editarc").val("<?php echo $row['arc']; ?>");
+				$("#editath").val("<?php echo $row['ath']; ?>");
+				$("#editblu").val("<?php echo $row['blu']; ?>");
+				$("#editdip").val("<?php echo $row['dip']; ?>");
+				$("#editdun").val("<?php echo $row['dun']; ?>");
+				$("#editend").val("<?php echo $row['end']; ?>");
+				$("#edithea").val("<?php echo $row['hea']; ?>");
+				$("#edithis").val("<?php echo $row['his']; ?>");
+				$("#editins").val("<?php echo $row['ins']; ?>");
+				$("#edititd").val("<?php echo $row['itd']; ?>");
+				$("#editnat").val("<?php echo $row['nat']; ?>");
+				$("#editper").val("<?php echo $row['per']; ?>");
+				$("#editrel").val("<?php echo $row['rel']; ?>");
+				$("#editste").val("<?php echo $row['ste']; ?>");
+				$("#editstw").val("<?php echo $row['stw']; ?>");
+				$("#editthi").val("<?php echo $row['thi']; ?>");
 				$("#inventoryList").html("");
 				dnd.inventory = new Array();
 	<?php
