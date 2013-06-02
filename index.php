@@ -6,7 +6,7 @@ include("include/funcs.php");
 mysql_connect("$host", "$user", "$pass") or die(mysql_error());
 mysql_select_db("$db") or die(mysql_error());
 
-$charRes = mysql_query("SELECT * FROM characters") or die(mysql_error());
+$charRes = mysql_query("SELECT * FROM characters WHERE disable='0'") or die(mysql_error());
 ?>
 
 <!DOCTYPE html>
@@ -53,10 +53,10 @@ $charRes = mysql_query("SELECT * FROM characters") or die(mysql_error());
 							<span class="statHeading">Defenses:</span><br />
 							<table style="font-family: Verdana,Arial,sans-serif;border:0px;max-width:250px;">
 								<tr>
-									<th>AC</th>
-									<th>Fortitude</th>
-									<th>Reflex</th>
-									<th>Will</th>
+									<th style="font-size:14px;">AC</th>
+									<th style="font-size:14px;">Fortitude</th>
+									<th style="font-size:14px;">Reflex</th>
+									<th style="font-size:14px;">Will</th>
 								</tr>
 								<tr>
 									<td><?php echo $row['ac'] ?></td>
@@ -64,6 +64,35 @@ $charRes = mysql_query("SELECT * FROM characters") or die(mysql_error());
 									<td><?php echo $row['reflex'] ?></td>
 									<td><?php echo $row['will'] ?></td>
 								</tr>
+							</table>
+						</div>
+						<div style="float: left;padding-left:25px;" />
+							<br />
+							<span class="statHeading">Inventory:</span><br />
+							<table style="font-family: Verdana,Arial,sans-serif;border:0px;max-width:400px;">
+								<tr>
+									<th style="font-size:14px;">Qty</th>
+									<th style="font-size:14px;">Item & Description</th>
+								</tr>
+								<?php
+									$invRes = mysql_query("SELECT * FROM inventory WHERE charid='".$row['id']."'") or die(mysql_error());
+									while ($invRow = mysql_fetch_array($invRes)) {
+								?>
+								<tr>
+									<td style="padding-right:10px;"><span class="itemQty" style="vertical-align: top;"><?php echo $invRow['qty']; ?>x</span></td>
+									<td>
+										<span class="itemName"><?php echo $invRow['name']; ?></span>
+									</td>
+								</tr>
+								<tr>
+									<td style="padding-right:10px;"></td>
+									<td>
+										<span class="itemDesc"><?php echo $invRow['desc']; ?></span>
+									</td>
+								</tr>
+								<?php 
+									}
+								?>
 							</table>
 						</div>
 						<br style="clear: both;" />
