@@ -113,7 +113,12 @@ var dnd = {
 				rel: $("#editrel").val(),
 				ste: $("#editste").val(),
 				stw: $("#editstw").val(),
-				thi: $("#editthi").val()
+				thi: $("#editthi").val(),
+				hsval: $("#edithsval").val(),
+				hsdaily: $("#edithsdaily").val(),
+				hsleft: $("#edithsleft").val(),
+				hswind: $("#edithswind").is(":checked"),
+				disable: $("#editdisable").is(":checked")
 			};
 			for (var i = 0; i < dnd.inventory.length; i++) {
 				var item = dnd.inventory[i];
@@ -210,10 +215,12 @@ var dnd = {
 				type: $("#editEtype").val(),
 				maxhp: $("#editEmaxhp").val(),
 				hp: $("#editEhp").val(),
+				temphp: $("#editEtemphp").val(),
 				hide: $("#editEhide").is(":checked"),
 				mask: $("#editEmaskDmg").is(":checked"),
 				disable: $("#editEdisable").is(":checked")
 			};
+			
 			$("#editEnemyAction").attr("disabled", "disabled");
 			$.post("calls/editEnemy.php", JSON.stringify(dataD), function(data, status) {
 				$("#editEnemyList").load("calls/enemyList.php");

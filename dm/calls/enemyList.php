@@ -47,6 +47,7 @@ $result = mysql_query("SELECT * FROM enemies WHERE disable='0' ORDER BY id DESC"
 				$("#editEname").val("<?php echo $row['name']; ?>");
 				$("#editEtype").val("<?php echo $row['type']; ?>");
 				$("#editEhp").val("<?php echo $row['hp']; ?>");
+				$("#editEtemphp").val("<?php echo $row['temphp']; ?>");
 				$("#editEmaxhp").val("<?php echo $row['maxhp']; ?>");
 				$("#editEmaskDmg").prop("checked", <?php echo ($row['mask'] == 1) ? "true" : "false"; ?>);
 				$("#editEhide").prop("checked", <?php echo ($row['hide'] == 1) ? "true" : "false"; ?>);

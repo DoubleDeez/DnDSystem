@@ -103,6 +103,11 @@ if($_GET['r'] >= 10) {
 				$("#editste").val("<?php echo $row['ste']; ?>");
 				$("#editstw").val("<?php echo $row['stw']; ?>");
 				$("#editthi").val("<?php echo $row['thi']; ?>");
+				$("#edithsval").val("<?php echo $row['hsval']; ?>");
+				$("#edithsdaily").val("<?php echo $row['hsdaily']; ?>");
+				$("#edithsleft").val("<?php echo $row['hsleft']; ?>");
+				$("#edithswind").prop("checked", <?php echo ($row['hswind'] == 1) ? "true" : "false"; ?>);
+				$("#editdisable").prop("checked", <?php echo ($row['disable'] == 1) ? "true" : "false"; ?>);
 				$("#inventoryList").html("");
 				dnd.inventory = new Array();
 	<?php

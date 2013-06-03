@@ -52,8 +52,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	$ste = $in->ste;
 	$stw = $in->stw;
 	$thi = $in->thi;
+	$hsval = $in->hsval;
+	$hsdaily = $in->hsdaily;
+	$hsleft = $in->hsleft;
+	$hswind = $in->hswind;
+	$disable = $in->disable;
 
-	mysql_query("UPDATE characters SET name='$name', maxhp='$maxhp', hp='$hp', class='$class', ac='$ac', fortitude='$fort', reflex='$reflex', will='$will', exp='$exp', temphp='$temphp', speed='$speed', initiative='$initiative', ap='$ap', vision='$vision', str='$str', strMod='$strMod', con='$con', conMod='$conMod', dex='$dex', dexMod='$dexMod', `int`='$int', intMod='$intMod', wis='$wis', wisMod='$wisMod', cha='$cha', chaMod='$chaMod', acr='$acr', arc='$arc', ath='$ath', blu='$blu', dip='$dip', dun='$dun', end='$end', hea='$hea', his='$his', ins='$ins', itd='$itd', nat='$nat', per='$per', rel='$rel', ste='$ste', stw='$stw', thi='$thi' WHERE id='$id'") or die(mysql_error());
+	mysql_query("UPDATE characters SET name='$name', maxhp='$maxhp', hp='$hp', class='$class', ac='$ac', fortitude='$fort', reflex='$reflex', will='$will', exp='$exp', temphp='$temphp', speed='$speed', initiative='$initiative', ap='$ap', vision='$vision', str='$str', strMod='$strMod', con='$con', conMod='$conMod', dex='$dex', dexMod='$dexMod', `int`='$int', intMod='$intMod', wis='$wis', wisMod='$wisMod', cha='$cha', chaMod='$chaMod', acr='$acr', arc='$arc', ath='$ath', blu='$blu', dip='$dip', dun='$dun', end='$end', hea='$hea', his='$his', ins='$ins', itd='$itd', nat='$nat', per='$per', rel='$rel', ste='$ste', stw='$stw', thi='$thi', hsval='$hsval', hsdaily='$hsdaily', hsleft='$hsleft', hswind='$hswind', disable='$disable' WHERE id='$id'") or die(mysql_error());
 
 	echo "Character updated!";
 }

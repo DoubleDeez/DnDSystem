@@ -110,6 +110,18 @@ if (isset($_SESSION['sid']) && isset($_SESSION['id'])) {
 					<label style="float:left;" for="editexp">Total EXP: </label>
 					<input style="float:right;" type="text" id="editexp" />
 					<br style="clear:both;" />
+					<label style="float:left;" for="edithsval">Healing Surge Value: </label>
+					<input style="float:right;" type="text" id="edithsval" />
+					<br style="clear:both;" />
+					<label style="float:left;" for="edithsdaily">Healing Surges / day: </label>
+					<input style="float:right;" type="text" id="edithsdaily" />
+					<br style="clear:both;" />
+					<label style="float:left;" for="edithsleft">Healing Surges Remaining: </label>
+					<input style="float:right;" type="text" id="edithsleft" />
+					<br style="clear:both;" />
+					<label style="float:left;" for="edithswind">Second Wind Available? </label>
+					<input style="float:right;" type="checkbox" id="edithswind" />
+					<br style="clear:both;" />
 					<label style="float:left;" for="editap">Action Points: </label>
 					<input style="float:right;" type="text" id="editap" />
 					<br style="clear:both;" />
@@ -209,6 +221,9 @@ if (isset($_SESSION['sid']) && isset($_SESSION['id'])) {
 					<label style="float:left;" for="editthi">Thievery: </label>
 					<input style="float:right;" type="text" id="editthi" />
 					<br style="clear:both;" />
+					<label style="float:left;" for="editdisable">Exclude this player from action? </label>
+					<input style="float:right;" type="checkbox" id="editdisable" />
+					<br style="clear:both;" />
 				</div>
 				<div id="inventoryList" style="float:left;padding-left:20px;">
 				</div>
@@ -273,6 +288,9 @@ if (isset($_SESSION['sid']) && isset($_SESSION['id'])) {
 					<br />
 					<label for="editEmaxhp">Max Health Points: </label>
 					<input type="text" id="editEmaxhp" />
+					<br />
+					<label for="editEtemphp">Temporary Health Points: </label>
+					<input type="text" id="editEtemphp" />
 					<br />
 					<label for="editEmaskDmg">Mask Damage Taken: </label>
 					<input type="checkbox" id="editEmaskDmg" />

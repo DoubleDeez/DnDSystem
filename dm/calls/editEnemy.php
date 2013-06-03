@@ -12,12 +12,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	$name = $in->name;
 	$type = $in->type;
 	$hp = $in->hp;
+	$temphp = $in->temphp;
 	$maxhp = $in->maxhp;
 	$mask = $in->mask;
 	$hide = $in->hide;
 	$disable = $in->disable;
 
-	mysql_query("UPDATE enemies SET name='$name', maxhp='$maxhp', hp='$hp', type='$type', mask='$mask', hide='$hide', disable='$disable' WHERE id='$id'") or die(mysql_error());
+	mysql_query("UPDATE enemies SET name='$name', maxhp='$maxhp', hp='$hp', temphp='$temphp', type='$type', mask='$mask', hide='$hide', disable='$disable' WHERE id='$id'") or die(mysql_error());
 
 	echo "Enemy updated!";
 }

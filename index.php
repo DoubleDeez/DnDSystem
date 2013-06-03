@@ -151,6 +151,23 @@ mysql_select_db("$db") or die(mysql_error());
 						</table>
 						<br />
 						<br />
+						<span class="statHeading">Healing Surges:</span><br />
+						<table style="font-family: Verdana,Arial,sans-serif;border:0px;width:300px;padding-top:5px;">
+							<tr>
+								<th style="font-size:14px;width:25%;">Value</th>
+								<th style="font-size:14px;width:25%;">Daily</th>
+								<th style="font-size:14px;width:25%;">Left</th>
+								<th style="font-size:14px;width:25%;">2nd Wind</th>
+							</tr>
+							<tr>
+								<td><?php echo $row['hsval']; ?></td>
+								<td><?php echo $row['hsdaily']; ?></td>
+								<td><?php echo $row['hsleft']; ?></td>
+								<td><?php echo ($row['hswind'] == 1) ? "Available" : "Used"; ?></td>
+							</tr>
+						</table>
+						<br />
+						<br />
 						<span class="statHeading">Ability Scores:</span><br />
 						<table style="font-family: Verdana,Arial,sans-serif;border:0px;width:300px;padding-top:5px;">
 							<tr>
