@@ -11,6 +11,8 @@ var dnd = {
 			$("#editChar").hide();
 			$("#addEnemies").hide();
 			$("#editEnemies").hide();
+			$("#userList").hide();
+			$("#dmTools").hide();
 		});
 		$("#addCharBtn").click(function() {
 			$("#info").hide();
@@ -18,6 +20,8 @@ var dnd = {
 			$("#editChar").hide();
 			$("#addEnemies").hide();
 			$("#editEnemies").hide();
+			$("#userList").hide();
+			$("#dmTools").hide();
 		});
 		$("#editCharBtn").click(function() {
 			$("#info").hide();
@@ -26,6 +30,8 @@ var dnd = {
 			$("#editCharList").load("calls/charList.php?id=" + id + "&r=" + rank);
 			$("#addEnemies").hide();
 			$("#editEnemies").hide();
+			$("#userList").hide();
+			$("#dmTools").hide();
 		});
 		$("#addEnemiesBtn").click(function() {
 			$("#info").hide();
@@ -33,6 +39,8 @@ var dnd = {
 			$("#editChar").hide();
 			$("#addEnemies").show();
 			$("#editEnemies").hide();
+			$("#userList").hide();
+			$("#dmTools").hide();
 		});
 		$("#editEnemiesBtn").click(function() {
 			$("#info").hide();
@@ -41,6 +49,27 @@ var dnd = {
 			$("#addEnemies").hide();
 			$("#editEnemies").show();
 			$("#editEnemyList").load("calls/enemyList.php");
+			$("#userList").hide();
+			$("#dmTools").hide();
+		});
+		$("#userListBtn").click(function() {
+			$("#info").hide();
+			$("#addChar").hide();
+			$("#editChar").hide();
+			$("#addEnemies").hide();
+			$("#editEnemies").hide();
+			$("#userList").show();
+			$("#dmTools").hide();
+			$("#userList").load("calls/userList.php");
+		});
+		$("#dmToolsBtn").click(function() {
+			$("#info").hide();
+			$("#addChar").hide();
+			$("#editChar").hide();
+			$("#addEnemies").hide();
+			$("#editEnemies").hide();
+			$("#userList").hide();
+			$("#dmTools").show();
 		});
 		$("#logoutBtn").click(function() {
 			window.location.replace("logout.php");

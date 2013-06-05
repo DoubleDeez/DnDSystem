@@ -36,7 +36,7 @@ if (isset($_SESSION['sid']) && isset($_SESSION['id'])) {
 			var rank = <?php echo $_SESSION['rank'];?>;
 			var id = <?php echo $_SESSION['id'];?>;
 		</script>
-		<div id='menu'><a href='#' id='infoBtn'>Info</a> | <a href='#' id='addCharBtn'>Add a Character</a> | <a href='#' id='editCharBtn'>Edit a Character</a><?php if($_SESSION['rank'] >= 10) { ?> | <a href='#' id='addEnemiesBtn'>Add an Enemy</a> | <a href='#' id='editEnemiesBtn'>Edit Enemies</a> | <a href='#' id='userListBtn'>User List</a> | <a href='#' id='dmTools'>DM Tools</a><?php } ?> | <a href='#' id='logoutBtn'>Log Out</a></div>
+		<div id='menu'><a href='#' id='infoBtn'>Info</a> | <a href='#' id='addCharBtn'>Add a Character</a> | <a href='#' id='editCharBtn'>Edit a Character</a><?php if($_SESSION['rank'] >= 10) { ?> | <a href='#' id='addEnemiesBtn'>Add an Enemy</a> | <a href='#' id='editEnemiesBtn'>Edit Enemies</a> | <a href='#' id='userListBtn'>User List</a> | <a href='#' id='dmToolsBtn'>DM Tools</a><?php } ?> | <a href='#' id='logoutBtn'>Log Out</a></div>
 		<span id='message' class='errMsg'></span>
 		<br/>
 		<div id='main'>
@@ -317,6 +317,9 @@ if (isset($_SESSION['sid']) && isset($_SESSION['id'])) {
 			</div>
 			<!-- User list Page -->
 			<div id='userList'>
+			</div>
+			<!-- DM tools Page -->
+			<div id='dmTools'>
 			</div>
 			<?php } ?>
 		</div>
