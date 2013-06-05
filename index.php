@@ -190,34 +190,28 @@ mysql_select_db("$db") or die(mysql_error());
 						<span class="statHeading">Ability Scores:</span><br />
 						<table style="font-family: Verdana,Arial,sans-serif;border:0px;width:300px;padding-top:5px;">
 							<tr>
-								<th style="font-size:14px;width:25%;">Str:</th>
-								<td style="font-size:13px;width:25%;"><?php echo $row['str']; ?></td>
-								<td style="font-size:13px;width:25%;"><?php echo ($row['strMod'] >= 0) ? "+" : ""; echo $row['strMod']; ?></td>
+								<th style="font-size:14px;width:20%;">Str:</th>
+								<td style="font-size:13px;width:15%;"><?php echo $row['str']; ?></td>
+								<td style="font-size:13px;width:15%;"><?php echo ($row['strMod'] >= 0) ? "+" : ""; echo $row['strMod']; ?></td>
+								<th style="font-size:14px;width:20%;">Con:</th>
+								<td style="font-size:13px;width:15%;"><?php echo $row['con']; ?></td>
+								<td style="font-size:13px;width:15%;"><?php echo ($row['conMod'] >= 0) ? "+" : ""; echo $row['conMod']; ?></td>
 							</tr>
 							<tr>
-								<th style="font-size:14px;width:25%;">Con:</th>
-								<td style="font-size:13px;width:25%;"><?php echo $row['con']; ?></td>
-								<td style="font-size:13px;width:25%;"><?php echo ($row['conMod'] >= 0) ? "+" : ""; echo $row['conMod']; ?></td>
+								<th style="font-size:14px;width:20%;">Dex:</th>
+								<td style="font-size:13px;width:15%;"><?php echo $row['dex']; ?></td>
+								<td style="font-size:13px;width:15%;"><?php echo ($row['dexMod'] >= 0) ? "+" : ""; echo $row['dexMod']; ?></td>
+								<th style="font-size:14px;width:20%;">Int:</th>
+								<td style="font-size:13px;width:15%;"><?php echo $row['int']; ?></td>
+								<td style="font-size:13px;width:15%;"><?php echo ($row['intMod'] >= 0) ? "+" : ""; echo $row['intMod']; ?></td>
 							</tr>
 							<tr>
-								<th style="font-size:14px;width:25%;">Dex:</th>
-								<td style="font-size:13px;width:25%;"><?php echo $row['dex']; ?></td>
-								<td style="font-size:13px;width:25%;"><?php echo ($row['dexMod'] >= 0) ? "+" : ""; echo $row['dexMod']; ?></td>
-							</tr>
-							<tr>
-								<th style="font-size:14px;width:25%;">Int:</th>
-								<td style="font-size:13px;width:25%;"><?php echo $row['int']; ?></td>
-								<td style="font-size:13px;width:25%;"><?php echo ($row['intMod'] >= 0) ? "+" : ""; echo $row['intMod']; ?></td>
-							</tr>
-							<tr>
-								<th style="font-size:14px;width:25%;">Wis:</th>
-								<td style="font-size:13px;width:25%;"><?php echo $row['wis']; ?></td>
-								<td style="font-size:13px;width:25%;"><?php echo ($row['wisMod'] >= 0) ? "+" : ""; echo $row['wisMod']; ?></td>
-							</tr>
-							<tr>
-								<th style="font-size:14px;width:25%;">Cha:</th>
-								<td style="font-size:13px;width:25%;"><?php echo $row['cha']; ?></td>
-								<td style="font-size:13px;width:25%;"><?php echo ($row['chaMod'] >= 0) ? "+" : ""; echo $row['chaMod']; ?></td>
+								<th style="font-size:14px;width:20%;">Wis:</th>
+								<td style="font-size:13px;width:15%;"><?php echo $row['wis']; ?></td>
+								<td style="font-size:13px;width:15%;"><?php echo ($row['wisMod'] >= 0) ? "+" : ""; echo $row['wisMod']; ?></td>
+								<th style="font-size:14px;width:20%;">Cha:</th>
+								<td style="font-size:13px;width:15%;"><?php echo $row['cha']; ?></td>
+								<td style="font-size:13px;width:15%;"><?php echo ($row['chaMod'] >= 0) ? "+" : ""; echo $row['chaMod']; ?></td>
 							</tr>
 						</table>
 					</div>
@@ -272,71 +266,71 @@ mysql_select_db("$db") or die(mysql_error());
 					<span class="statHeading">Skills: </span><a class="linkBtn" id="toggleSkill<?php echo $row['id']; ?>">(hide)</a><br />
 					<div id="skl<?php echo $row['id']; ?>">
 					<table style="font-family: Verdana,Arial,sans-serif;border-width:0px;width:auto;width:300px;padding-top:5px;" cellspacing="0">
-						<tr>
+						<tr style="background-color:#D1D1D1;">
 							<th style="font-size:14px;width:75%;">Acrobatics (Dex)</th>
 							<td style="font-size:13px;width:25%;"><?php echo ($row['acr'] >= 0) ? "+" : ""; echo $row['acr']; ?></td>
 						</tr>
-						<tr>
+						<tr style="background-color:#E3E3E3;">
 							<th style="font-size:14px;width:75%;">Arcana (Int)</th>
 							<td style="font-size:13px;width:25%;"><?php echo ($row['arc'] >= 0) ? "+" : ""; echo $row['arc']; ?></td>
 						</tr>
-						<tr>
+						<tr style="background-color:#D1D1D1;">
 							<th style="font-size:14px;width:75%;">Athletics (Str)</th>
 							<td style="font-size:13px;width:25%;"><?php echo ($row['ath'] >= 0) ? "+" : ""; echo $row['ath']; ?></td>
 						</tr>
-						<tr>
+						<tr style="background-color:#E3E3E3;">
 							<th style="font-size:14px;width:75%;">Bluff (Cha)</th>
 							<td style="font-size:13px;width:25%;"><?php echo ($row['blu'] >= 0) ? "+" : ""; echo $row['blu']; ?></td>
 						</tr>
-						<tr>
+						<tr style="background-color:#D1D1D1;">
 							<th style="font-size:14px;width:75%;">Diplomacy (Cha)</th>
 							<td style="font-size:13px;width:25%;"><?php echo ($row['dip'] >= 0) ? "+" : ""; echo $row['dip']; ?></td>
 						</tr>
-						<tr>
+						<tr style="background-color:#E3E3E3;">
 							<th style="font-size:14px;width:75%;">Dungeoneering (Wis)</th>
 							<td style="font-size:13px;width:25%;"><?php echo ($row['dun'] >= 0) ? "+" : ""; echo $row['dun']; ?></td>
 						</tr>
-						<tr>
+						<tr style="background-color:#D1D1D1;">
 							<th style="font-size:14px;width:75%;">Endurance (Con)</th>
 							<td style="font-size:13px;width:25%;"><?php echo ($row['end'] >= 0) ? "+" : ""; echo $row['end']; ?></td>
 						</tr>
-						<tr>
+						<tr style="background-color:#E3E3E3;">
 							<th style="font-size:14px;width:75%;">Heal (Wis)</th>
 							<td style="font-size:13px;width:25%;"><?php echo ($row['hea'] >= 0) ? "+" : ""; echo $row['hea']; ?></td>
 						</tr>
-						<tr>
+						<tr style="background-color:#D1D1D1;">
 							<th style="font-size:14px;width:75%;">History (Int)</th>
 							<td style="font-size:13px;width:25%;"><?php echo ($row['his'] >= 0) ? "+" : ""; echo $row['his']; ?></td>
 						</tr>
-						<tr>
+						<tr style="background-color:#E3E3E3;">
 							<th style="font-size:14px;width:75%;">Insight (Wis)</th>
 							<td style="font-size:13px;width:25%;"><?php echo ($row['ins'] >= 0) ? "+" : ""; echo $row['ins']; ?></td>
 						</tr>
-						<tr>
+						<tr style="background-color:#D1D1D1;">
 							<th style="font-size:14px;width:75%;">Intimidate (Cha)</th>
 							<td style="font-size:13px;width:25%;"><?php echo ($row['itd'] >= 0) ? "+" : ""; echo $row['itd']; ?></td>
 						</tr>
-						<tr>
+						<tr style="background-color:#E3E3E3;">
 							<th style="font-size:14px;width:75%;">Nature (Wis)</th>
 							<td style="font-size:13px;width:25%;"><?php echo ($row['nat'] >= 0) ? "+" : ""; echo $row['nat']; ?></td>
 						</tr>
-						<tr>
+						<tr style="background-color:#D1D1D1;">
 							<th style="font-size:14px;width:75%;">Perception (Wis)</th>
 							<td style="font-size:13px;width:25%;"><?php echo ($row['per'] >= 0) ? "+" : ""; echo $row['per']; ?></td>
 						</tr>
-						<tr>
+						<tr style="background-color:#E3E3E3;">
 							<th style="font-size:14px;width:75%;">Religion (Int)</th>
 							<td style="font-size:13px;width:25%;"><?php echo ($row['rel'] >= 0) ? "+" : ""; echo $row['rel']; ?></td>
 						</tr>
-						<tr>
+						<tr style="background-color:#D1D1D1;">
 							<th style="font-size:14px;width:75%;">Stealth (Dex)</th>
 							<td style="font-size:13px;width:25%;"><?php echo ($row['ste'] >= 0) ? "+" : ""; echo $row['ste']; ?></td>
 						</tr>
-						<tr>
+						<tr style="background-color:#E3E3E3;">
 							<th style="font-size:14px;width:75%;">Streetwise (Cha)</th>
 							<td style="font-size:13px;width:25%;"><?php echo ($row['stw'] >= 0) ? "+" : ""; echo $row['stw']; ?></td>
 						</tr>
-						<tr>
+						<tr style="background-color:#D1D1D1;">
 							<th style="font-size:14px;width:75%;">Thievery (Dex)</th>
 							<td style="font-size:13px;width:25%;"><?php echo ($row['thi'] >= 0) ? "+" : ""; echo $row['thi']; ?></td>
 						</tr>
