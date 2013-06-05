@@ -29,14 +29,14 @@ if (isset($_SESSION['sid']) && isset($_SESSION['id'])) {
 		<link rel="stylesheet" type="text/css" href="style.css">
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
 		<script type="text/javascript" src="script.js"></script>
-        <title>DnD Manager System</title>
+        <title>D&D Management System</title>
     </head>
     <body>
 		<script>
 			var rank = <?php echo $_SESSION['rank'];?>;
 			var id = <?php echo $_SESSION['id'];?>;
 		</script>
-		<div id='menu'><a href='#' id='infoBtn'>Info</a> | <a href='#' id='addCharBtn'>Add a Character</a> | <a href='#' id='editCharBtn'>Edit a Character</a><?php if($_SESSION['rank'] >= 10) { ?> | <a href='#' id='addEnemiesBtn'>Add an Enemy</a> | <a href='#' id='editEnemiesBtn'>Edit Enemies</a> | <a href='#' id='userListBtn'>User List</a><?php } ?> | <a href='#' id='logoutBtn'>Log Out</a></div>
+		<div id='menu'><a href='#' id='infoBtn'>Info</a> | <a href='#' id='addCharBtn'>Add a Character</a> | <a href='#' id='editCharBtn'>Edit a Character</a><?php if($_SESSION['rank'] >= 10) { ?> | <a href='#' id='addEnemiesBtn'>Add an Enemy</a> | <a href='#' id='editEnemiesBtn'>Edit Enemies</a> | <a href='#' id='userListBtn'>User List</a> | <a href='#' id='dmTools'>DM Tools</a><?php } ?> | <a href='#' id='logoutBtn'>Log Out</a></div>
 		<span id='message' class='errMsg'></span>
 		<br/>
 		<div id='main'>
@@ -127,6 +127,9 @@ if (isset($_SESSION['sid']) && isset($_SESSION['id'])) {
 					<br style="clear:both;" />
 					<label style="float:left;" for="editinit">Initiative Bonus: </label>
 					<input style="float:right;" type="text" id="editinit" />
+					<br style="clear:both;" />
+					<label style="float:left;" for="editinitroll">Encounter Initiative: </label>
+					<input style="float:right;" type="text" id="editinitroll" />
 					<br style="clear:both;" />
 					<label style="float:left;" for="editspeed">Speed: </label>
 					<input style="float:right;" type="text" id="editspeed" />
@@ -292,6 +295,9 @@ if (isset($_SESSION['sid']) && isset($_SESSION['id'])) {
 					<label for="editEtemphp">Temporary Health Points: </label>
 					<input type="text" id="editEtemphp" />
 					<br />
+					<label for="editEinitroll">Encounter Initiative: </label>
+					<input type="text" id="editEinitroll" />
+					<br />
 					<label for="editEmaskDmg">Mask Damage Taken: </label>
 					<input type="checkbox" id="editEmaskDmg" />
 					<br />
@@ -308,6 +314,9 @@ if (isset($_SESSION['sid']) && isset($_SESSION['id'])) {
 				</div>
 				<br style="clear: both;" />
 				<br />
+			</div>
+			<!-- User list Page -->
+			<div id='userList'>
 			</div>
 			<?php } ?>
 		</div>

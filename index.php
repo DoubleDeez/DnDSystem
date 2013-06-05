@@ -15,7 +15,7 @@ mysql_select_db("$db") or die(mysql_error());
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<link rel="stylesheet" type="text/css" href="style.css">
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
-        <title>DnD Manager System</title>
+        <title>D&D Live Stats</title>
     </head>
     <body onload='setTimeout("location.reload(true);", 60000);'>
 		<div id='menu'>
@@ -48,6 +48,23 @@ mysql_select_db("$db") or die(mysql_error());
 		<a name="top" />
 		<div id='main'>
 			<div id='content'>
+				<div class="charInfo">
+					<span class="statHeading">Encounter Order:</span><br /><br />
+				<?php
+					$initRes = mysql_query("SELECT * FROM (SELECT initroll, name, type FROM enemies WHERE disable='0' AND hide='0' AND initroll!='0' UNION ALL SELECT initroll, name, type FROM characters WHERE disable='0' AND initroll!='0') AS `result` ORDER BY `result`.`initroll` DESC") or die(mysql_error());
+					
+					while ($initrow = mysql_fetch_array($initRes)) {
+						if($initrow['type'] != "") {
+							echo "&bull; <span style='color:#660000;font-weight:bold;'>".$initrow['name']." ".$initrow['type']."</span>";
+						} else {
+							echo "&bull; <span style='color:#024435;font-weight:bold;'>".$initrow['name']."</span>";
+						}
+				?>
+				<?php
+				}
+				?>
+				
+				</div>
 				<?php
 					$enRes = mysql_query("SELECT * FROM enemies WHERE disable='0' AND hide='0'") or die(mysql_error());
 					$enNum = 0;
@@ -78,7 +95,6 @@ mysql_select_db("$db") or die(mysql_error());
 						<span class='charHP' style="color: <?php echo $hpcolour; ?>;"><?php echo $enHPmsg; ?></span>
 					</div>
 					<br style='clear: both;' />
-					<a name="0" />
 				</div>
 				<?php
 					if((($enNum % 2) == 1) || (($enNum + 1) == mysql_num_rows($enRes))) {
@@ -87,6 +103,9 @@ mysql_select_db("$db") or die(mysql_error());
 					
 					$enNum++;
 				}
+				?>
+				<a name="0" />
+				<?php
 				$charRes = mysql_query("SELECT * FROM characters WHERE disable='0'") or die(mysql_error());
 				$charCount = 1;
 				while ($row = mysql_fetch_array($charRes)) {

@@ -73,6 +73,7 @@ if($_GET['r'] >= 10) {
 				$("#editap").val("<?php echo $row['ap']; ?>");
 				$("#editspeed").val("<?php echo $row['speed']; ?>");
 				$("#editinit").val("<?php echo $row['initiative']; ?>");
+				$("#editinitroll").val("<?php echo $row['initroll']; ?>");
 				$("#editvision").val("<?php echo $row['vision']; ?>");
 				$("#editstr").val("<?php echo $row['str']; ?>");
 				$("#editstrMod").val("<?php echo $row['strMod']; ?>");
