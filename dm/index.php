@@ -86,6 +86,18 @@ if (isset($_SESSION['sid']) && isset($_SESSION['id'])) {
 					<label style="float:left;" for="editclass">Class: </label>
 					<input style="float:right;" type="text" id="editclass" class="editChar" />
 					<br style="clear:both;" />
+					<label style="float:left;" for="editexp">Total EXP: </label>
+					<input style="float:right;" type="text" id="editexp" class="editChar" />
+					<br style="clear:both;" />
+					<label style="float:left;" for="editap">Action Points: </label>
+					<input style="float:right;" type="text" id="editap" class="editChar" />
+					<br style="clear:both;" />
+					<label style="float:left;" for="editspeed">Speed: </label>
+					<input style="float:right;" type="text" id="editspeed" class="editChar" />
+					<br style="clear:both;" />
+					<label style="float:left;" for="editvision">Vision: </label>
+					<input style="float:right;" type="text" id="editvision" class="editChar" />
+					<br style="clear:both;" />
 					<label style="float:left;" for="editinit">Initiative Bonus: </label>
 					<input style="float:right;" type="text" id="editinit" class="editChar" />
 					<br style="clear:both;" />
@@ -112,18 +124,6 @@ if (isset($_SESSION['sid']) && isset($_SESSION['id'])) {
 					<br style="clear:both;" />
 					<label style="float:left;" for="edithswind">Second Wind Available? </label>
 					<input style="float:right;" type="checkbox" id="edithswind" class="editChar" />
-					<br style="clear:both;" />
-					<label style="float:left;" for="editap">Action Points: </label>
-					<input style="float:right;" type="text" id="editap" class="editChar" />
-					<br style="clear:both;" />
-					<label style="float:left;" for="editspeed">Speed: </label>
-					<input style="float:right;" type="text" id="editspeed" class="editChar" />
-					<br style="clear:both;" />
-					<label style="float:left;" for="editvision">Vision: </label>
-					<input style="float:right;" type="text" id="editvision" class="editChar" />
-					<br style="clear:both;" />
-					<label style="float:left;" for="editexp">Total EXP: </label>
-					<input style="float:right;" type="text" id="editexp" class="editChar" />
 					<br style="clear:both;" />
 				</div>
 				<div style="float:left;padding-right:50px;">
@@ -260,7 +260,7 @@ if (isset($_SESSION['sid']) && isset($_SESSION['id'])) {
 						</div>
 						<br style="clear: both;" />
 						<input type="button" id="addInvAction" value="Add to Inventory" /><br/>
-					<span id='addInvMessage' class='errMsg'></span>
+						<span id='addInvMessage' class='errMsg'></span>
 						<br />
 					</div>
 				</div>
@@ -281,7 +281,7 @@ if (isset($_SESSION['sid']) && isset($_SESSION['id'])) {
 						</div>
 						<br style="clear: both;" />
 						<input type="button" id="addFeatAction" value="Add Feat/Trait" /><br/>
-					<span id='addFeatMessage' class='errMsg'></span>
+						<span id='addFeatMessage' class='errMsg'></span>
 						<br />
 					</div>
 				</div>
@@ -354,6 +354,44 @@ if (isset($_SESSION['sid']) && isset($_SESSION['id'])) {
 				</div>
 				<!-- DM tools Page -->
 				<div id='dmTools'>
+					<div style="float:left;">
+						<h4>Split EXP among all active characters:</h4>
+						<label for="dmEXP">EXP Amount: </label>
+						<input type="text" id="dmEXP" />
+						<br />
+						<input type="button" id="dmEXPAction" value="Add EXP" />
+					</div>
+					<div style="float:left;padding-left:50px;">
+						<h4>Reset Encounter Initiatives:</h4>
+						<input type="button" id="dmInitAction" value="Reset Initiatives" />
+					</div>
+					<div style="float:left;padding-left:50px;">
+						<h4>Set the owner of a character:</h4>
+						<label for="dmOwner">Owner:</label>
+						<select id="dmOwner">
+							<?php
+							$result = mysql_query("SELECT * FROM users") or die(mysql_error());
+
+							while ($row = mysql_fetch_array($result)) {
+								echo "<option value='".$row['id']."'>".$row['name']."</option>";
+							}
+							?>
+						</select>
+						&nbsp;&HorizontalLine;&nbsp;
+						<label for="dmChar">Character:</label>
+						<select id="dmChar">
+							<?php
+							$charresult = mysql_query("SELECT * FROM characters") or die(mysql_error());
+
+							while ($charrow = mysql_fetch_array($charresult)) {
+								echo "<option value='".$charrow['id']."'>".$charrow['name']."</option>";
+							}
+							?>
+						</select>
+						<br/>
+						<input type="button" id="dmOwnerAction" value="Set Owner" />
+					</div>
+					<br style="clear:both;"/>
 				</div>
 			<?php } ?>
 		</div>

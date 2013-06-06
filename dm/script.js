@@ -6,6 +6,8 @@ var dnd = {
 		$("#editChar").hide();
 		$("#addEnemies").hide();
 		$("#editEnemies").hide();
+		$("#userList").hide();
+		$("#dmTools").hide();
 		$("#infoBtn").click(function() {
 			$("#info").show();
 			$("#addChar").hide();
@@ -326,6 +328,52 @@ var dnd = {
 			if (e.keyCode === 13) {
 				$('#addFeatAction').trigger('click');
 			}
+		});
+		$("#dmEXPAction").click(function() {
+			var dataD = {
+				exp: $("#dmEXP").val()
+			};
+			$("#dmEXPActioon").attr("disabled", "disabled");
+			$.post("calls/addEXP.php", JSON.stringify(dataD), function(data, status) {
+				$("#message").html(data);
+				window.setTimeout(function() {
+					$("#message").fadeOut(null, function() {
+						$("#message").html("");
+						$("#message").fadeIn();
+					});
+				}, 10000);
+				$("#dmEXPAction").removeAttr("disabled");
+			});
+		});
+		$("#dmInitAction").click(function() {
+			$("#dmInitAction").attr("disabled", "disabled");
+			$.post("calls/resetInit.php", null, function(data, status) {
+				$("#message").html(data);
+				window.setTimeout(function() {
+					$("#message").fadeOut(null, function() {
+						$("#message").html("");
+						$("#message").fadeIn();
+					});
+				}, 10000);
+				$("#dmInitAction").removeAttr("disabled");
+			});
+		});
+		$("#dmOwnerAction").click(function() {
+			var dataD = {
+				ownerid: $("#dmOwner").val(),
+				charid: $("#dmChar").val()
+			};
+			$("#dmOwnerActioon").attr("disabled", "disabled");
+			$.post("calls/changeOwner.php", JSON.stringify(dataD), function(data, status) {
+				$("#message").html(data);
+				window.setTimeout(function() {
+					$("#message").fadeOut(null, function() {
+						$("#message").html("");
+						$("#message").fadeIn();
+					});
+				}, 10000);
+				$("#dmOwnerAction").removeAttr("disabled");
+			});
 		});
 	}
 };

@@ -21,3 +21,15 @@ th {
 	background-color: #262626;
 	color: #d1e6fd;
 }
+
+a {
+	font-family: Verdana,Arial,sans-serif;
+	font-size: 14px;
+	text-decoration: none;
+	color: #262626;
+	font-weight: bold;
+}
+
+a:hover {
+	text-decoration: underline;
+}
