@@ -5,6 +5,7 @@ root {
 body {
 	font-family: Verdana,Arial,sans-serif;
 	font-size: 14px;
+	background-color:#d1e6fd;
 }
 
 .errMsg {
@@ -16,3 +17,7 @@ label {
 	font-weight: bold;
 }
 
+th {
+	background-color: #262626;
+	color: #d1e6fd;
+}

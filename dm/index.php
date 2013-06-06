@@ -33,10 +33,10 @@ if (isset($_SESSION['sid']) && isset($_SESSION['id'])) {
     </head>
     <body>
 		<script>
-			var rank = <?php echo $_SESSION['rank'];?>;
-			var id = <?php echo $_SESSION['id'];?>;
+			var rank = <?php echo $_SESSION['rank']; ?>;
+			var id = <?php echo $_SESSION['id']; ?>;
 		</script>
-		<div id='menu'><a href='#' id='infoBtn'>Info</a> | <a href='#' id='addCharBtn'>Add a Character</a> | <a href='#' id='editCharBtn'>Edit a Character</a><?php if($_SESSION['rank'] >= 10) { ?> | <a href='#' id='addEnemiesBtn'>Add an Enemy</a> | <a href='#' id='editEnemiesBtn'>Edit Enemies</a> | <a href='#' id='userListBtn'>User List</a> | <a href='#' id='dmToolsBtn'>DM Tools</a><?php } ?> | <a href='#' id='logoutBtn'>Log Out</a></div>
+		<div id='menu'><a href='#' id='infoBtn'>Info</a> | <a href='#' id='addCharBtn'>Add a Character</a> | <a href='#' id='editCharBtn'>Edit a Character</a><?php if ($_SESSION['rank'] >= 10) { ?> | <a href='#' id='addEnemiesBtn'>Add an Enemy</a> | <a href='#' id='editEnemiesBtn'>Edit Enemies</a> | <a href='#' id='userListBtn'>User List</a> | <a href='#' id='dmToolsBtn'>DM Tools</a><?php } ?> | <a href='#' id='logoutBtn'>Log Out</a></div>
 		<span id='message' class='errMsg'></span>
 		<br/>
 		<div id='main'>
@@ -64,7 +64,7 @@ if (isset($_SESSION['sid']) && isset($_SESSION['id'])) {
 				<label for="name">Will: </label>
 				<input type="text" id="will" />
 				<br />
-				<?php if($_SESSION['rank'] >= 10) { ?>
+				<?php if ($_SESSION['rank'] >= 10) { ?>
 					<label for="name">User ID: </label>
 					<input type="text" id="userid" />
 					<br />
@@ -78,13 +78,19 @@ if (isset($_SESSION['sid']) && isset($_SESSION['id'])) {
 				<div id="editCharList">
 				</div>
 				<br />
-				<div style="float:left;">
+				<div style="float:left;padding-right:50px;">
 					<input type="hidden" id="editid" />
 					<label style="float:left;" for="name">Name: </label>
 					<input style="float:right;" type="text" id="editname" />
 					<br style="clear:both;" />
 					<label style="float:left;" for="editclass">Class: </label>
 					<input style="float:right;" type="text" id="editclass" />
+					<br style="clear:both;" />
+					<label style="float:left;" for="editinit">Initiative Bonus: </label>
+					<input style="float:right;" type="text" id="editinit" />
+					<br style="clear:both;" />
+					<label style="float:left;" for="editinitroll">Encounter Initiative: </label>
+					<input style="float:right;" type="text" id="editinitroll" />
 					<br style="clear:both;" />
 					<label style="float:left;" for="edithp">Current Health Points: </label>
 					<input style="float:right;" type="text" id="edithp" />
@@ -94,21 +100,6 @@ if (isset($_SESSION['sid']) && isset($_SESSION['id'])) {
 					<br style="clear:both;" />
 					<label style="float:left;" for="edittemphp">Temporary Health Points: </label>
 					<input style="float:right;" type="text" id="edittemphp" />
-					<br style="clear:both;" />
-					<label style="float:left;" for="editac">AC: </label>
-					<input style="float:right;" type="text" id="editac" />
-					<br style="clear:both;" />
-					<label style="float:left;" for="editfort">Fortitude: </label>
-					<input style="float:right;" type="text" id="editfort" />
-					<br style="clear:both;" />
-					<label style="float:left;" for="editreflex">Reflex: </label>
-					<input style="float:right;" type="text" id="editreflex" />
-					<br style="clear:both;" />
-					<label style="float:left;" for="editwill">Will: </label>
-					<input style="float:right;" type="text" id="editwill" />
-					<br style="clear:both;" />
-					<label style="float:left;" for="editexp">Total EXP: </label>
-					<input style="float:right;" type="text" id="editexp" />
 					<br style="clear:both;" />
 					<label style="float:left;" for="edithsval">Healing Surge Value: </label>
 					<input style="float:right;" type="text" id="edithsval" />
@@ -125,17 +116,28 @@ if (isset($_SESSION['sid']) && isset($_SESSION['id'])) {
 					<label style="float:left;" for="editap">Action Points: </label>
 					<input style="float:right;" type="text" id="editap" />
 					<br style="clear:both;" />
-					<label style="float:left;" for="editinit">Initiative Bonus: </label>
-					<input style="float:right;" type="text" id="editinit" />
-					<br style="clear:both;" />
-					<label style="float:left;" for="editinitroll">Encounter Initiative: </label>
-					<input style="float:right;" type="text" id="editinitroll" />
-					<br style="clear:both;" />
 					<label style="float:left;" for="editspeed">Speed: </label>
 					<input style="float:right;" type="text" id="editspeed" />
 					<br style="clear:both;" />
 					<label style="float:left;" for="editvision">Vision: </label>
 					<input style="float:right;" type="text" id="editvision" />
+					<br style="clear:both;" />
+					<label style="float:left;" for="editexp">Total EXP: </label>
+					<input style="float:right;" type="text" id="editexp" />
+					<br style="clear:both;" />
+				</div>
+				<div style="float:left;padding-right:50px;">
+					<label style="float:left;" for="editac">AC: </label>
+					<input style="float:right;" type="text" id="editac" />
+					<br style="clear:both;" />
+					<label style="float:left;" for="editfort">Fortitude: </label>
+					<input style="float:right;" type="text" id="editfort" />
+					<br style="clear:both;" />
+					<label style="float:left;" for="editreflex">Reflex: </label>
+					<input style="float:right;" type="text" id="editreflex" />
+					<br style="clear:both;" />
+					<label style="float:left;" for="editwill">Will: </label>
+					<input style="float:right;" type="text" id="editwill" />
 					<br style="clear:both;" />
 					<label style="float:left;" for="editstr">Base Strength: </label>
 					<input style="float:right;" type="text" id="editstr" />
@@ -173,6 +175,11 @@ if (isset($_SESSION['sid']) && isset($_SESSION['id'])) {
 					<label style="float:left;" for="editchaMod">Charisma Modifier: </label>
 					<input style="float:right;" type="text" id="editchaMod" />
 					<br style="clear:both;" />
+					<label style="float:left;" for="editdisable">Exclude this player from action? </label>
+					<input style="float:right;" type="checkbox" id="editdisable" />
+					<br style="clear:both;" />
+				</div>
+				<div style="float:left;">
 					<label style="float:left;" for="editacr">Acrobatics: </label>
 					<input style="float:right;" type="text" id="editacr" />
 					<br style="clear:both;" />
@@ -224,103 +231,125 @@ if (isset($_SESSION['sid']) && isset($_SESSION['id'])) {
 					<label style="float:left;" for="editthi">Thievery: </label>
 					<input style="float:right;" type="text" id="editthi" />
 					<br style="clear:both;" />
-					<label style="float:left;" for="editdisable">Exclude this player from action? </label>
-					<input style="float:right;" type="checkbox" id="editdisable" />
-					<br style="clear:both;" />
-				</div>
-				<div id="inventoryList" style="float:left;padding-left:20px;">
 				</div>
 				<br style="clear: both;" />
-				<br/>
 				<div style="float:left;">
 					<input type="button" id="editCharAction" value="Update Character" />
 				</div>
-				<div style="float:left;">
-					<input type="button" id="editInvAction" value="Update Inventory" />
-					<br />
-				</div>
 				<br style="clear: both;" />
-				<br />
-				<br />
-				<div>
-					<label for="invAddName">Name</label>
-					<input type="text" id="invAddName">&nbsp;
-					<input type="hidden" id="invAddCharID">
-					<label for="invAddDesc">Desc</label>
-					<input type="text" id="invAddDesc">&nbsp;
-					<label for="invAddQty">Quantity</label>
-					<input type="text" id="invAddQty"><br />
-					<input type="button" id="addInvAction" value="Add to Inventory" />
-					<br />
-				</div>
-			</div>
-			<?php if($_SESSION['rank'] >= 10) { ?>
-			<!-- Add Enemy Page -->
-			<div id='addEnemies'>
-				<label for="addEname">Name: </label>
-				<input type="text" id="addEname" />
-				<br />
-				<label for="addEtype">Type: </label>
-				<input type="text" id="addEtype" />
-				<br />
-				<label for="addEmaxhp">Max Health Points: </label>
-				<input type="text" id="addEmaxhp" />
-				<br />
-				<label for="addEmaskDmg">Mask Damage Taken: </label>
-				<input type="checkbox" id="addEmaskDmg" />
-				<br />
-				<label for="addEhide">Hide Enemy from Players: </label>
-				<input type="checkbox" id="addEhide" />
-				<br />
-				<input type="button" id="addEnemyAction" value="Create Enemy" />
-			</div>
-			<!-- Edit Enemies Page -->
-			<div id='editEnemies'>
-				<div id="editEnemyList"></div>
-				<br />
+				<br/><br/>
 				<div style="float:left;">
-					<input type="hidden" id="editEid" />
-					<label for="editEname">Name: </label>
-					<input type="text" id="editEname" />
-					<br />
-					<label for="editEtype">Type: </label>
-					<input type="text" id="editEtype" />
-					<br />
-					<label for="editEhp">Current Health Points: </label>
-					<input type="text" id="editEhp" />
-					<br />
-					<label for="editEmaxhp">Max Health Points: </label>
-					<input type="text" id="editEmaxhp" />
-					<br />
-					<label for="editEtemphp">Temporary Health Points: </label>
-					<input type="text" id="editEtemphp" />
-					<br />
-					<label for="editEinitroll">Encounter Initiative: </label>
-					<input type="text" id="editEinitroll" />
-					<br />
-					<label for="editEmaskDmg">Mask Damage Taken: </label>
-					<input type="checkbox" id="editEmaskDmg" />
-					<br />
-					<label for="editEhide">Hide Enemy from Players: </label>
-					<input type="checkbox" id="editEhide" />
-					<br />
-					<label for="editEdisable">Disable this enemy forever: </label>
-					<input type="checkbox" id="editEdisable" />
+					<div id="inventoryList"></div><br/>
+					<input type="button" id="editInvAction" value="Update Inventory" />
+					<br/><br/>
+					<div>
+						<div style="float:left;">
+							<label for="invAddName">Name:</label><br/>
+							<input type="text" id="invAddName">&nbsp;
+							<input type="hidden" id="invAddCharID">
+						</div>
+						<div style="float:left;">
+							<label for="invAddDesc">Description:</label><br/>
+							<input type="text" id="invAddDesc">&nbsp;
+						</div>
+						<div style="float:left;">
+							<label for="invAddQty">Quantity:</label><br/>
+							<input type="text" id="invAddQty">
+						</div>
+						<br style="clear: both;" />
+						<input type="button" id="addInvAction" value="Add to Inventory" />
+						<br />
+					</div>
+				</div>
+				<div style="float:left;padding-left:50px;">
+					<div id="featList"></div><br/>
+					<input type="button" id="editFeatAction" value="Update Feats & Traits" />
+					<br/><br/>
+					<div>
+						<div style="float:left;">
+							<label for="invAddName">Name:</label><br/>
+							<input type="text" id="featAddName">&nbsp;
+							<input type="hidden" id="featAddCharID">
+						</div>
+						<div style="float:left;">
+							<label for="invAddDesc">Description:</label><br/>
+							<input type="text" id="featAddDesc">&nbsp;
+						</div>
+						<br style="clear: both;" />
+						<input type="button" id="addFeatAction" value="Add Feat/Trait" />
+						<br />
+					</div>
 				</div>
 				<br style="clear: both;" />
 				<br/>
-				<div style="float:left;">
-					<input type="button" id="editEnemyAction" value="Update Enemy" />
+			</div>
+			<?php if ($_SESSION['rank'] >= 10) { ?>
+				<!-- Add Enemy Page -->
+				<div id='addEnemies'>
+					<label for="addEname">Name: </label>
+					<input type="text" id="addEname" />
+					<br />
+					<label for="addEtype">Type: </label>
+					<input type="text" id="addEtype" />
+					<br />
+					<label for="addEmaxhp">Max Health Points: </label>
+					<input type="text" id="addEmaxhp" />
+					<br />
+					<label for="addEmaskDmg">Mask Damage Taken: </label>
+					<input type="checkbox" id="addEmaskDmg" />
+					<br />
+					<label for="addEhide">Hide Enemy from Players: </label>
+					<input type="checkbox" id="addEhide" />
+					<br />
+					<input type="button" id="addEnemyAction" value="Create Enemy" />
 				</div>
-				<br style="clear: both;" />
-				<br />
-			</div>
-			<!-- User list Page -->
-			<div id='userList'>
-			</div>
-			<!-- DM tools Page -->
-			<div id='dmTools'>
-			</div>
+				<!-- Edit Enemies Page -->
+				<div id='editEnemies'>
+					<div id="editEnemyList"></div>
+					<br />
+					<div style="float:left;">
+						<input type="hidden" id="editEid" />
+						<label for="editEname">Name: </label>
+						<input type="text" id="editEname" />
+						<br />
+						<label for="editEtype">Type: </label>
+						<input type="text" id="editEtype" />
+						<br />
+						<label for="editEhp">Current Health Points: </label>
+						<input type="text" id="editEhp" />
+						<br />
+						<label for="editEmaxhp">Max Health Points: </label>
+						<input type="text" id="editEmaxhp" />
+						<br />
+						<label for="editEtemphp">Temporary Health Points: </label>
+						<input type="text" id="editEtemphp" />
+						<br />
+						<label for="editEinitroll">Encounter Initiative: </label>
+						<input type="text" id="editEinitroll" />
+						<br />
+						<label for="editEmaskDmg">Mask Damage Taken: </label>
+						<input type="checkbox" id="editEmaskDmg" />
+						<br />
+						<label for="editEhide">Hide Enemy from Players: </label>
+						<input type="checkbox" id="editEhide" />
+						<br />
+						<label for="editEdisable">Disable this enemy forever: </label>
+						<input type="checkbox" id="editEdisable" />
+					</div>
+					<br style="clear: both;" />
+					<br/>
+					<div style="float:left;">
+						<input type="button" id="editEnemyAction" value="Update Enemy" />
+					</div>
+					<br style="clear: both;" />
+					<br />
+				</div>
+				<!-- User list Page -->
+				<div id='userList'>
+				</div>
+				<!-- DM tools Page -->
+				<div id='dmTools'>
+				</div>
 			<?php } ?>
 		</div>
 		<div id='footer'></div>

@@ -60,6 +60,7 @@ if($_GET['r'] >= 10) {
 			$("#edit<?php echo $row['id']; ?>").click(function() {
 				$("#editid").val("<?php echo $row['id']; ?>");
 				$("#invAddCharID").val("<?php echo $row['id']; ?>");
+				$("#featAddCharID").val("<?php echo $row['id']; ?>");
 				$("#editname").val("<?php echo $row['name']; ?>");
 				$("#editclass").val("<?php echo $row['class']; ?>");
 				$("#edithp").val("<?php echo $row['hp']; ?>");
@@ -110,12 +111,11 @@ if($_GET['r'] >= 10) {
 				$("#edithswind").prop("checked", <?php echo ($row['hswind'] == 1) ? "true" : "false"; ?>);
 				$("#editdisable").prop("checked", <?php echo ($row['disable'] == 1) ? "true" : "false"; ?>);
 				$("#inventoryList").html("");
+				$("#featList").html("");
 				dnd.inventory = new Array();
+				dnd.feats = new Array();
 	<?php
 	$invresult = mysql_query("SELECT * FROM inventory WHERE charid='" . $row['id'] . "'") or die(mysql_error());
-	?>
-
-	<?php
 	while ($invrow = mysql_fetch_array($invresult)) {
 		?>
 					$("#inventoryList").append("<input type=\"text\" id=\"invName<?php echo $invrow['id']; ?>\" value=\"<?php echo $invrow['name']; ?>\" >&nbsp;");
@@ -127,6 +127,19 @@ if($_GET['r'] >= 10) {
 						"name": "<?php echo $invrow['name']; ?>",
 						"desc": "<?php echo $invrow['desc']; ?>",
 						"quantity": "<?php echo $invrow['quantity']; ?>"
+					});
+		<?php
+	}
+	$featresult = mysql_query("SELECT * FROM feats WHERE charid='" . $row['id'] . "'") or die(mysql_error());
+	while ($featrow = mysql_fetch_array($featresult)) {
+		?>
+					$("#featList").append("<input type=\"text\" id=\"featName<?php echo $featrow['id']; ?>\" value=\"<?php echo $featrow['name']; ?>\" >&nbsp;");
+					$("#featList").append("<input type=\"text\" id=\"featDesc<?php echo $featrow['id']; ?>\" value=\"<?php echo $featrow['description']; ?>\" ><br />");
+
+					dnd.feats.push({
+						"id": "<?php echo $featrow['id']; ?>",
+						"name": "<?php echo $featrow['name']; ?>",
+						"desc": "<?php echo $featrow['description']; ?>"
 					});
 		<?php
 	}

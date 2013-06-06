@@ -1,5 +1,6 @@
 var dnd = {
 	inventory: new Array(),
+	feats: new Array(),
 	init: function() {
 		$("#addChar").hide();
 		$("#editChar").hide();
@@ -193,6 +194,28 @@ var dnd = {
 				$("#addInvAction").removeAttr("disabled");
 			});
 		});
+		$("#addFeatAction").click(function() {
+			var dataD = {
+				charID: $("#featAddCharID").val(),
+				name: $("#featAddName").val(),
+				desc: $("#featAddDesc").val()
+			};
+			$("#addFeatAction").attr("disabled", "disabled");
+			$.post("calls/addFeat.php", JSON.stringify(dataD), function(data, status) {
+				$("#editCharList").load("calls/charList.php?id=" + id + "&r=" + rank, function() {
+					$("#edit" + $("#featAddCharID").val()).trigger("click");
+				});
+				
+				$("#message").html(data);
+				window.setTimeout(function() {
+					$("#message").fadeOut(null, function() {
+						$("#message").html("");
+						$("#message").fadeIn();
+					});
+				}, 10000);
+				$("#addFeatAction").removeAttr("disabled");
+			});
+		});
 		$("#editInvAction").click(function() {
 			for (var i = 0; i < dnd.inventory.length; i++) {
 				var item = dnd.inventory[i];
@@ -215,6 +238,29 @@ var dnd = {
 					});
 				}, 10000);
 				$("#editInvAction").removeAttr("disabled");
+			});
+		});
+		$("#editFeatAction").click(function() {
+			for (var i = 0; i < dnd.feats.length; i++) {
+				var feat = dnd.feats[i];
+				feat.name = $("#featName"+feat.id).val();
+				feat.desc = $("#featDesc"+feat.id).val();
+				dnd.feats[i] = feat;
+			}
+			$("#editFeatAction").attr("disabled", "disabled");
+			$.post("calls/editFeat.php", JSON.stringify(dnd.feats), function(data, status) {
+				$("#editCharList").load("calls/charList.php?id=" + id + "&r=" + rank, function() {
+					$("#edit" + $("#featAddCharID").val()).trigger("click");
+				});
+				
+				$("#message").html(data);
+				window.setTimeout(function() {
+					$("#message").fadeOut(null, function() {
+						$("#message").html("");
+						$("#message").fadeIn();
+					});
+				}, 10000);
+				$("#editFeatAction").removeAttr("disabled");
 			});
 		});
 		$("#addEnemyAction").click(function() {
