@@ -125,6 +125,9 @@ if (isset($_SESSION['sid']) && isset($_SESSION['id'])) {
 					<label style="float:left;" for="edithswind">Second Wind Available? </label>
 					<input style="float:right;" type="checkbox" id="edithswind" class="editChar" />
 					<br style="clear:both;" />
+					<label style="float:left;" for="editdisable">Exclude this player from action? </label>
+					<input style="float:right;" type="checkbox" id="editdisable" class="editChar" />
+					<br style="clear:both;" />
 				</div>
 				<div style="float:left;padding-right:50px;">
 					<label style="float:left;" for="editac">AC: </label>
@@ -174,9 +177,6 @@ if (isset($_SESSION['sid']) && isset($_SESSION['id'])) {
 					<br style="clear:both;" />
 					<label style="float:left;" for="editchaMod">Charisma Modifier: </label>
 					<input style="float:right;" type="text" id="editchaMod" class="editChar" />
-					<br style="clear:both;" />
-					<label style="float:left;" for="editdisable">Exclude this player from action? </label>
-					<input style="float:right;" type="checkbox" id="editdisable" class="editChar" />
 					<br style="clear:both;" />
 				</div>
 				<div style="float:left;">
