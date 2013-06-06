@@ -153,19 +153,19 @@ var dnd = {
 			};
 			for (var i = 0; i < dnd.inventory.length; i++) {
 				var item = dnd.inventory[i];
-				item.name = $("#invName"+item.id).val();
-				item.desc = $("#invDesc"+item.id).val();
-				item.quantity = $("#invQuantity"+item.id).val();
+				item.name = $("#invName" + item.id).val();
+				item.desc = $("#invDesc" + item.id).val();
+				item.quantity = $("#invQuantity" + item.id).val();
 				dnd.inventory[i] = item;
 			}
 			$("#editCharAction").attr("disabled", "disabled");
 			$.post("calls/editChar.php", JSON.stringify(dataD), function(data, status) {
 				$("#editCharList").load("calls/charList.php?id=" + id + "&r=" + rank);
-				$("#message").html(data);
+				$("#editCharMessage").html(data);
 				window.setTimeout(function() {
-					$("#message").fadeOut(null, function() {
-						$("#message").html("");
-						$("#message").fadeIn();
+					$("#editCharMessage").fadeOut(null, function() {
+						$("#editCharMessage").html("");
+						$("#editCharMessage").fadeIn();
 					});
 				}, 10000);
 				$("#editCharAction").removeAttr("disabled");
@@ -183,12 +183,12 @@ var dnd = {
 				$("#editCharList").load("calls/charList.php?id=" + id + "&r=" + rank, function() {
 					$("#edit" + $("#invAddCharID").val()).trigger("click");
 				});
-				
-				$("#message").html(data);
+
+				$("#addInvMessage").html(data);
 				window.setTimeout(function() {
-					$("#message").fadeOut(null, function() {
-						$("#message").html("");
-						$("#message").fadeIn();
+					$("#addInvMessage").fadeOut(null, function() {
+						$("#addInvMessage").html("");
+						$("#addInvMessage").fadeIn();
 					});
 				}, 10000);
 				$("#addInvAction").removeAttr("disabled");
@@ -205,12 +205,12 @@ var dnd = {
 				$("#editCharList").load("calls/charList.php?id=" + id + "&r=" + rank, function() {
 					$("#edit" + $("#featAddCharID").val()).trigger("click");
 				});
-				
-				$("#message").html(data);
+
+				$("#addFeatMessage").html(data);
 				window.setTimeout(function() {
-					$("#message").fadeOut(null, function() {
-						$("#message").html("");
-						$("#message").fadeIn();
+					$("#addFeatMessage").fadeOut(null, function() {
+						$("#addFeatMessage").html("");
+						$("#addFeatMessage").fadeIn();
 					});
 				}, 10000);
 				$("#addFeatAction").removeAttr("disabled");
@@ -219,9 +219,9 @@ var dnd = {
 		$("#editInvAction").click(function() {
 			for (var i = 0; i < dnd.inventory.length; i++) {
 				var item = dnd.inventory[i];
-				item.name = $("#invName"+item.id).val();
-				item.desc = $("#invDesc"+item.id).val();
-				item.quantity = $("#invQuantity"+item.id).val();
+				item.name = $("#invName" + item.id).val();
+				item.desc = $("#invDesc" + item.id).val();
+				item.quantity = $("#invQuantity" + item.id).val();
 				dnd.inventory[i] = item;
 			}
 			$("#editInvAction").attr("disabled", "disabled");
@@ -229,12 +229,12 @@ var dnd = {
 				$("#editCharList").load("calls/charList.php?id=" + id + "&r=" + rank, function() {
 					$("#edit" + $("#invAddCharID").val()).trigger("click");
 				});
-				
-				$("#message").html(data);
+
+				$("#editInvMessage").html(data);
 				window.setTimeout(function() {
-					$("#message").fadeOut(null, function() {
-						$("#message").html("");
-						$("#message").fadeIn();
+					$("#editInvMessage").fadeOut(null, function() {
+						$("#editInvMessage").html("");
+						$("#editInvMessage").fadeIn();
 					});
 				}, 10000);
 				$("#editInvAction").removeAttr("disabled");
@@ -243,8 +243,8 @@ var dnd = {
 		$("#editFeatAction").click(function() {
 			for (var i = 0; i < dnd.feats.length; i++) {
 				var feat = dnd.feats[i];
-				feat.name = $("#featName"+feat.id).val();
-				feat.desc = $("#featDesc"+feat.id).val();
+				feat.name = $("#featName" + feat.id).val();
+				feat.desc = $("#featDesc" + feat.id).val();
 				dnd.feats[i] = feat;
 			}
 			$("#editFeatAction").attr("disabled", "disabled");
@@ -252,12 +252,12 @@ var dnd = {
 				$("#editCharList").load("calls/charList.php?id=" + id + "&r=" + rank, function() {
 					$("#edit" + $("#featAddCharID").val()).trigger("click");
 				});
-				
-				$("#message").html(data);
+
+				$("#editFeatMessage").html(data);
 				window.setTimeout(function() {
-					$("#message").fadeOut(null, function() {
-						$("#message").html("");
-						$("#message").fadeIn();
+					$("#editFeatMessage").fadeOut(null, function() {
+						$("#editFeatMessage").html("");
+						$("#editFeatMessage").fadeIn();
 					});
 				}, 10000);
 				$("#editFeatAction").removeAttr("disabled");
@@ -273,7 +273,7 @@ var dnd = {
 			};
 			$("#addEnemyAction").attr("disabled", "disabled");
 			$.post("calls/addEnemy.php", JSON.stringify(dataD), function(data, status) {
-				
+
 				$("#message").html(data);
 				window.setTimeout(function() {
 					$("#message").fadeOut(null, function() {
@@ -297,11 +297,11 @@ var dnd = {
 				mask: $("#editEmaskDmg").is(":checked"),
 				disable: $("#editEdisable").is(":checked")
 			};
-			
+
 			$("#editEnemyAction").attr("disabled", "disabled");
 			$.post("calls/editEnemy.php", JSON.stringify(dataD), function(data, status) {
 				$("#editEnemyList").load("calls/enemyList.php");
-				
+
 				$("#message").html(data);
 				window.setTimeout(function() {
 					$("#message").fadeOut(null, function() {
@@ -311,6 +311,21 @@ var dnd = {
 				}, 10000);
 				$("#editEnemyAction").removeAttr("disabled");
 			});
+		});
+		$(".editChar").keydown(function(e) {
+			if (e.keyCode === 13) {
+				$('#editCharAction').trigger('click');
+			}
+		});
+		$(".addInv").keydown(function(e) {
+			if (e.keyCode === 13) {
+				$('#addInvAction').trigger('click');
+			}
+		});
+		$(".addFeat").keydown(function(e) {
+			if (e.keyCode === 13) {
+				$('#addFeatAction').trigger('click');
+			}
 		});
 	}
 };

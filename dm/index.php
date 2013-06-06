@@ -81,202 +81,207 @@ if (isset($_SESSION['sid']) && isset($_SESSION['id'])) {
 				<div style="float:left;padding-right:50px;">
 					<input type="hidden" id="editid" />
 					<label style="float:left;" for="name">Name: </label>
-					<input style="float:right;" type="text" id="editname" />
+					<input style="float:right;" type="text" id="editname" class="editChar" />
 					<br style="clear:both;" />
 					<label style="float:left;" for="editclass">Class: </label>
-					<input style="float:right;" type="text" id="editclass" />
+					<input style="float:right;" type="text" id="editclass" class="editChar" />
 					<br style="clear:both;" />
 					<label style="float:left;" for="editinit">Initiative Bonus: </label>
-					<input style="float:right;" type="text" id="editinit" />
+					<input style="float:right;" type="text" id="editinit" class="editChar" />
 					<br style="clear:both;" />
 					<label style="float:left;" for="editinitroll">Encounter Initiative: </label>
-					<input style="float:right;" type="text" id="editinitroll" />
+					<input style="float:right;" type="text" id="editinitroll" class="editChar" />
 					<br style="clear:both;" />
 					<label style="float:left;" for="edithp">Current Health Points: </label>
-					<input style="float:right;" type="text" id="edithp" />
+					<input style="float:right;" type="text" id="edithp" class="editChar" />
 					<br style="clear:both;" />
 					<label style="float:left;" for="editmaxhp">Max Health Points: </label>
-					<input style="float:right;" type="text" id="editmaxhp" />
+					<input style="float:right;" type="text" id="editmaxhp" class="editChar" />
 					<br style="clear:both;" />
 					<label style="float:left;" for="edittemphp">Temporary Health Points: </label>
-					<input style="float:right;" type="text" id="edittemphp" />
+					<input style="float:right;" type="text" id="edittemphp" class="editChar" />
 					<br style="clear:both;" />
 					<label style="float:left;" for="edithsval">Healing Surge Value: </label>
-					<input style="float:right;" type="text" id="edithsval" />
+					<input style="float:right;" type="text" id="edithsval" class="editChar" />
 					<br style="clear:both;" />
 					<label style="float:left;" for="edithsdaily">Healing Surges / day: </label>
-					<input style="float:right;" type="text" id="edithsdaily" />
+					<input style="float:right;" type="text" id="edithsdaily" class="editChar" />
 					<br style="clear:both;" />
 					<label style="float:left;" for="edithsleft">Healing Surges Remaining: </label>
-					<input style="float:right;" type="text" id="edithsleft" />
+					<input style="float:right;" type="text" id="edithsleft" class="editChar" />
 					<br style="clear:both;" />
 					<label style="float:left;" for="edithswind">Second Wind Available? </label>
-					<input style="float:right;" type="checkbox" id="edithswind" />
+					<input style="float:right;" type="checkbox" id="edithswind" class="editChar" />
 					<br style="clear:both;" />
 					<label style="float:left;" for="editap">Action Points: </label>
-					<input style="float:right;" type="text" id="editap" />
+					<input style="float:right;" type="text" id="editap" class="editChar" />
 					<br style="clear:both;" />
 					<label style="float:left;" for="editspeed">Speed: </label>
-					<input style="float:right;" type="text" id="editspeed" />
+					<input style="float:right;" type="text" id="editspeed" class="editChar" />
 					<br style="clear:both;" />
 					<label style="float:left;" for="editvision">Vision: </label>
-					<input style="float:right;" type="text" id="editvision" />
+					<input style="float:right;" type="text" id="editvision" class="editChar" />
 					<br style="clear:both;" />
 					<label style="float:left;" for="editexp">Total EXP: </label>
-					<input style="float:right;" type="text" id="editexp" />
+					<input style="float:right;" type="text" id="editexp" class="editChar" />
 					<br style="clear:both;" />
 				</div>
 				<div style="float:left;padding-right:50px;">
 					<label style="float:left;" for="editac">AC: </label>
-					<input style="float:right;" type="text" id="editac" />
+					<input style="float:right;" type="text" id="editac" class="editChar" />
 					<br style="clear:both;" />
 					<label style="float:left;" for="editfort">Fortitude: </label>
-					<input style="float:right;" type="text" id="editfort" />
+					<input style="float:right;" type="text" id="editfort" class="editChar" />
 					<br style="clear:both;" />
 					<label style="float:left;" for="editreflex">Reflex: </label>
-					<input style="float:right;" type="text" id="editreflex" />
+					<input style="float:right;" type="text" id="editreflex" class="editChar" />
 					<br style="clear:both;" />
 					<label style="float:left;" for="editwill">Will: </label>
-					<input style="float:right;" type="text" id="editwill" />
+					<input style="float:right;" type="text" id="editwill" class="editChar" />
 					<br style="clear:both;" />
 					<label style="float:left;" for="editstr">Base Strength: </label>
-					<input style="float:right;" type="text" id="editstr" />
+					<input style="float:right;" type="text" id="editstr" class="editChar" />
 					<br style="clear:both;" />
 					<label style="float:left;" for="editstrMod">Strength Modifier: </label>
-					<input style="float:right;" type="text" id="editstrMod" />
+					<input style="float:right;" type="text" id="editstrMod" class="editChar" />
 					<br style="clear:both;" />
 					<label style="float:left;" for="editcon">Base Constitution: </label>
-					<input style="float:right;" type="text" id="editcon" />
+					<input style="float:right;" type="text" id="editcon" class="editChar" />
 					<br style="clear:both;" />
 					<label style="float:left;" for="editconMod">Constitution Modifier: </label>
-					<input style="float:right;" type="text" id="editconMod" />
+					<input style="float:right;" type="text" id="editconMod" class="editChar" />
 					<br style="clear:both;" />
 					<label style="float:left;" for="editdex">Base Dexterity: </label>
-					<input style="float:right;" type="text" id="editdex" />
+					<input style="float:right;" type="text" id="editdex" class="editChar" />
 					<br style="clear:both;" />
 					<label style="float:left;" for="editdexMod">Dexterity Modifier: </label>
-					<input style="float:right;" type="text" id="editdexMod" />
+					<input style="float:right;" type="text" id="editdexMod" class="editChar" />
 					<br style="clear:both;" />
 					<label style="float:left;" for="editint">Base Intelligence: </label>
-					<input style="float:right;" type="text" id="editint" />
+					<input style="float:right;" type="text" id="editint" class="editChar" />
 					<br style="clear:both;" />
 					<label style="float:left;" for="editintMod">Intelligence Modifier: </label>
-					<input style="float:right;" type="text" id="editintMod" />
+					<input style="float:right;" type="text" id="editintMod" class="editChar" />
 					<br style="clear:both;" />
 					<label style="float:left;" for="editwis">Base Wisdom: </label>
-					<input style="float:right;" type="text" id="editwis" />
+					<input style="float:right;" type="text" id="editwis" class="editChar" />
 					<br style="clear:both;" />
 					<label style="float:left;" for="editwisMod">Wisdom Modifier: </label>
-					<input style="float:right;" type="text" id="editwisMod" />
+					<input style="float:right;" type="text" id="editwisMod" class="editChar" />
 					<br style="clear:both;" />
 					<label style="float:left;" for="editcha">Base Charisma: </label>
-					<input style="float:right;" type="text" id="editcha" />
+					<input style="float:right;" type="text" id="editcha" class="editChar" />
 					<br style="clear:both;" />
 					<label style="float:left;" for="editchaMod">Charisma Modifier: </label>
-					<input style="float:right;" type="text" id="editchaMod" />
+					<input style="float:right;" type="text" id="editchaMod" class="editChar" />
 					<br style="clear:both;" />
 					<label style="float:left;" for="editdisable">Exclude this player from action? </label>
-					<input style="float:right;" type="checkbox" id="editdisable" />
+					<input style="float:right;" type="checkbox" id="editdisable" class="editChar" />
 					<br style="clear:both;" />
 				</div>
 				<div style="float:left;">
 					<label style="float:left;" for="editacr">Acrobatics: </label>
-					<input style="float:right;" type="text" id="editacr" />
+					<input style="float:right;" type="text" id="editacr" class="editChar" />
 					<br style="clear:both;" />
 					<label style="float:left;" for="editarc">Arcana: </label>
-					<input style="float:right;" type="text" id="editarc" />
+					<input style="float:right;" type="text" id="editarc" class="editChar" />
 					<br style="clear:both;" />
 					<label style="float:left;" for="editath">Athletics: </label>
-					<input style="float:right;" type="text" id="editath" />
+					<input style="float:right;" type="text" id="editath" class="editChar" />
 					<br style="clear:both;" />
 					<label style="float:left;" for="editblu">Bluff: </label>
-					<input style="float:right;" type="text" id="editblu" />
+					<input style="float:right;" type="text" id="editblu" class="editChar" />
 					<br style="clear:both;" />
 					<label style="float:left;" for="editdip">Diplomacy: </label>
-					<input style="float:right;" type="text" id="editdip" />
+					<input style="float:right;" type="text" id="editdip" class="editChar" />
 					<br style="clear:both;" />
 					<label style="float:left;" for="editdun">Dungeoneering: </label>
-					<input style="float:right;" type="text" id="editdun" />
+					<input style="float:right;" type="text" id="editdun" class="editChar" />
 					<br style="clear:both;" />
 					<label style="float:left;" for="editend">Endurance: </label>
-					<input style="float:right;" type="text" id="editend" />
+					<input style="float:right;" type="text" id="editend" class="editChar" />
 					<br style="clear:both;" />
 					<label style="float:left;" for="edithea">Heal: </label>
-					<input style="float:right;" type="text" id="edithea" />
+					<input style="float:right;" type="text" id="edithea" class="editChar" />
 					<br style="clear:both;" />
 					<label style="float:left;" for="edithis">History: </label>
-					<input style="float:right;" type="text" id="edithis" />
+					<input style="float:right;" type="text" id="edithis" class="editChar" />
 					<br style="clear:both;" />
 					<label style="float:left;" for="editins">Insight: </label>
-					<input style="float:right;" type="text" id="editins" />
+					<input style="float:right;" type="text" id="editins" class="editChar" />
 					<br style="clear:both;" />
 					<label style="float:left;" for="edititd">Intimidate: </label>
-					<input style="float:right;" type="text" id="edititd" />
+					<input style="float:right;" type="text" id="edititd" class="editChar" />
 					<br style="clear:both;" />
 					<label style="float:left;" for="editnat">Nature: </label>
-					<input style="float:right;" type="text" id="editnat" />
+					<input style="float:right;" type="text" id="editnat" class="editChar" />
 					<br style="clear:both;" />
 					<label style="float:left;" for="editper">Perception: </label>
-					<input style="float:right;" type="text" id="editper" />
+					<input style="float:right;" type="text" id="editper" class="editChar" />
 					<br style="clear:both;" />
 					<label style="float:left;" for="editrel">Religion: </label>
-					<input style="float:right;" type="text" id="editrel" />
+					<input style="float:right;" type="text" id="editrel" class="editChar" />
 					<br style="clear:both;" />
 					<label style="float:left;" for="editste">Stealth: </label>
-					<input style="float:right;" type="text" id="editste" />
+					<input style="float:right;" type="text" id="editste" class="editChar" />
 					<br style="clear:both;" />
 					<label style="float:left;" for="editstw">Streetwise: </label>
-					<input style="float:right;" type="text" id="editstw" />
+					<input style="float:right;" type="text" id="editstw" class="editChar" />
 					<br style="clear:both;" />
 					<label style="float:left;" for="editthi">Thievery: </label>
-					<input style="float:right;" type="text" id="editthi" />
+					<input style="float:right;" type="text" id="editthi" class="editChar" />
 					<br style="clear:both;" />
 				</div>
 				<br style="clear: both;" />
 				<div style="float:left;">
-					<input type="button" id="editCharAction" value="Update Character" />
+					<input type="button" id="editCharAction" value="Update Character" /><br/>
+					<span id='editCharMessage' class='errMsg'></span>
 				</div>
 				<br style="clear: both;" />
 				<br/><br/>
 				<div style="float:left;">
 					<div id="inventoryList"></div><br/>
-					<input type="button" id="editInvAction" value="Update Inventory" />
+					<input type="button" id="editInvAction" value="Update Inventory" /><br/>
+					<span id='editInvMessage' class='errMsg'></span>
 					<br/><br/>
 					<div>
 						<div style="float:left;">
 							<label for="invAddName">Name:</label><br/>
-							<input type="text" id="invAddName">&nbsp;
+							<input class="addInv" type="text" id="invAddName">&nbsp;
 							<input type="hidden" id="invAddCharID">
 						</div>
 						<div style="float:left;">
 							<label for="invAddDesc">Description:</label><br/>
-							<input type="text" id="invAddDesc">&nbsp;
+							<input class="addInv" type="text" id="invAddDesc">&nbsp;
 						</div>
 						<div style="float:left;">
 							<label for="invAddQty">Quantity:</label><br/>
-							<input type="text" id="invAddQty">
+							<input class="addInv" type="text" id="invAddQty">
 						</div>
 						<br style="clear: both;" />
-						<input type="button" id="addInvAction" value="Add to Inventory" />
+						<input type="button" id="addInvAction" value="Add to Inventory" /><br/>
+					<span id='addInvMessage' class='errMsg'></span>
 						<br />
 					</div>
 				</div>
 				<div style="float:left;padding-left:50px;">
 					<div id="featList"></div><br/>
-					<input type="button" id="editFeatAction" value="Update Feats & Traits" />
+					<input type="button" id="editFeatAction" value="Update Feats & Traits" /><br/>
+					<span id='editFeatMessage' class='errMsg'></span>
 					<br/><br/>
 					<div>
 						<div style="float:left;">
 							<label for="invAddName">Name:</label><br/>
-							<input type="text" id="featAddName">&nbsp;
+							<input type="text" class="addFeat" id="featAddName">&nbsp;
 							<input type="hidden" id="featAddCharID">
 						</div>
 						<div style="float:left;">
 							<label for="invAddDesc">Description:</label><br/>
-							<input type="text" id="featAddDesc">&nbsp;
+							<input type="text" class="addFeat" id="featAddDesc">&nbsp;
 						</div>
 						<br style="clear: both;" />
-						<input type="button" id="addFeatAction" value="Add Feat/Trait" />
+						<input type="button" id="addFeatAction" value="Add Feat/Trait" /><br/>
+					<span id='addFeatMessage' class='errMsg'></span>
 						<br />
 					</div>
 				</div>

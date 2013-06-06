@@ -3,10 +3,10 @@ include("../../include/vars.php");
 
 mysql_connect("$host", "$user", "$pass") or die(mysql_error());
 mysql_select_db("$db") or die(mysql_error());
-if($_GET['r'] >= 10) {
+if ($_GET['r'] >= 10) {
 	$result = mysql_query("SELECT * FROM characters") or die(mysql_error());
 } else {
-	$result = mysql_query("SELECT * FROM characters WHERE userid='".$_GET['id']."'") or die(mysql_error());
+	$result = mysql_query("SELECT * FROM characters WHERE userid='" . $_GET['id'] . "'") or die(mysql_error());
 }
 ?>
 <table cellpadding="0" cellspacing="0" style="width:75%;border-width: 1px; border-style: solid; text-align: left;">
@@ -32,7 +32,7 @@ if($_GET['r'] >= 10) {
 		} else {
 			$rowColour = "#F3F3F3";
 		}
-		echo "<tr style=\"border-width: 1px; border-style: solid; text-align: left; background-color:".$rowColour.";\"><td>";
+		echo "<tr style=\"border-width: 1px; border-style: solid; text-align: left; background-color:" . $rowColour . ";\"><td>";
 		echo $row['id'];
 		echo "</td><td>";
 		echo $row['class'];
@@ -118,9 +118,9 @@ if($_GET['r'] >= 10) {
 	$invresult = mysql_query("SELECT * FROM inventory WHERE charid='" . $row['id'] . "'") or die(mysql_error());
 	while ($invrow = mysql_fetch_array($invresult)) {
 		?>
-					$("#inventoryList").append("<input type=\"text\" id=\"invName<?php echo $invrow['id']; ?>\" value=\"<?php echo $invrow['name']; ?>\" >&nbsp;");
-					$("#inventoryList").append("<input type=\"text\" id=\"invDesc<?php echo $invrow['id']; ?>\" value=\"<?php echo $invrow['desc']; ?>\" >&nbsp;");
-					$("#inventoryList").append("<input type=\"text\" id=\"invQuantity<?php echo $invrow['id']; ?>\" value=\"<?php echo $invrow['qty']; ?>\" ><br />");
+					$("#inventoryList").append("<input type=\"text\" class=\"editInv\" id=\"invName<?php echo $invrow['id']; ?>\" value=\"<?php echo $invrow['name']; ?>\" >&nbsp;");
+					$("#inventoryList").append("<input type=\"text\" class=\"editInv\" id=\"invDesc<?php echo $invrow['id']; ?>\" value=\"<?php echo $invrow['desc']; ?>\" >&nbsp;");
+					$("#inventoryList").append("<input type=\"text\" class=\"editInv\" id=\"invQuantity<?php echo $invrow['id']; ?>\" value=\"<?php echo $invrow['qty']; ?>\" ><br />");
 
 					dnd.inventory.push({
 						"id": "<?php echo $invrow['id']; ?>",
@@ -133,13 +133,23 @@ if($_GET['r'] >= 10) {
 	$featresult = mysql_query("SELECT * FROM feats WHERE charid='" . $row['id'] . "'") or die(mysql_error());
 	while ($featrow = mysql_fetch_array($featresult)) {
 		?>
-					$("#featList").append("<input type=\"text\" id=\"featName<?php echo $featrow['id']; ?>\" value=\"<?php echo $featrow['name']; ?>\" >&nbsp;");
-					$("#featList").append("<input type=\"text\" id=\"featDesc<?php echo $featrow['id']; ?>\" value=\"<?php echo $featrow['description']; ?>\" ><br />");
+					$("#featList").append("<input type=\"text\" class=\"editFeat\" id=\"featName<?php echo $featrow['id']; ?>\" value=\"<?php echo $featrow['name']; ?>\" >&nbsp;");
+					$("#featList").append("<input type=\"text\" class=\"editFeat\" id=\"featDesc<?php echo $featrow['id']; ?>\" value=\"<?php echo $featrow['description']; ?>\" ><br />");
 
 					dnd.feats.push({
 						"id": "<?php echo $featrow['id']; ?>",
 						"name": "<?php echo $featrow['name']; ?>",
 						"desc": "<?php echo $featrow['description']; ?>"
+					});
+					$(".editInv").keydown(function(e) {
+						if (e.keyCode === 13) {
+							$('#editInvAction').trigger('click');
+						}
+					});
+					$(".editFeat").keydown(function(e) {
+						if (e.keyCode === 13) {
+							$('#editFeatAction').trigger('click');
+						}
 					});
 		<?php
 	}
