@@ -40,7 +40,7 @@ if (isset($_SESSION['sid']) && isset($_SESSION['id'])) {
 		<span id='message' class='errMsg'></span>
 		<br/>
 		<div id='main'>
-			<div id='info'>This is basic as shit for now, I'll work on making the entire thing better later.</div>
+			<div id='info'>It's getting a bit better, still missing attacks.</div>
 			<!-- Add Character Page -->
 			<div id='addChar'>
 				<label for="name">Name: </label>
