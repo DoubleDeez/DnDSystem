@@ -1,5 +1,6 @@
 <?php
 include("../../include/vars.php");
+include("../../include/funcs.php");
 
 mysql_connect("$host", "$user", "$pass") or die(mysql_error());
 mysql_select_db("$db") or die(mysql_error());
@@ -58,9 +59,12 @@ if ($_GET['r'] >= 10) {
 		?>
 		<script>
 			$("#edit<?php echo $row['id']; ?>").click(function() {
+				var newAction = "";
+
 				$("#editid").val("<?php echo $row['id']; ?>");
 				$("#invAddCharID").val("<?php echo $row['id']; ?>");
 				$("#featAddCharID").val("<?php echo $row['id']; ?>");
+				$("#actionAddCharID").val("<?php echo $row['id']; ?>");
 				$("#editname").val("<?php echo $row['name']; ?>");
 				$("#editclass").val("<?php echo $row['class']; ?>");
 				$("#edithp").val("<?php echo $row['hp']; ?>");
@@ -112,8 +116,10 @@ if ($_GET['r'] >= 10) {
 				$("#editdisable").prop("checked", <?php echo ($row['disable'] == 1) ? "true" : "false"; ?>);
 				$("#inventoryList").html("");
 				$("#featList").html("");
+				$("#actionList").html("");
 				dnd.inventory = new Array();
 				dnd.feats = new Array();
+				dnd.actions = new Array();
 	<?php
 	$invresult = mysql_query("SELECT * FROM inventory WHERE charid='" . $row['id'] . "'") or die(mysql_error());
 	while ($invrow = mysql_fetch_array($invresult)) {
@@ -128,6 +134,11 @@ if ($_GET['r'] >= 10) {
 						"desc": "<?php echo $invrow['desc']; ?>",
 						"quantity": "<?php echo $invrow['quantity']; ?>"
 					});
+					$(".editInv").keydown(function(e) {
+						if (e.keyCode === 13) {
+							$('#editInvAction').trigger('click');
+						}
+					});
 		<?php
 	}
 	$featresult = mysql_query("SELECT * FROM feats WHERE charid='" . $row['id'] . "'") or die(mysql_error());
@@ -141,11 +152,6 @@ if ($_GET['r'] >= 10) {
 						"name": "<?php echo $featrow['name']; ?>",
 						"desc": "<?php echo $featrow['description']; ?>"
 					});
-					$(".editInv").keydown(function(e) {
-						if (e.keyCode === 13) {
-							$('#editInvAction').trigger('click');
-						}
-					});
 					$(".editFeat").keydown(function(e) {
 						if (e.keyCode === 13) {
 							$('#editFeatAction').trigger('click');
@@ -153,7 +159,106 @@ if ($_GET['r'] >= 10) {
 					});
 		<?php
 	}
+
+	$actionresult = mysql_query("SELECT * FROM actions WHERE charid='" . $row['id'] . "'") or die(mysql_error());
+	$actionNum = 0;
+	while ($actionrow = mysql_fetch_array($actionresult)) {
+		$actionMod = $actionNum % 3;
+		?>
+					var newActionTop = "";
+					var newActionBot = "";
+					var typeSel0 = "";
+					var typeSel1 = "";
+					var typeSel2 = "";
+					var typeSel3 = "";
+					var freqSel0 = "";
+					var freqSel1 = "";
+					var freqSel2 = "";
+					switch (<?php echo $actionMod; ?>) {
+						case 0:
+							newActionTop = "<tr><td>";
+							break;
+						case 1:
+							newActionTop = "<td>";
+							break;
+						case 2:
+							newActionTop = "<td>";
+							break;
+					}
+
+					switch (<?php echo $actionMod; ?>) {
+						case 0:
+							newActionBot = "</td>";
+							break;
+						case 1:
+							newActionBot = "</td>";
+							break;
+						case 2:
+							newActionBot = "</td></tr>";
+							break;
+					}
+
+					switch (<?php echo $actionrow['actiontype']; ?>) {
+						case 0:
+							typeSel0 = "selected='selected'";
+							break;
+						case 1:
+							typeSel1 = "selected='selected'";
+							break;
+						case 2:
+							typeSel2 = "selected='selected'";
+							break;
+						case 2:
+							typeSel3 = "selected='selected'";
+							break;
+					}
+
+					switch (<?php echo $actionrow['frequency']; ?>) {
+						case 0:
+							freqSel0 = "selected='selected'";
+							break;
+						case 1:
+							freqSel1 = "selected='selected'";
+							break;
+						case 2:
+							freqSel2 = "selected='selected'";
+							break;
+					}
+
+					newAction = newAction + (newActionTop + "<div style=\"float:left;\"><label for=\"actionName<?php echo $actionrow['id']; ?>\">Name:</label><br/><input type=\"text\" class=\"editAction\" id=\"actionName<?php echo $actionrow['id']; ?>\" value=\"<?php echo $actionrow['name']; ?>\" >&nbsp;</div><div style=\"float:right;\"><label for=\"actionDesc<?php echo $actionrow['id']; ?>\">Description:</label><br/><input type=\"text\" class=\"editAction\" id=\"actionDesc<?php echo $actionrow['id']; ?>\" value=\"<?php echo $actionrow['description']; ?>\" >&nbsp;</div><br style=\"clear: both;\" /><div style=\"float:left;\"><label for=\"actionFreq<?php echo $actionrow['id']; ?>\">Frequency:</label><br/><select id=\"actionFreq<?php echo $actionrow['id']; ?>\" class=\"addAction\"><option value=\"0\" "+freqSel0+">At-Will</option><option value=\"1\" "+freqSel1+">Encounter</option><option value=\"2\" "+freqSel2+">Daily</option></select>&nbsp;</div><div style=\"float:right;\"><label for=\"actionPower<?php echo $actionrow['id']; ?>\">Action Keywords:</label><br/><input type=\"text\" class=\"editAction\" id=\"actionPower<?php echo $actionrow['id']; ?>\" value=\"<?php echo $actionrow['power']; ?>\" >&nbsp;</div><br style=\"clear: both;\" /><div style=\"float:left;\"><label for=\"actionType<?php echo $actionrow['id']; ?>\">Action Type:</label><br/><select id=\"actionType<?php echo $actionrow['id']; ?>\" class=\"addAction\"><option value=\"0\" "+typeSel0+">Standard</option><option value=\"1\" "+typeSel1+">Minor</option><option value=\"2\" "+typeSel2+">Move</option><option value=\"3\" "+typeSel3+">Free</option></select>&nbsp;</div><div style=\"float:right;\"><label for=\"actionClass<?php echo $actionrow['id']; ?>\">Level and Class:</label><br/><input type=\"text\" class=\"editAction\" id=\"actionClass<?php echo $actionrow['id']; ?>\" value=\"<?php echo $actionrow['actionclass']; ?>\" >&nbsp;</div><br style=\"clear: both;\" /><div style=\"float:left;\"><label for=\"actionRange<?php echo $actionrow['id']; ?>\">Action Range:</label><br/><input type=\"text\" class=\"editAction\" id=\"actionRange<?php echo $actionrow['id']; ?>\" value=\"<?php echo $actionrow['rangetype']; ?>\" >&nbsp;</div><div style=\"float:right;\"><label for=\"actionTarget<?php echo $actionrow['id']; ?>\">Target:</label><br/><input type=\"text\" class=\"editAction\" id=\"actionTarget<?php echo $actionrow['id']; ?>\" value=\"<?php echo $actionrow['target']; ?>\" >&nbsp;</div><br style=\"clear: both;\" /><div style=\"float:left;\"><label for=\"actionHit<?php echo $actionrow['id']; ?>\">Hit / Effect:</label><br/><input type=\"text\" class=\"editAction\" id=\"actionHit<?php echo $actionrow['id']; ?>\" value=\"<?php echo $actionrow['hit']; ?>\" >&nbsp;</div><div style=\"float:right;\"><label for=\"actionMiss<?php echo $actionrow['id']; ?>\">Miss:</label><br/><input type=\"text\" class=\"editAction\" id=\"actionMiss<?php echo $actionrow['id']; ?>\" value=\"<?php echo $actionrow['miss']; ?>\" >&nbsp;</div><br style=\"clear: both;\" /><div style=\"float:left;\"><label for=\"actionAttack<?php echo $actionrow['id']; ?>\">Attack:</label><br/><input type=\"text\" class=\"editAction\" id=\"actionAttack<?php echo $actionrow['id']; ?>\" value=\"<?php echo $actionrow['attack']; ?>\" >&nbsp;</div><div style=\"float:right;\"><label for=\"actionSpecial<?php echo $actionrow['id']; ?>\">Special:</label><br/><input type=\"text\" class=\"editAction\" id=\"actionSpecial<?php echo $actionrow['id']; ?>\" value=\"<?php echo $actionrow['special']; ?>\" >&nbsp;</div><br style=\"clear:both;\" />" + newActionBot);
+					
+					dnd.actions.push({
+						"id": "<?php echo $actionrow['id']; ?>",
+						"name": "<?php echo $actionrow['name']; ?>",
+						"desc": "<?php echo $actionrow['description']; ?>",
+						"freq": "<?php echo $actionrow['frequency']; ?>",
+						"power": "<?php echo $actionrow['power']; ?>",
+						"type": "<?php echo $actionrow['actiontype']; ?>",
+						"class": "<?php echo $actionrow['actionclass']; ?>",
+						"range": "<?php echo $actionrow['rangetype']; ?>",
+						"target": "<?php echo $actionrow['target']; ?>",
+						"hit": "<?php echo $actionrow['hit']; ?>",
+						"miss": "<?php echo $actionrow['miss']; ?>",
+						"attack": "<?php echo $actionrow['attack']; ?>",
+						"special": "<?php echo $actionrow['special']; ?>",
+						"charid": "<?php echo $actionrow['charid']; ?>"
+					});
+
+		<?php
+		$actionNum++;
+	}
 	?>
+				if ("<?php echo $actionMod; ?>" != "2") {
+					newAction = newAction + "</tr>";
+				}
+
+				$("#actionList").append(newAction);
+					
+					$(".editAction").keydown(function(e) {
+						if (e.keyCode === 13) {
+							$('#editActionAction').trigger('click');
+						}
+					});
 			});
 		</script>
 		<?php

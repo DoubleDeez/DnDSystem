@@ -40,7 +40,7 @@ if (isset($_SESSION['sid']) && isset($_SESSION['id'])) {
 		<span id='message' class='errMsg'></span>
 		<br/>
 		<div id='main'>
-			<div id='info'>It's getting a bit better, still missing attacks.</div>
+			<div id='info'>Attacks are added and show on frontpage. This will become a list of useful shit, once someone writes it.</div>
 			<!-- Add Character Page -->
 			<div id='addChar'>
 				<label for="name">Name: </label>
@@ -271,12 +271,12 @@ if (isset($_SESSION['sid']) && isset($_SESSION['id'])) {
 					<br/><br/>
 					<div>
 						<div style="float:left;">
-							<label for="invAddName">Name:</label><br/>
+							<label for="featAddName">Name:</label><br/>
 							<input type="text" class="addFeat" id="featAddName">&nbsp;
 							<input type="hidden" id="featAddCharID">
 						</div>
 						<div style="float:left;">
-							<label for="invAddDesc">Description:</label><br/>
+							<label for="featAddDesc">Description:</label><br/>
 							<input type="text" class="addFeat" id="featAddDesc">&nbsp;
 						</div>
 						<br style="clear: both;" />
@@ -284,6 +284,83 @@ if (isset($_SESSION['sid']) && isset($_SESSION['id'])) {
 						<span id='addFeatMessage' class='errMsg'></span>
 						<br />
 					</div>
+				</div>
+				<br style="clear: both;" />
+				<br/>
+				<table id="actionList" cellspacing='' cellpadding='10px' border='1px'>
+					<tbody></tbody>
+				</table>
+				<input type="button" id="editActionAction" value="Update Actions" /><br/>
+				<span id='editActionMessage' class='errMsg'></span>
+				<br/>
+				<div style='width: 350px'>
+					<div style="float:left;">
+						<label for="actionAddName">Name:</label><br/>
+						<input type="text" class="addAction" id="actionAddName">&nbsp;
+						<input type="hidden" id="actionAddCharID">
+					</div>
+					<div style="float:right;">
+						<label for="actionAddDesc">Description:</label><br/>
+						<input type="text" class="addAction" id="actionAddDesc">&nbsp;
+					</div>
+					<br style="clear: both;" />
+					<div style="float:left;">
+						<label for="actionAddFrequency">Frequency:</label><br/>
+						<select id="actionAddFrequency" class="addAction">
+							<option value="0">At-Will</option>
+							<option value="1">Encounter</option>
+							<option value="2">Daily</option>
+						</select>&nbsp;
+					</div>
+					<div style="float:right;">
+						<label for="actionAddPower">Action Keywords:</label><br/>
+						<input type="text" class="addAction" id="actionAddPower">&nbsp;
+					</div>
+					<br style="clear: both;" />
+					<div style="float:left;">
+						<label for="actionAddType">Action Type:</label><br/>
+						<select id="actionAddType" class="addAction">
+							<option value="0">Standard</option>
+							<option value="1">Minor</option>
+							<option value="2">Move</option>
+							<option value="3">Free</option>
+						</select>&nbsp;
+					</div>
+					<div style="float:right;">
+						<label for="actionAddClass">Level and Class:</label><br/>
+						<input type="text" class="addAction" id="actionAddClass">&nbsp;
+					</div>
+					<br style="clear: both;" />
+					<div style="float:left;">
+						<label for="actionAddRange">Range Type:</label><br/>
+						<input type="text" class="addAction" id="actionAddRange">&nbsp;
+					</div>
+					<div style="float:right;">
+						<label for="actionAddTarget">Target:</label><br/>
+						<input type="text" class="addAction" id="actionAddTarget">&nbsp;
+					</div>
+					<br style="clear: both;" />
+					<div style="float:left;">
+						<label for="actionAddHit">Hit / Effect:</label><br/>
+						<input type="text" class="addAction" id="actionAddHit">&nbsp;
+					</div>
+					<div style="float:right;">
+						<label for="actionAddMiss">Miss:</label><br/>
+						<input type="text" class="addAction" id="actionAddMiss">&nbsp;
+					</div>
+					<br style="clear: both;" />
+					<div style="float:left;">
+						<label for="actionAddAttack">Attack:</label><br/>
+						<input type="text" class="addAction" id="actionAddAttack">&nbsp;
+					</div>
+					<div style="float:right;">
+						<label for="actionAddSpecial">Special:</label><br/>
+						<input type="text" class="addAction" id="actionAddSpecial">&nbsp;
+					</div>
+					<br style="clear: both;" />
+					<input type="button" id="addActionAction" value="Add Action" /><br/>
+					<span id='addActionMessage' class='errMsg'></span>
+					<br />
 				</div>
 				<br style="clear: both;" />
 				<br/>
@@ -373,7 +450,7 @@ if (isset($_SESSION['sid']) && isset($_SESSION['id'])) {
 							$result = mysql_query("SELECT * FROM users") or die(mysql_error());
 
 							while ($row = mysql_fetch_array($result)) {
-								echo "<option value='".$row['id']."'>".$row['name']."</option>";
+								echo "<option value='" . $row['id'] . "'>" . $row['name'] . "</option>";
 							}
 							?>
 						</select>
@@ -384,7 +461,7 @@ if (isset($_SESSION['sid']) && isset($_SESSION['id'])) {
 							$charresult = mysql_query("SELECT * FROM characters") or die(mysql_error());
 
 							while ($charrow = mysql_fetch_array($charresult)) {
-								echo "<option value='".$charrow['id']."'>".$charrow['name']."</option>";
+								echo "<option value='" . $charrow['id'] . "'>" . $charrow['name'] . "</option>";
 							}
 							?>
 						</select>

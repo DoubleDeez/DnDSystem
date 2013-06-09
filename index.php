@@ -94,7 +94,17 @@ mysql_select_db("$db") or die(mysql_error());
 					?>
 					<div class="charInfo" style='width:45%;float:<?php echo $enFloat; ?>'>
 						<div style='float: left;'>
-							<span class='enName'><?php echo $enrow['name'] . ": " . $enrow['type']; ?></span>
+							<?php
+							if ($enrow['type'] != "") {
+								?>
+								<span class='enName'><?php echo $enrow['name'] . ": " . $enrow['type']; ?></span>
+								<?php
+							} else {
+								?>
+								<span class='npcName'><?php echo $enrow['name'] ?></span>
+								<?php
+							}
+							?>
 						</div>
 						<div style='float: right;'>
 							<span class='charHP' style="color: <?php echo $hpcolour; ?>;"><?php echo $enHPmsg; ?></span>
@@ -364,6 +374,7 @@ mysql_select_db("$db") or die(mysql_error());
 									</tr>
 								</table>
 							</div>
+
 							<script>
 			if ($.cookie('skl<?php echo $row['id']; ?>') === 'hidden') {
 				$("#toggleSkill<?php echo $row['id']; ?>").html("(show)");
@@ -381,8 +392,110 @@ mysql_select_db("$db") or die(mysql_error());
 				}
 			});
 							</script>
+							<br/>
+							<div id="daily<?php echo $row['id']; ?>">
+
+								<?php
+								$dailyRes = mysql_query("SELECT * FROM actions WHERE charid='" . $row['id'] . "' AND name!='' AND frequency='2' ORDER BY `name`") or die(mysql_error());
+
+								
+								while ($dailyRow = mysql_fetch_array($dailyRes)) {
+									$dailyRowBG = 0;
+									?>
+									<table style="font-family: Verdana,Arial,sans-serif;border:#000 solid 1px;width:auto;width:300px;" cellspacing="0" cellpadding='2px'>
+										<tr style="background-color:#483D8B;">
+											<td style='width:300px;'>
+												<span class="dailyName"><?php echo $dailyRow['name']; ?></span><span class="dailyClass"><?php echo $dailyRow['actionclass']; $dailyRowBG++; ?></span>
+											</td>
+										</tr>
+										<tr style="background-color:#E3E3E3;">
+											<td>
+												<span class="dailyDesc"><?php echo $dailyRow['description']; $dailyRowBG++; ?></span>
+											</td>
+										</tr>
+										<tr style="background-color:#D1D1D1;">
+											<td>
+												<span class="dailyFreq">Daily &diams;&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['power']; $dailyRowBG++; ?></span>
+											</td>
+										</tr>
+										<tr style="background-color:#E3E3E3;">
+											<td>
+												<span class="dailyFreq"><?php switch($dailyRow['actiontype']) { case 0: echo "Standard"; break; case 1: echo "Minor"; break; case 2: echo "Move"; break; case 3: echo "Free"; break; } $dailyRowBG++; ?> &diams;&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['rangetype'] ?></span>
+											</td>
+										</tr>
+										<?php 
+										if($dailyRow['attack'] != "") {
+											if($dailyRowBG % 2 == "0") {
+												$bg = "#D1D1D1";
+											} else {
+												$bg = "#E3E3E3";
+											}
+										?>
+										<tr style="background-color:<?php echo $bg; ?>;">
+											<td>
+												<span class="dailyFreq">Attack:&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['attack']; ?></span>
+											</td>
+										</tr>
+										<?php 
+											$dailyRowBG++;
+										} 
+										
+										if($dailyRow['hit'] != "") {
+											if($dailyRowBG % 2 == "0") {
+												$bg = "#D1D1D1";
+											} else {
+												$bg = "#E3E3E3";
+											}
+										?>
+										<tr style="background-color:<?php echo $bg; ?>;">
+											<td>
+												<span class="dailyFreq">Effect:&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['hit']; ?></span>
+											</td>
+										</tr>
+										<?php 
+											$dailyRowBG++;
+										} 
+										
+										if($dailyRow['miss'] != "") {
+											if($dailyRowBG % 2 == "0") {
+												$bg = "#D1D1D1";
+											} else {
+												$bg = "#E3E3E3";
+											}
+										?>
+										<tr style="background-color:<?php echo $bg; ?>;">
+											<td>
+												<span class="dailyFreq">Miss:&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['miss']; ?></span>
+											</td>
+										</tr>
+										<?php 
+											$dailyRowBG++;
+										} 
+										
+										if($dailyRow['special'] != "") {
+											if($dailyRowBG % 2 == "0") {
+												$bg = "#D1D1D1";
+											} else {
+												$bg = "#E3E3E3";
+											}
+										?>
+										<tr style="background-color:<?php echo $bg; ?>;">
+											<td>
+												<span class="dailyFreq">Special:&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['special']; ?></span>
+											</td>
+										</tr>
+										<?php 
+											$dailyRowBG++;
+										}
+										?>
+									</table>
+								<br/>
+									<?php
+								}
+								?>
+							</div>
 						</div>
-						<div style="float: left;padding-left:30px;">
+						<div style="float: left;padding-left:50px;">
 							<br/>
 							<span class="statHeading">Feats & Traits: </span><a class="linkBtn" id="toggleFeat<?php echo $row['id']; ?>">(hide)</a><br />
 							<div id="feat<?php echo $row['id']; ?>">
@@ -414,6 +527,108 @@ mysql_select_db("$db") or die(mysql_error());
 									?>
 								</table>
 							</div>
+							<br/>
+							<div id="atwill<?php echo $row['id']; ?>">
+
+								<?php
+								$dailyRes = mysql_query("SELECT * FROM actions WHERE charid='" . $row['id'] . "' AND name!='' AND frequency='0' ORDER BY `name`") or die(mysql_error());
+
+								
+								while ($dailyRow = mysql_fetch_array($dailyRes)) {
+									$dailyRowBG = 0;
+									?>
+									<table style="font-family: Verdana,Arial,sans-serif;border:#000 solid 1px;width:auto;width:300px;" cellspacing="0" cellpadding='2px'>
+										<tr style="background-color:#228B22;">
+											<td style='width:300px;'>
+												<span class="dailyName"><?php echo $dailyRow['name']; ?></span><span class="dailyClass"><?php echo $dailyRow['actionclass']; $dailyRowBG++; ?></span>
+											</td>
+										</tr>
+										<tr style="background-color:#E3E3E3;">
+											<td>
+												<span class="dailyDesc"><?php echo $dailyRow['description']; $dailyRowBG++; ?></span>
+											</td>
+										</tr>
+										<tr style="background-color:#D1D1D1;">
+											<td>
+												<span class="dailyFreq">At-Will &diams;&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['power']; $dailyRowBG++; ?></span>
+											</td>
+										</tr>
+										<tr style="background-color:#E3E3E3;">
+											<td>
+												<span class="dailyFreq"><?php switch($dailyRow['actiontype']) { case 0: echo "Standard"; break; case 1: echo "Minor"; break; case 2: echo "Move"; break; case 3: echo "Free"; break; } $dailyRowBG++; ?> &diams;&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['rangetype'] ?></span>
+											</td>
+										</tr>
+										<?php 
+										if($dailyRow['attack'] != "") {
+											if($dailyRowBG % 2 == "0") {
+												$bg = "#D1D1D1";
+											} else {
+												$bg = "#E3E3E3";
+											}
+										?>
+										<tr style="background-color:<?php echo $bg; ?>;">
+											<td>
+												<span class="dailyFreq">Attack:&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['attack']; ?></span>
+											</td>
+										</tr>
+										<?php 
+											$dailyRowBG++;
+										} 
+										
+										if($dailyRow['hit'] != "") {
+											if($dailyRowBG % 2 == "0") {
+												$bg = "#D1D1D1";
+											} else {
+												$bg = "#E3E3E3";
+											}
+										?>
+										<tr style="background-color:<?php echo $bg; ?>;">
+											<td>
+												<span class="dailyFreq">Effect:&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['hit']; ?></span>
+											</td>
+										</tr>
+										<?php 
+											$dailyRowBG++;
+										} 
+										
+										if($dailyRow['miss'] != "") {
+											if($dailyRowBG % 2 == "0") {
+												$bg = "#D1D1D1";
+											} else {
+												$bg = "#E3E3E3";
+											}
+										?>
+										<tr style="background-color:<?php echo $bg; ?>;">
+											<td>
+												<span class="dailyFreq">Miss:&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['miss']; ?></span>
+											</td>
+										</tr>
+										<?php 
+											$dailyRowBG++;
+										} 
+										
+										if($dailyRow['special'] != "") {
+											if($dailyRowBG % 2 == "0") {
+												$bg = "#D1D1D1";
+											} else {
+												$bg = "#E3E3E3";
+											}
+										?>
+										<tr style="background-color:<?php echo $bg; ?>;">
+											<td>
+												<span class="dailyFreq">Special:&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['special']; ?></span>
+											</td>
+										</tr>
+										<?php 
+											$dailyRowBG++;
+										}
+										?>
+									</table>
+								<br/>
+									<?php
+								}
+								?>
+							</div>
 						</div>
 						<script>
 							if ($.cookie('feat<?php echo $row['id']; ?>') === 'hidden') {
@@ -432,11 +647,11 @@ mysql_select_db("$db") or die(mysql_error());
 								}
 							});
 						</script>
-						<div style="float: left;padding-left:25px;">
+						<div style="float: left;padding-left:50px;">
 							<br />
 							<span class="statHeading">Inventory: </span><a class="linkBtn" id="toggleInv<?php echo $row['id']; ?>">(hide)</a><br />
 							<div id="inv<?php echo $row['id']; ?>">
-								<table style="font-family: Verdana,Arial,sans-serif;border-width:0px;width:auto;width:350px;padding-top:5px;" cellspacing="0">
+								<table style="font-family: Verdana,Arial,sans-serif;border-width:0px;width:auto;width:300px;padding-top:5px;" cellspacing="0">
 									<?php
 									$invRes = mysql_query("SELECT * FROM inventory WHERE charid='" . $row['id'] . "' AND name!='' AND qty!='0' ORDER BY `name`") or die(mysql_error());
 
@@ -465,6 +680,108 @@ mysql_select_db("$db") or die(mysql_error());
 									}
 									?>
 								</table>
+							</div>
+							<br/>
+							<div id="encounter<?php echo $row['id']; ?>">
+
+								<?php
+								$dailyRes = mysql_query("SELECT * FROM actions WHERE charid='" . $row['id'] . "' AND name!='' AND frequency='1' ORDER BY `name`") or die(mysql_error());
+
+								
+								while ($dailyRow = mysql_fetch_array($dailyRes)) {
+									$dailyRowBG = 0;
+									?>
+									<table style="font-family: Verdana,Arial,sans-serif;border:#000 solid 1px;width:auto;width:300px;" cellspacing="0" cellpadding='2px'>
+										<tr style="background-color:#A0522D;">
+											<td style='width:300px;'>
+												<span class="dailyName"><?php echo $dailyRow['name']; ?></span><span class="dailyClass"><?php echo $dailyRow['actionclass']; $dailyRowBG++; ?></span>
+											</td>
+										</tr>
+										<tr style="background-color:#E3E3E3;">
+											<td>
+												<span class="dailyDesc"><?php echo $dailyRow['description']; $dailyRowBG++; ?></span>
+											</td>
+										</tr>
+										<tr style="background-color:#D1D1D1;">
+											<td>
+												<span class="dailyFreq">Encounter &diams;&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['power']; $dailyRowBG++; ?></span>
+											</td>
+										</tr>
+										<tr style="background-color:#E3E3E3;">
+											<td>
+												<span class="dailyFreq"><?php switch($dailyRow['actiontype']) { case 0: echo "Standard"; break; case 1: echo "Minor"; break; case 2: echo "Move"; break; case 3: echo "Free"; break; } $dailyRowBG++; ?> &diams;&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['rangetype'] ?></span>
+											</td>
+										</tr>
+										<?php 
+										if($dailyRow['attack'] != "") {
+											if($dailyRowBG % 2 == "0") {
+												$bg = "#D1D1D1";
+											} else {
+												$bg = "#E3E3E3";
+											}
+										?>
+										<tr style="background-color:<?php echo $bg; ?>;">
+											<td>
+												<span class="dailyFreq">Attack:&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['attack']; ?></span>
+											</td>
+										</tr>
+										<?php 
+											$dailyRowBG++;
+										} 
+										
+										if($dailyRow['hit'] != "") {
+											if($dailyRowBG % 2 == "0") {
+												$bg = "#D1D1D1";
+											} else {
+												$bg = "#E3E3E3";
+											}
+										?>
+										<tr style="background-color:<?php echo $bg; ?>;">
+											<td>
+												<span class="dailyFreq">Effect:&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['hit']; ?></span>
+											</td>
+										</tr>
+										<?php 
+											$dailyRowBG++;
+										} 
+										
+										if($dailyRow['miss'] != "") {
+											if($dailyRowBG % 2 == "0") {
+												$bg = "#D1D1D1";
+											} else {
+												$bg = "#E3E3E3";
+											}
+										?>
+										<tr style="background-color:<?php echo $bg; ?>;">
+											<td>
+												<span class="dailyFreq">Miss:&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['miss']; ?></span>
+											</td>
+										</tr>
+										<?php 
+											$dailyRowBG++;
+										} 
+										
+										if($dailyRow['special'] != "") {
+											if($dailyRowBG % 2 == "0") {
+												$bg = "#D1D1D1";
+											} else {
+												$bg = "#E3E3E3";
+											}
+										?>
+										<tr style="background-color:<?php echo $bg; ?>;">
+											<td>
+												<span class="dailyFreq">Special:&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['special']; ?></span>
+											</td>
+										</tr>
+										<?php 
+											$dailyRowBG++;
+										}
+										?>
+									</table>
+								<br/>
+									<?php
+								}
+								?>
 							</div>
 						</div>
 						<script>

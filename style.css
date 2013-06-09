@@ -35,6 +35,13 @@ body {
 	color: #660000;
 }
 
+.npcName {
+	font-family: Verdana,Arial,sans-serif;
+	font-weight: bold;
+	font-size: 22px;
+	color: #024435;
+}
+
 .charInfo {
     border:1px solid #333;
     background-color:#eee;
@@ -109,4 +116,38 @@ body {
 .linkBtn:hover {
 	text-decoration: underline;
 	cursor: pointer;
+}
+
+.dailyName {
+	font-family: Verdana,Arial,sans-serif;
+	font-weight: bold;
+	font-size: 13px;
+	color:#FFF;
+}
+
+.dailyClass {
+	font-family: Verdana,Arial,sans-serif;
+	font-size: 10px;
+	color:#FFF;
+	float: right;
+	display:inline-block;
+	line-height:20px;
+}
+
+.dailyDesc {
+	font-family: Verdana,Arial,sans-serif;
+	font-size: 10px;
+	display:inline-block;
+	line-height:10px;
+}
+
+.dailyFreq {
+	font-family: Verdana,Arial,sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+}
+
+.dailyPower {
+	font-family: Verdana,Arial,sans-serif;
+	font-size: 11px;
 }

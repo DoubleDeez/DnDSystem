@@ -1,6 +1,7 @@
 var dnd = {
 	inventory: new Array(),
 	feats: new Array(),
+	actions: new Array(),
 	init: function() {
 		$("#addChar").hide();
 		$("#editChar").hide();
@@ -91,6 +92,8 @@ var dnd = {
 			$("#addCharAction").attr("disabled", "disabled");
 			$.post("calls/addChar.php", JSON.stringify(dataD), function(data, status) {
 				$("#message").html(data);
+				$("#message").fadeOut(0);
+				$("#message").fadeIn();
 				window.setTimeout(function() {
 					$("#message").fadeOut(null, function() {
 						$("#message").html("");
@@ -164,6 +167,8 @@ var dnd = {
 			$.post("calls/editChar.php", JSON.stringify(dataD), function(data, status) {
 				$("#editCharList").load("calls/charList.php?id=" + id + "&r=" + rank);
 				$("#editCharMessage").html(data);
+				$("#editCharMessage").fadeOut(0);
+				$("#editCharMessage").fadeIn();
 				window.setTimeout(function() {
 					$("#editCharMessage").fadeOut(null, function() {
 						$("#editCharMessage").html("");
@@ -187,6 +192,8 @@ var dnd = {
 				});
 
 				$("#addInvMessage").html(data);
+				$("#addInvMessage").fadeOut(0);
+				$("#addInvMessage").fadeIn();
 				window.setTimeout(function() {
 					$("#addInvMessage").fadeOut(null, function() {
 						$("#addInvMessage").html("");
@@ -209,6 +216,8 @@ var dnd = {
 				});
 
 				$("#addFeatMessage").html(data);
+				$("#addFeatMessage").fadeOut(0);
+				$("#addFeatMessage").fadeIn();
 				window.setTimeout(function() {
 					$("#addFeatMessage").fadeOut(null, function() {
 						$("#addFeatMessage").html("");
@@ -233,6 +242,8 @@ var dnd = {
 				});
 
 				$("#editInvMessage").html(data);
+				$("#editInvMessage").fadeOut(0);
+				$("#editInvMessage").fadeIn();
 				window.setTimeout(function() {
 					$("#editInvMessage").fadeOut(null, function() {
 						$("#editInvMessage").html("");
@@ -256,6 +267,8 @@ var dnd = {
 				});
 
 				$("#editFeatMessage").html(data);
+				$("#editFeatMessage").fadeOut(0);
+				$("#editFeatMessage").fadeIn();
 				window.setTimeout(function() {
 					$("#editFeatMessage").fadeOut(null, function() {
 						$("#editFeatMessage").html("");
@@ -277,6 +290,8 @@ var dnd = {
 			$.post("calls/addEnemy.php", JSON.stringify(dataD), function(data, status) {
 
 				$("#message").html(data);
+				$("#message").fadeOut(0);
+				$("#message").fadeIn();
 				window.setTimeout(function() {
 					$("#message").fadeOut(null, function() {
 						$("#message").html("");
@@ -305,6 +320,8 @@ var dnd = {
 				$("#editEnemyList").load("calls/enemyList.php");
 
 				$("#message").html(data);
+				$("#message").fadeOut(0);
+				$("#message").fadeIn();
 				window.setTimeout(function() {
 					$("#message").fadeOut(null, function() {
 						$("#message").html("");
@@ -312,6 +329,74 @@ var dnd = {
 					});
 				}, 10000);
 				$("#editEnemyAction").removeAttr("disabled");
+			});
+		});
+		$("#addActionAction").click(function() {
+			var dataD = {
+				id: $("#actionAddCharID").val(),
+				name: $("#actionAddName").val(),
+				type: $("#actionAddType").val(),
+				desc: $("#actionAddDesc").val(),
+				freq: $("#actionAddFrequency").val(),
+				power: $("#actionAddPower").val(),
+				class: $("#actionAddClass").val(),
+				range: $("#actionAddRange").val(),
+				target: $("#actionAddTarget").val(),
+				hit: $("#actionAddHit").val(),
+				miss: $("#actionAddMiss").val(),
+				attack: $("#actionAddAttack").val(),
+				special: $("#actionAddSpecial").val()
+			};
+			$("#addActionAction").attr("disabled", "disabled");
+			$.post("calls/addAction.php", JSON.stringify(dataD), function(data, status) {
+				$("#editCharList").load("calls/charList.php?id=" + id + "&r=" + rank, function() {
+					$("#edit" + $("#actionAddCharID").val()).trigger("click");
+				});
+				$("#addActionMessage").html(data);
+				$("#addActionMessage").fadeOut(0);
+				$("#addActionMessage").fadeIn();
+				window.setTimeout(function() {
+					$("#addActionMessage").fadeOut(null, function() {
+						$("#addActionMessage").html("");
+						$("#addActionMessage").fadeIn();
+					});
+				}, 10000);
+				$("#addActionAction").removeAttr("disabled");
+			});
+		});
+		$("#editActionAction").click(function() {
+			for (var i = 0; i < dnd.actions.length; i++) {
+				var action = dnd.actions[i];
+				action.name = $("#actionName" + action.id).val();
+				action.desc = $("#actionDesc" + action.id).val();
+				action.freq = $("#actionFreq" + action.id).val();
+				action.power = $("#actionPower" + action.id).val();
+				action.type = $("#actionType" + action.id).val();
+				action.class = $("#actionClass" + action.id).val();
+				action.range = $("#actionRange" + action.id).val();
+				action.target = $("#actionTarget" + action.id).val();
+				action.hit = $("#actionHit" + action.id).val();
+				action.miss = $("#actionMiss" + action.id).val();
+				action.attack = $("#actionAttack" + action.id).val();
+				action.special = $("#actionSpecial" + action.id).val();
+				dnd.actions[i] = action;
+			}
+			$("#editActionAction").attr("disabled", "disabled");
+			$.post("calls/editAction.php", JSON.stringify(dnd.actions), function(data, status) {
+				$("#editCharList").load("calls/charList.php?id=" + id + "&r=" + rank, function() {
+					$("#edit" + $("#actionAddCharID").val()).trigger("click");
+				});
+
+				$("#editActionMessage").html(data);
+				$("#editActionMessage").fadeOut(0);
+				$("#editActionMessage").fadeIn();
+				window.setTimeout(function() {
+					$("#editActionMessage").fadeOut(null, function() {
+						$("#editActionMessage").html("");
+						$("#editActionMessage").fadeIn();
+					});
+				}, 10000);
+				$("#editActionAction").removeAttr("disabled");
 			});
 		});
 		$(".editChar").keydown(function(e) {
@@ -329,6 +414,11 @@ var dnd = {
 				$('#addFeatAction').trigger('click');
 			}
 		});
+		$(".addAction").keydown(function(e) {
+			if (e.keyCode === 13) {
+				$('#addActionAction').trigger('click');
+			}
+		});
 		$("#dmEXPAction").click(function() {
 			var dataD = {
 				exp: $("#dmEXP").val()
@@ -336,6 +426,8 @@ var dnd = {
 			$("#dmEXPActioon").attr("disabled", "disabled");
 			$.post("calls/addEXP.php", JSON.stringify(dataD), function(data, status) {
 				$("#message").html(data);
+				$("#message").fadeOut(0);
+				$("#message").fadeIn();
 				window.setTimeout(function() {
 					$("#message").fadeOut(null, function() {
 						$("#message").html("");
@@ -349,6 +441,8 @@ var dnd = {
 			$("#dmInitAction").attr("disabled", "disabled");
 			$.post("calls/resetInit.php", null, function(data, status) {
 				$("#message").html(data);
+				$("#message").fadeOut(0);
+				$("#message").fadeIn();
 				window.setTimeout(function() {
 					$("#message").fadeOut(null, function() {
 						$("#message").html("");
@@ -366,6 +460,8 @@ var dnd = {
 			$("#dmOwnerActioon").attr("disabled", "disabled");
 			$.post("calls/changeOwner.php", JSON.stringify(dataD), function(data, status) {
 				$("#message").html(data);
+				$("#message").fadeOut(0);
+				$("#message").fadeIn();
 				window.setTimeout(function() {
 					$("#message").fadeOut(null, function() {
 						$("#message").html("");
