@@ -64,7 +64,7 @@ var dnd = {
 			$("#editEnemies").hide();
 			$("#userList").show();
 			$("#dmTools").hide();
-			$("#userList").load("calls/userList.php");
+			$("#userListTable").load("calls/userList.php");
 		});
 		$("#dmToolsBtn").click(function() {
 			$("#info").hide();
@@ -101,6 +101,27 @@ var dnd = {
 					});
 				}, 10000);
 				$("#addCharAction").removeAttr("disabled");
+			});
+		});
+		$("#addUserAction").click(function() {
+			var dataD = {
+				name: $("#username").val(),
+				rank: $("#userrank").val(),
+				pass: $("#userpass").val(),
+				pass2: $("#userpass2").val()
+			};
+			$("#addUserAction").attr("disabled", "disabled");
+			$.post("calls/addUser.php", JSON.stringify(dataD), function(data, status) {
+				$("#message").html(data);
+				$("#message").fadeOut(0);
+				$("#message").fadeIn();
+				window.setTimeout(function() {
+					$("#message").fadeOut(null, function() {
+						$("#message").html("");
+						$("#message").fadeIn();
+					});
+				}, 10000);
+				$("#addUserAction").removeAttr("disabled");
 			});
 		});
 		$("#editCharAction").click(function() {

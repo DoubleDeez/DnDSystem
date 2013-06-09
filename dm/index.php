@@ -46,26 +46,26 @@ if (isset($_SESSION['sid']) && isset($_SESSION['id'])) {
 				<label for="name">Name: </label>
 				<input type="text" id="name" />
 				<br />
-				<label for="name">Class: </label>
+				<label for="class">Class: </label>
 				<input type="text" id="class" />
 				<br />
-				<label for="name">Max Health Points: </label>
+				<label for="maxhp">Max Health Points: </label>
 				<input type="text" id="maxhp" />
 				<br />
-				<label for="name">AC: </label>
+				<label for="ac">AC: </label>
 				<input type="text" id="ac" />
 				<br />
-				<label for="name">Fortitude: </label>
+				<label for="fort">Fortitude: </label>
 				<input type="text" id="fort" />
 				<br />
-				<label for="name">Reflex: </label>
+				<label for="reflex">Reflex: </label>
 				<input type="text" id="reflex" />
 				<br />
-				<label for="name">Will: </label>
+				<label for="will">Will: </label>
 				<input type="text" id="will" />
 				<br />
 				<?php if ($_SESSION['rank'] >= 10) { ?>
-					<label for="name">User ID: </label>
+					<label for="userid">User ID: </label>
 					<input type="text" id="userid" />
 					<br />
 				<?php } else { ?>
@@ -428,6 +428,39 @@ if (isset($_SESSION['sid']) && isset($_SESSION['id'])) {
 				</div>
 				<!-- User list Page -->
 				<div id='userList'>
+					<div id='userListTable'></div>
+					<br/>
+					<div style='width:400px;'>
+						<div style="float:left;">
+							<label for="username">Name: </label>
+						</div>
+						<div style="float:right;">
+							<input type="text" id="username" />
+						</div>
+						<br style="clear: both;" />
+						<div style="float:left;">
+							<label for="userrank">Rank: (5: Player, 10: DM) </label>
+						</div>
+						<div style="float:right;">
+							<input type="text" id="userrank" />
+						</div>
+						<br style="clear: both;" />
+						<div style="float:left;">
+							<label for="userpass">Password: </label>
+						</div>
+						<div style="float:right;">
+							<input type="password" id='userpass' />
+						</div>
+						<br style="clear: both;" />
+						<div style="float:left;">
+							<label for="userpass2">Password Confirm: </label>
+						</div>
+						<div style="float:right;">
+							<input type="password" id="userpass2" />
+						</div>
+						<br style="clear: both;" />
+					</div>
+					<input type="button" id="addUserAction" value="Create User" />
 				</div>
 				<!-- DM tools Page -->
 				<div id='dmTools'>
