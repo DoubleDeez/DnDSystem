@@ -324,6 +324,7 @@ if (isset($_SESSION['sid']) && isset($_SESSION['id'])) {
 							<option value="1">Minor</option>
 							<option value="2">Move</option>
 							<option value="3">Free</option>
+							<option value="4">Interrupt</option>
 						</select>&nbsp;
 					</div>
 					<div style="float:right;">

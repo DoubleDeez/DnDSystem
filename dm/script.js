@@ -113,6 +113,7 @@ var dnd = {
 			$("#addUserAction").attr("disabled", "disabled");
 			$.post("calls/addUser.php", JSON.stringify(dataD), function(data, status) {
 				$("#message").html(data);
+				$("#userListTable").load("calls/userList.php");
 				$("#message").fadeOut(0);
 				$("#message").fadeIn();
 				window.setTimeout(function() {
