@@ -424,6 +424,21 @@ mysql_select_db("$db") or die(mysql_error());
 											</td>
 										</tr>
 										<?php 
+										if($dailyRow['target'] != "") {
+											if($dailyRowBG % 2 == "0") {
+												$bg = "#D1D1D1";
+											} else {
+												$bg = "#E3E3E3";
+											}
+										?>
+										<tr style="background-color:<?php echo $bg; ?>;">
+											<td>
+												<span class="dailyFreq">Target:&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['target']; ?></span>
+											</td>
+										</tr>
+										<?php 
+											$dailyRowBG++;
+										} 
 										if($dailyRow['attack'] != "") {
 											if($dailyRowBG % 2 == "0") {
 												$bg = "#D1D1D1";
@@ -559,6 +574,22 @@ mysql_select_db("$db") or die(mysql_error());
 											</td>
 										</tr>
 										<?php 
+										if($dailyRow['target'] != "") {
+											if($dailyRowBG % 2 == "0") {
+												$bg = "#D1D1D1";
+											} else {
+												$bg = "#E3E3E3";
+											}
+										?>
+										<tr style="background-color:<?php echo $bg; ?>;">
+											<td>
+												<span class="dailyFreq">Target:&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['target']; ?></span>
+											</td>
+										</tr>
+										<?php 
+											$dailyRowBG++;
+										} 
+										
 										if($dailyRow['attack'] != "") {
 											if($dailyRowBG % 2 == "0") {
 												$bg = "#D1D1D1";
@@ -713,6 +744,21 @@ mysql_select_db("$db") or die(mysql_error());
 											</td>
 										</tr>
 										<?php 
+										if($dailyRow['target'] != "") {
+											if($dailyRowBG % 2 == "0") {
+												$bg = "#D1D1D1";
+											} else {
+												$bg = "#E3E3E3";
+											}
+										?>
+										<tr style="background-color:<?php echo $bg; ?>;">
+											<td>
+												<span class="dailyFreq">Target:&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['target']; ?></span>
+											</td>
+										</tr>
+										<?php 
+											$dailyRowBG++;
+										} 
 										if($dailyRow['attack'] != "") {
 											if($dailyRowBG % 2 == "0") {
 												$bg = "#D1D1D1";
