@@ -420,7 +420,7 @@ mysql_select_db("$db") or die(mysql_error());
 										</tr>
 										<tr style="background-color:#E3E3E3;">
 											<td>
-												<span class="dailyFreq"><?php switch($dailyRow['actiontype']) { case 0: echo "Standard"; break; case 1: echo "Minor"; break; case 2: echo "Move"; break; case 3: echo "Free"; break; } $dailyRowBG++; ?> &diams;&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['rangetype'] ?></span>
+												<span class="dailyFreq"><?php switch($dailyRow['actiontype']) { case 0: echo "Standard"; break; case 1: echo "Minor"; break; case 2: echo "Move"; break; case 3: echo "Free"; break; case 4: echo "Interrupt"; break; } $dailyRowBG++; ?> &diams;&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['rangetype'] ?></span>
 											</td>
 										</tr>
 										<?php 
@@ -555,7 +555,7 @@ mysql_select_db("$db") or die(mysql_error());
 										</tr>
 										<tr style="background-color:#E3E3E3;">
 											<td>
-												<span class="dailyFreq"><?php switch($dailyRow['actiontype']) { case 0: echo "Standard"; break; case 1: echo "Minor"; break; case 2: echo "Move"; break; case 3: echo "Free"; break; } $dailyRowBG++; ?> &diams;&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['rangetype'] ?></span>
+												<span class="dailyFreq"><?php switch($dailyRow['actiontype']) { case 0: echo "Standard"; break; case 1: echo "Minor"; break; case 2: echo "Move"; break; case 3: echo "Free"; break; case 4: echo "Interrupt"; break; } $dailyRowBG++; ?> &diams;&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['rangetype'] ?></span>
 											</td>
 										</tr>
 										<?php 
@@ -709,7 +709,7 @@ mysql_select_db("$db") or die(mysql_error());
 										</tr>
 										<tr style="background-color:#E3E3E3;">
 											<td>
-												<span class="dailyFreq"><?php switch($dailyRow['actiontype']) { case 0: echo "Standard"; break; case 1: echo "Minor"; break; case 2: echo "Move"; break; case 3: echo "Free"; break; } $dailyRowBG++; ?> &diams;&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['rangetype'] ?></span>
+												<span class="dailyFreq"><?php switch($dailyRow['actiontype']) { case 0: echo "Standard"; break; case 1: echo "Minor"; break; case 2: echo "Move"; break; case 3: echo "Free"; break; case 4: echo "Interrupt"; break; } $dailyRowBG++; ?> &diams;&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['rangetype'] ?></span>
 											</td>
 										</tr>
 										<?php 
