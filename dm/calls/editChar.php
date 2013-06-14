@@ -13,6 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	$name = clean($in->name);
 	$hp = clean($in->hp);
 	$maxhp = clean($in->maxhp);
+	$maxweight = clean($in->maxweight);
 	$class = clean($in->class);
 	$ac = clean($in->ac);
 	$fort = clean($in->fort);
@@ -60,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	$hswind = clean($in->hswind);
 	$disable = clean($in->disable);
 
-	mysql_query("UPDATE characters SET name='$name', maxhp='$maxhp', hp='$hp', class='$class', ac='$ac', fortitude='$fort', reflex='$reflex', will='$will', exp='$exp', temphp='$temphp', speed='$speed', initiative='$initiative', initroll='$initroll', ap='$ap', vision='$vision', str='$str', strMod='$strMod', con='$con', conMod='$conMod', dex='$dex', dexMod='$dexMod', `int`='$int', intMod='$intMod', wis='$wis', wisMod='$wisMod', cha='$cha', chaMod='$chaMod', acr='$acr', arc='$arc', ath='$ath', blu='$blu', dip='$dip', dun='$dun', end='$end', hea='$hea', his='$his', ins='$ins', itd='$itd', nat='$nat', per='$per', rel='$rel', ste='$ste', stw='$stw', thi='$thi', hsval='$hsval', hsdaily='$hsdaily', hsleft='$hsleft', hswind='$hswind', disable='$disable' WHERE id='$id'") or die(mysql_error());
+	mysql_query("UPDATE characters SET name='$name', maxhp='$maxhp', maxweight='$maxweight', hp='$hp', class='$class', ac='$ac', fortitude='$fort', reflex='$reflex', will='$will', exp='$exp', temphp='$temphp', speed='$speed', initiative='$initiative', initroll='$initroll', ap='$ap', vision='$vision', str='$str', strMod='$strMod', con='$con', conMod='$conMod', dex='$dex', dexMod='$dexMod', `int`='$int', intMod='$intMod', wis='$wis', wisMod='$wisMod', cha='$cha', chaMod='$chaMod', acr='$acr', arc='$arc', ath='$ath', blu='$blu', dip='$dip', dun='$dun', end='$end', hea='$hea', his='$his', ins='$ins', itd='$itd', nat='$nat', per='$per', rel='$rel', ste='$ste', stw='$stw', thi='$thi', hsval='$hsval', hsdaily='$hsdaily', hsleft='$hsleft', hswind='$hswind', disable='$disable' WHERE id='$id'") or die(mysql_error());
 
 	echo "Character updated!";
 }

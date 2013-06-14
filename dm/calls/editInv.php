@@ -14,7 +14,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		$invDesc = clean($item->desc);
 		$invQuantity = clean($item->quantity);
 		$invID = clean($item->id);
-		mysql_query("UPDATE `inventory` SET `name` = '".$invName."', `desc` = '".$invDesc."', `qty` = '".$invQuantity."' WHERE  `id` = '".$invID."'") or die(mysql_error());
+		$invWeight = clean($item->weight);
+		mysql_query("UPDATE `inventory` SET `name` = '".$invName."', `desc` = '".$invDesc."', `qty` = '".$invQuantity."', `weight` = '".$invWeight."' WHERE  `id` = '".$invID."'") or die(mysql_error());
 	}
 
 	echo "Character inventory updated!";

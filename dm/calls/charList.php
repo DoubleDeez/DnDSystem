@@ -74,6 +74,7 @@ if ($_GET['r'] >= 10) {
 				$("#editreflex").val("<?php echo $row['reflex']; ?>");
 				$("#editwill").val("<?php echo $row['will']; ?>");
 				$("#editexp").val("<?php echo $row['exp']; ?>");
+				$("#editmaxweight").val("<?php echo $row['maxweight']; ?>");
 				$("#edittemphp").val("<?php echo $row['temphp']; ?>");
 				$("#editap").val("<?php echo $row['ap']; ?>");
 				$("#editspeed").val("<?php echo $row['speed']; ?>");
@@ -126,13 +127,15 @@ if ($_GET['r'] >= 10) {
 		?>
 					$("#inventoryList").append("<input type=\"text\" class=\"editInv\" id=\"invName<?php echo $invrow['id']; ?>\" value=\"<?php echo $invrow['name']; ?>\" >&nbsp;");
 					$("#inventoryList").append("<input type=\"text\" class=\"editInv\" id=\"invDesc<?php echo $invrow['id']; ?>\" value=\"<?php echo $invrow['desc']; ?>\" >&nbsp;");
-					$("#inventoryList").append("<input type=\"text\" class=\"editInv\" id=\"invQuantity<?php echo $invrow['id']; ?>\" value=\"<?php echo $invrow['qty']; ?>\" ><br />");
+					$("#inventoryList").append("<input type=\"text\" class=\"editInv\" id=\"invQuantity<?php echo $invrow['id']; ?>\" value=\"<?php echo $invrow['qty']; ?>\" >&nbsp;");
+					$("#inventoryList").append("<input type=\"text\" class=\"editInv\" id=\"invWeight<?php echo $invrow['id']; ?>\" value=\"<?php echo $invrow['weight']; ?>\" ><br />");
 
 					dnd.inventory.push({
 						"id": "<?php echo $invrow['id']; ?>",
 						"name": "<?php echo $invrow['name']; ?>",
 						"desc": "<?php echo $invrow['desc']; ?>",
-						"quantity": "<?php echo $invrow['quantity']; ?>"
+						"quantity": "<?php echo $invrow['quantity']; ?>",
+						"weight": "<?php echo $invrow['weight']; ?>"
 					});
 					$(".editInv").keydown(function(e) {
 						if (e.keyCode === 13) {

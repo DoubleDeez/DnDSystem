@@ -13,8 +13,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	$name = clean($in->name);
 	$desc = clean($in->desc);
 	$qty = clean($in->qty);
+	$weight = clean($in->weight);
 	
-	mysql_query("INSERT INTO inventory (`name`, `desc`, `qty`, `charid`) VALUES('$name', '$desc', '$qty', '$charid') ") or die(mysql_error());
+	mysql_query("INSERT INTO inventory (`name`, `desc`, `qty`, `weight`, `charid`) VALUES('$name', '$desc', '$qty', '$weight', '$charid') ") or die(mysql_error());
 	
 	echo "Item added!";
 }

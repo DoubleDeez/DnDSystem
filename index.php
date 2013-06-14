@@ -134,6 +134,10 @@ mysql_select_db("$db") or die(mysql_error());
 					} else if ($hp <= ($maxhp / 2)) {
 						$hpcolour = "#FFA500";
 					}
+					
+					$weightRes = mysql_query("SELECT SUM(weight) FROM inventory WHERE qty!='0' AND name !='0' AND charid='".$row['id']."'") or die(mysql_error());
+					$weightRow = mysql_fetch_assoc($weightRes);
+					
 					?>
 					<div class="charInfo">
 						<div style="float: left;">
@@ -144,6 +148,8 @@ mysql_select_db("$db") or die(mysql_error());
 							<span class="charLevel">Level: <?php echo getLevel($exp); ?></span>
 							<br/>
 							<span class="charExpToLevel">EXP to Level: <?php echo getExpToLevel($exp); ?></span>
+							<br/>
+							<span class="charWeight">Capacity: <?php echo $weightRow['SUM(weight)']; ?>/<?php echo $row['maxweight'] ?></span>
 						</div>
 						<div style="float: right;">
 							<span class="charHP" style="color: <?php echo $hpcolour; ?>;"><?php
@@ -700,10 +706,11 @@ mysql_select_db("$db") or die(mysql_error());
 											<td style="padding-left:5px;">
 												<span class="itemName"><?php echo $invRow['name']; ?></span>
 											</td>
+											<td style="padding-right:5px;text-align: right;"><span class="itemWeight"><?php echo $invRow['weight']; ?> lbs.</span></td>
 										</tr>
 										<tr style="background-color:<?php echo $invRowColour; ?>;">
 											<td style="padding-right:5px;"></td>
-											<td style="padding-left:5px;">
+											<td style="padding-left:5px;" colspan="2">
 												<span class="itemDesc"><?php echo $invRow['desc']; ?></span>
 											</td>
 										</tr>

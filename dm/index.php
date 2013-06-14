@@ -46,7 +46,7 @@ if (isset($_SESSION['sid']) && isset($_SESSION['id'])) {
 				<label for="name">Name: </label>
 				<input type="text" id="name" />
 				<br />
-				<label for="class">Class: </label>
+				<label for="class">Race & Class: </label>
 				<input type="text" id="class" />
 				<br />
 				<label for="maxhp">Max Health Points: </label>
@@ -88,6 +88,9 @@ if (isset($_SESSION['sid']) && isset($_SESSION['id'])) {
 					<br style="clear:both;" />
 					<label style="float:left;" for="editexp">Total EXP: </label>
 					<input style="float:right;" type="text" id="editexp" class="editChar" />
+					<br style="clear:both;" />
+					<label style="float:left;" for="editmaxweight">Max Weight: </label>
+					<input style="float:right;" type="text" id="editmaxweight" class="editChar" />
 					<br style="clear:both;" />
 					<label style="float:left;" for="editap">Action Points: </label>
 					<input style="float:right;" type="text" id="editap" class="editChar" />
@@ -257,6 +260,10 @@ if (isset($_SESSION['sid']) && isset($_SESSION['id'])) {
 						<div style="float:left;">
 							<label for="invAddQty">Quantity:</label><br/>
 							<input class="addInv" type="text" id="invAddQty">
+						</div>
+						<div style="float:left;">
+							<label for="invAddWeight">Weight: (lbs.)</label><br/>
+							<input class="addInv" type="text" id="invAddWeight">
 						</div>
 						<br style="clear: both;" />
 						<input type="button" id="addInvAction" value="Add to Inventory" /><br/>

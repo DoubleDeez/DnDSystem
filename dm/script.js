@@ -137,6 +137,7 @@ var dnd = {
 				will: $("#editwill").val(),
 				reflex: $("#editreflex").val(),
 				exp: $("#editexp").val(),
+				maxweight: $("#editmaxweight").val(),
 				speed: $("#editspeed").val(),
 				temphp: $("#edittemphp").val(),
 				vision: $("#editvision").val(),
@@ -205,7 +206,8 @@ var dnd = {
 				charID: $("#invAddCharID").val(),
 				name: $("#invAddName").val(),
 				desc: $("#invAddDesc").val(),
-				qty: $("#invAddQty").val()
+				qty: $("#invAddQty").val(),
+				weight: $("#invAddWeight").val()
 			};
 			$("#addInvAction").attr("disabled", "disabled");
 			$.post("calls/addInv.php", JSON.stringify(dataD), function(data, status) {
@@ -255,6 +257,7 @@ var dnd = {
 				item.name = $("#invName" + item.id).val();
 				item.desc = $("#invDesc" + item.id).val();
 				item.quantity = $("#invQuantity" + item.id).val();
+				item.weight = $("#invWeight" + item.id).val();
 				dnd.inventory[i] = item;
 			}
 			$("#editInvAction").attr("disabled", "disabled");
