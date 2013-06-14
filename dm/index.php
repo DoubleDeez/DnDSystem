@@ -101,6 +101,9 @@ if (isset($_SESSION['sid']) && isset($_SESSION['id'])) {
 					<label style="float:left;" for="editvision">Vision: </label>
 					<input style="float:right;" type="text" id="editvision" class="editChar" />
 					<br style="clear:both;" />
+					<label style="float:left;" for="editlanguages">Languages: </label>
+					<input style="float:right;" type="text" id="editlanguages" class="editChar" />
+					<br style="clear:both;" />
 					<label style="float:left;" for="editinit">Initiative Bonus: </label>
 					<input style="float:right;" type="text" id="editinit" class="editChar" />
 					<br style="clear:both;" />
@@ -133,6 +136,12 @@ if (isset($_SESSION['sid']) && isset($_SESSION['id'])) {
 					<br style="clear:both;" />
 				</div>
 				<div style="float:left;padding-right:50px;">
+					<label style="float:left;" for="editvul">Vulnerabilities: </label>
+					<input style="float:right;" type="text" id="editvul" class="editChar" />
+					<br style="clear:both;" />
+					<label style="float:left;" for="editresist">Resistances: </label>
+					<input style="float:right;" type="text" id="editresist" class="editChar" />
+					<br style="clear:both;" />
 					<label style="float:left;" for="editac">AC: </label>
 					<input style="float:right;" type="text" id="editac" class="editChar" />
 					<br style="clear:both;" />
@@ -183,6 +192,12 @@ if (isset($_SESSION['sid']) && isset($_SESSION['id'])) {
 					<br style="clear:both;" />
 				</div>
 				<div style="float:left;">
+					<label style="float:left;" for="editdiet">Diety: </label>
+					<input style="float:right;" type="text" id="editdiet" class="editChar" />
+					<br style="clear:both;" />
+					<label style="float:left;" for="editalign">Alignment: </label>
+					<input style="float:right;" type="text" id="editalign" class="editChar" />
+					<br style="clear:both;" />
 					<label style="float:left;" for="editacr">Acrobatics: </label>
 					<input style="float:right;" type="text" id="editacr" class="editChar" />
 					<br style="clear:both;" />

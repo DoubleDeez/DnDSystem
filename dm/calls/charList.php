@@ -60,7 +60,7 @@ if ($_GET['r'] >= 10) {
 		<script>
 			$("#edit<?php echo $row['id']; ?>").click(function() {
 				var newAction = "";
-
+				
 				$("#editid").val("<?php echo $row['id']; ?>");
 				$("#invAddCharID").val("<?php echo $row['id']; ?>");
 				$("#featAddCharID").val("<?php echo $row['id']; ?>");
@@ -93,6 +93,11 @@ if ($_GET['r'] >= 10) {
 				$("#editwisMod").val("<?php echo $row['wisMod']; ?>");
 				$("#editcha").val("<?php echo $row['cha']; ?>");
 				$("#editchaMod").val("<?php echo $row['chaMod']; ?>");
+				$("#editlanguages").val("<?php echo $row['languages']; ?>");
+				$("#editvul").val("<?php echo $row['vulnerable']; ?>");
+				$("#editresist").val("<?php echo $row['resist']; ?>");
+				$("#editdiet").val("<?php echo $row['diety']; ?>");
+				$("#editalign").val("<?php echo $row['alignment']; ?>");
 				$("#editacr").val("<?php echo $row['acr']; ?>");
 				$("#editarc").val("<?php echo $row['arc']; ?>");
 				$("#editath").val("<?php echo $row['ath']; ?>");

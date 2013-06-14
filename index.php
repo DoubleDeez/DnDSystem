@@ -176,6 +176,29 @@ mysql_select_db("$db") or die(mysql_error());
 								</tr>
 							</table>
 							<br />
+							<table style="font-family: Verdana,Arial,sans-serif;border:0px;width:300px;padding-top:5px;">
+								<tr>
+									<th style="font-size:14px;width:33%;">Diety</th>
+									<th style="font-size:14px;width:33%;">Alignment</th>
+									<th style="font-size:14px;width:34%;">Languages</th>
+								</tr>
+								<tr>
+									<td><?php echo $row['diety']; ?></td>
+									<td><?php echo $row['alignment']; ?></td>
+									<td><?php echo $row['languages']; ?></td>
+								</tr>
+							</table>
+							<table style="font-family: Verdana,Arial,sans-serif;border:0px;width:300px;padding-top:5px;">
+								<tr>
+									<th style="font-size:14px;width:50%;">Resists</th>
+									<th style="font-size:14px;width:50%;">Vulnerable</th>
+								</tr>
+								<tr>
+									<td><?php echo $row['resist']; ?></td>
+									<td><?php echo $row['vulnerable']; ?></td>
+								</tr>
+							</table>
+							<br />
 							<br />
 							<span class="statHeading">Defenses:</span><br />
 							<table style="font-family: Verdana,Arial,sans-serif;border:0px;width:300px;padding-top:5px;">
