@@ -277,7 +277,7 @@ if (isset($_SESSION['sid']) && isset($_SESSION['id'])) {
 							<input class="addInv" type="text" id="invAddQty">
 						</div>
 						<div style="float:left;">
-							<label for="invAddWeight">Weight: (lbs.)</label><br/>
+							<label for="invAddWeight">Weight of 1: (lbs.)</label><br/>
 							<input class="addInv" type="text" id="invAddWeight">
 						</div>
 						<br style="clear: both;" />
