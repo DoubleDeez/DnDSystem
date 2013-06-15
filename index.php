@@ -23,7 +23,47 @@ $setRow = mysql_fetch_assoc($setRes);
     <body onload='setTimeout("location.reload(true);", 60000);'>
 		<div id='menu'>
 			<div style="display: inline-block;width:10%;">
-				<a id="collAll" class="linkBtn">Collapse All</a>
+				<span id="gameTime">
+				<?php
+					$timeSec = $setRow['time'];
+					
+					if($timeSec >= 0 && $timeSec < 43200) {
+						$ampm = "AM";
+					} else {
+						$ampm = "PM";
+						$timeSec -= 43200;
+					}
+					
+					$hours = floor($timeSec / 3600);
+					$timeSec -= 3600 * $hours;
+					
+					if($hours == "0") {
+						$hours = "12";
+					}
+					
+					$mins = floor($timeSec / 60);
+					$timeSec -= 60 * $mins;
+					
+					if($mins < 10) {
+						$mins = "0".$mins;
+					}
+					
+					$secs = $timeSec;
+					
+					if($secs < 10) {
+						$secs = "0".$secs;
+					}
+					
+					echo $hours . ":" . $mins . ":" . $secs . " " . $ampm;
+				?>
+				</span>
+				<script>
+					if("<?php echo $ampm; ?>" === "AM") {
+						$("#gameTime").css("color", "#E67451");
+					} else {
+						$("#gameTime").css("color", "#7D0552");
+					}
+				</script>
 			</div>
 			<div style="display: inline-block;width:70%;">
 				<?php
@@ -966,18 +1006,5 @@ $setRow = mysql_fetch_assoc($setRes);
 		<div id='sidebar'></div>
 	</div>
 	<div id='footer'></div>
-	<script>
-		$("#collAll").click(function() {
-			if ($(this).html() === "Collapse All") {
-				$(this).html("Open All");
-				$(".toggleChar").html("(open)");
-				$(".charBox").slideUp();
-			} else {
-				$(this).html("Collapse All");
-				$(".toggleChar").html("(collapse)");
-				$(".charBox").slideDown();
-			}
-		});
-	</script>
 </body>
 </html>
