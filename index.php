@@ -5,6 +5,10 @@ include("include/funcs.php");
 
 mysql_connect("$host", "$user", "$pass") or die(mysql_error());
 mysql_select_db("$db") or die(mysql_error());
+
+$setRes = mysql_query("SELECT * FROM settings LIMIT 1") or die(mysql_error());
+
+$setRow = mysql_fetch_assoc($setRes);
 ?>
 
 <!DOCTYPE html>
@@ -35,7 +39,14 @@ mysql_select_db("$db") or die(mysql_error());
 						$mhpcolour = "#FFA500";
 					}
 					?>
-					<a href="#<?php echo $menuCount; ?>" class="linkBtn" style="font-size:14px;"><?php echo $mrow['name']; ?></a>
+					<a href="#<?php echo $menuCount; ?>" class="linkBtn" style="font-size:14px;">
+					<?php 
+					if(strpos($mrow['name'], " ") == "") {
+						echo $mrow['name'];
+					} else {
+						echo substr($mrow['name'], 0, strpos($mrow['name'], " "));
+					}
+					?></a>
 					<span style="color:<?php echo $mhpcolour; ?>;font-weight:bold;font-size:14px;"> (<?php
 						echo $mhp . "/" . $mmaxhp;
 						echo ($mrow['temphp'] == 0) ? "" : " + " . $mrow['temphp'];
@@ -53,24 +64,29 @@ mysql_select_db("$db") or die(mysql_error());
 		<a name="top" />
 		<div id='main'>
 			<div id='content'>
-				<div class="charInfo">
-					<span class="statHeading">Encounter Order:</span><br /><br />
-					<?php
-					$initRes = mysql_query("SELECT * FROM (SELECT initroll, name, type FROM enemies WHERE disable='0' AND hide='0' AND initroll!='0' UNION ALL SELECT initroll, name, type FROM characters WHERE disable='0' AND initroll!='0') AS `result` ORDER BY `result`.`initroll` DESC") or die(mysql_error());
+				<?php
+				if ($setRow['initiative'] == 1) {
+					?>
+					<div class="charInfo">
+						<span class="statHeading">Encounter Order:</span><br /><br />
+						<?php
+						$initRes = mysql_query("SELECT * FROM (SELECT initroll, name, type FROM enemies WHERE disable='0' AND hide='0' AND initroll!='0' UNION ALL SELECT initroll, name, type FROM characters WHERE disable='0' AND initroll!='0') AS `result` ORDER BY `result`.`initroll` DESC") or die(mysql_error());
 
-					while ($initrow = mysql_fetch_array($initRes)) {
-						if ($initrow['type'] != "") {
-							echo "&bull; <span style='color:#660000;font-weight:bold;'>" . $initrow['name'] . " " . $initrow['type'] . "</span>";
-						} else {
-							echo "&bull; <span style='color:#024435;font-weight:bold;'>" . $initrow['name'] . "</span>";
+						while ($initrow = mysql_fetch_array($initRes)) {
+							if ($initrow['type'] != "") {
+								echo "&bull; <span style='color:#660000;font-weight:bold;'>" . $initrow['name'] . " " . $initrow['type'] . "</span>";
+							} else {
+								echo "&bull; <span style='color:#024435;font-weight:bold;'>" . $initrow['name'] . "</span>";
+							}
+							?>
+							<?php
 						}
 						?>
-						<?php
-					}
-					?>
 
-				</div>
-				<?php
+					</div>
+					<?php
+				}
+
 				$enRes = mysql_query("SELECT * FROM enemies WHERE disable='0' AND hide='0'") or die(mysql_error());
 				$enNum = 0;
 				while ($enrow = mysql_fetch_array($enRes)) {
@@ -134,10 +150,9 @@ mysql_select_db("$db") or die(mysql_error());
 					} else if ($hp <= ($maxhp / 2)) {
 						$hpcolour = "#FFA500";
 					}
-					
-					$weightRes = mysql_query("SELECT SUM(weight * qty) AS weight FROM inventory WHERE qty!='0' AND name !='' AND charid='".$row['id']."'") or die(mysql_error());
+
+					$weightRes = mysql_query("SELECT SUM(weight * qty) AS weight FROM inventory WHERE qty!='0' AND name !='' AND charid='" . $row['id'] . "'") or die(mysql_error());
 					$weightRow = mysql_fetch_assoc($weightRes);
-					
 					?>
 					<div class="charInfo">
 						<div style="float: left;">
@@ -153,9 +168,9 @@ mysql_select_db("$db") or die(mysql_error());
 						</div>
 						<div style="float: right;">
 							<span class="charHP" style="color: <?php echo $hpcolour; ?>;"><?php
-								echo $hp . "/" . $maxhp;
-								echo ($row['temphp'] == 0) ? "" : " + " . $row['temphp'];
-								?></span>
+				echo $hp . "/" . $maxhp;
+				echo ($row['temphp'] == 0) ? "" : " + " . $row['temphp'];
+					?></span>
 						</div>
 						<br style="clear: both;" />
 						<div class="charBox" id="char<?php echo $row['id']; ?>">
@@ -243,43 +258,43 @@ mysql_select_db("$db") or die(mysql_error());
 									<th style="font-size:14px;width:20%;">Str:</th>
 									<td style="font-size:13px;width:15%;"><?php echo $row['str']; ?></td>
 									<td style="font-size:13px;width:15%;"><?php
-										echo ($row['strMod'] >= 0) ? "+" : "";
-										echo $row['strMod'];
-										?></td>
+							echo ($row['strMod'] >= 0) ? "+" : "";
+							echo $row['strMod'];
+					?></td>
 									<th style="font-size:14px;width:20%;">Con:</th>
 									<td style="font-size:13px;width:15%;"><?php echo $row['con']; ?></td>
 									<td style="font-size:13px;width:15%;"><?php
-										echo ($row['conMod'] >= 0) ? "+" : "";
-										echo $row['conMod'];
-										?></td>
+									echo ($row['conMod'] >= 0) ? "+" : "";
+									echo $row['conMod'];
+					?></td>
 								</tr>
 								<tr>
 									<th style="font-size:14px;width:20%;">Dex:</th>
 									<td style="font-size:13px;width:15%;"><?php echo $row['dex']; ?></td>
 									<td style="font-size:13px;width:15%;"><?php
-										echo ($row['dexMod'] >= 0) ? "+" : "";
-										echo $row['dexMod'];
-										?></td>
+									echo ($row['dexMod'] >= 0) ? "+" : "";
+									echo $row['dexMod'];
+					?></td>
 									<th style="font-size:14px;width:20%;">Int:</th>
 									<td style="font-size:13px;width:15%;"><?php echo $row['int']; ?></td>
 									<td style="font-size:13px;width:15%;"><?php
-										echo ($row['intMod'] >= 0) ? "+" : "";
-										echo $row['intMod'];
-										?></td>
+									echo ($row['intMod'] >= 0) ? "+" : "";
+									echo $row['intMod'];
+					?></td>
 								</tr>
 								<tr>
 									<th style="font-size:14px;width:20%;">Wis:</th>
 									<td style="font-size:13px;width:15%;"><?php echo $row['wis']; ?></td>
 									<td style="font-size:13px;width:15%;"><?php
-										echo ($row['wisMod'] >= 0) ? "+" : "";
-										echo $row['wisMod'];
-										?></td>
+									echo ($row['wisMod'] >= 0) ? "+" : "";
+									echo $row['wisMod'];
+					?></td>
 									<th style="font-size:14px;width:20%;">Cha:</th>
 									<td style="font-size:13px;width:15%;"><?php echo $row['cha']; ?></td>
 									<td style="font-size:13px;width:15%;"><?php
-										echo ($row['chaMod'] >= 0) ? "+" : "";
-										echo $row['chaMod'];
-										?></td>
+									echo ($row['chaMod'] >= 0) ? "+" : "";
+									echo $row['chaMod'];
+					?></td>
 								</tr>
 							</table><br />
 							<span class="statHeading">Skills: </span><a class="linkBtn" id="toggleSkill<?php echo $row['id']; ?>">(hide)</a><br />
@@ -288,121 +303,121 @@ mysql_select_db("$db") or die(mysql_error());
 									<tr style="background-color:#D1D1D1;">
 										<th style="font-size:14px;width:75%;">Acrobatics (Dex)</th>
 										<td style="font-size:13px;width:25%;"><?php
-											echo ($row['acr'] >= 0) ? "+" : "";
-											echo $row['acr'];
-											?></td>
+									echo ($row['acr'] >= 0) ? "+" : "";
+									echo $row['acr'];
+					?></td>
 									</tr>
 									<tr style="background-color:#E3E3E3;">
 										<th style="font-size:14px;width:75%;">Arcana (Int)</th>
 										<td style="font-size:13px;width:25%;"><?php
-											echo ($row['arc'] >= 0) ? "+" : "";
-											echo $row['arc'];
-											?></td>
+										echo ($row['arc'] >= 0) ? "+" : "";
+										echo $row['arc'];
+					?></td>
 									</tr>
 									<tr style="background-color:#D1D1D1;">
 										<th style="font-size:14px;width:75%;">Athletics (Str)</th>
 										<td style="font-size:13px;width:25%;"><?php
-											echo ($row['ath'] >= 0) ? "+" : "";
-											echo $row['ath'];
-											?></td>
+										echo ($row['ath'] >= 0) ? "+" : "";
+										echo $row['ath'];
+					?></td>
 									</tr>
 									<tr style="background-color:#E3E3E3;">
 										<th style="font-size:14px;width:75%;">Bluff (Cha)</th>
 										<td style="font-size:13px;width:25%;"><?php
-											echo ($row['blu'] >= 0) ? "+" : "";
-											echo $row['blu'];
-											?></td>
+										echo ($row['blu'] >= 0) ? "+" : "";
+										echo $row['blu'];
+					?></td>
 									</tr>
 									<tr style="background-color:#D1D1D1;">
 										<th style="font-size:14px;width:75%;">Diplomacy (Cha)</th>
 										<td style="font-size:13px;width:25%;"><?php
-											echo ($row['dip'] >= 0) ? "+" : "";
-											echo $row['dip'];
-											?></td>
+										echo ($row['dip'] >= 0) ? "+" : "";
+										echo $row['dip'];
+					?></td>
 									</tr>
 									<tr style="background-color:#E3E3E3;">
 										<th style="font-size:14px;width:75%;">Dungeoneering (Wis)</th>
 										<td style="font-size:13px;width:25%;"><?php
-											echo ($row['dun'] >= 0) ? "+" : "";
-											echo $row['dun'];
-											?></td>
+										echo ($row['dun'] >= 0) ? "+" : "";
+										echo $row['dun'];
+					?></td>
 									</tr>
 									<tr style="background-color:#D1D1D1;">
 										<th style="font-size:14px;width:75%;">Endurance (Con)</th>
 										<td style="font-size:13px;width:25%;"><?php
-											echo ($row['end'] >= 0) ? "+" : "";
-											echo $row['end'];
-											?></td>
+										echo ($row['end'] >= 0) ? "+" : "";
+										echo $row['end'];
+					?></td>
 									</tr>
 									<tr style="background-color:#E3E3E3;">
 										<th style="font-size:14px;width:75%;">Heal (Wis)</th>
 										<td style="font-size:13px;width:25%;"><?php
-											echo ($row['hea'] >= 0) ? "+" : "";
-											echo $row['hea'];
-											?></td>
+										echo ($row['hea'] >= 0) ? "+" : "";
+										echo $row['hea'];
+					?></td>
 									</tr>
 									<tr style="background-color:#D1D1D1;">
 										<th style="font-size:14px;width:75%;">History (Int)</th>
 										<td style="font-size:13px;width:25%;"><?php
-											echo ($row['his'] >= 0) ? "+" : "";
-											echo $row['his'];
-											?></td>
+										echo ($row['his'] >= 0) ? "+" : "";
+										echo $row['his'];
+					?></td>
 									</tr>
 									<tr style="background-color:#E3E3E3;">
 										<th style="font-size:14px;width:75%;">Insight (Wis)</th>
 										<td style="font-size:13px;width:25%;"><?php
-											echo ($row['ins'] >= 0) ? "+" : "";
-											echo $row['ins'];
-											?></td>
+										echo ($row['ins'] >= 0) ? "+" : "";
+										echo $row['ins'];
+					?></td>
 									</tr>
 									<tr style="background-color:#D1D1D1;">
 										<th style="font-size:14px;width:75%;">Intimidate (Cha)</th>
 										<td style="font-size:13px;width:25%;"><?php
-											echo ($row['itd'] >= 0) ? "+" : "";
-											echo $row['itd'];
-											?></td>
+										echo ($row['itd'] >= 0) ? "+" : "";
+										echo $row['itd'];
+					?></td>
 									</tr>
 									<tr style="background-color:#E3E3E3;">
 										<th style="font-size:14px;width:75%;">Nature (Wis)</th>
 										<td style="font-size:13px;width:25%;"><?php
-											echo ($row['nat'] >= 0) ? "+" : "";
-											echo $row['nat'];
-											?></td>
+										echo ($row['nat'] >= 0) ? "+" : "";
+										echo $row['nat'];
+					?></td>
 									</tr>
 									<tr style="background-color:#D1D1D1;">
 										<th style="font-size:14px;width:75%;">Perception (Wis)</th>
 										<td style="font-size:13px;width:25%;"><?php
-											echo ($row['per'] >= 0) ? "+" : "";
-											echo $row['per'];
-											?></td>
+										echo ($row['per'] >= 0) ? "+" : "";
+										echo $row['per'];
+					?></td>
 									</tr>
 									<tr style="background-color:#E3E3E3;">
 										<th style="font-size:14px;width:75%;">Religion (Int)</th>
 										<td style="font-size:13px;width:25%;"><?php
-											echo ($row['rel'] >= 0) ? "+" : "";
-											echo $row['rel'];
-											?></td>
+										echo ($row['rel'] >= 0) ? "+" : "";
+										echo $row['rel'];
+					?></td>
 									</tr>
 									<tr style="background-color:#D1D1D1;">
 										<th style="font-size:14px;width:75%;">Stealth (Dex)</th>
 										<td style="font-size:13px;width:25%;"><?php
-											echo ($row['ste'] >= 0) ? "+" : "";
-											echo $row['ste'];
-											?></td>
+										echo ($row['ste'] >= 0) ? "+" : "";
+										echo $row['ste'];
+					?></td>
 									</tr>
 									<tr style="background-color:#E3E3E3;">
 										<th style="font-size:14px;width:75%;">Streetwise (Cha)</th>
 										<td style="font-size:13px;width:25%;"><?php
-											echo ($row['stw'] >= 0) ? "+" : "";
-											echo $row['stw'];
-											?></td>
+										echo ($row['stw'] >= 0) ? "+" : "";
+										echo $row['stw'];
+					?></td>
 									</tr>
 									<tr style="background-color:#D1D1D1;">
 										<th style="font-size:14px;width:75%;">Thievery (Dex)</th>
 										<td style="font-size:13px;width:25%;"><?php
-											echo ($row['thi'] >= 0) ? "+" : "";
-											echo $row['thi'];
-											?></td>
+										echo ($row['thi'] >= 0) ? "+" : "";
+										echo $row['thi'];
+					?></td>
 									</tr>
 								</table>
 							</div>
@@ -427,119 +442,133 @@ mysql_select_db("$db") or die(mysql_error());
 							<br/>
 							<div id="daily<?php echo $row['id']; ?>">
 
-								<?php
-								$dailyRes = mysql_query("SELECT * FROM actions WHERE charid='" . $row['id'] . "' AND name!='' AND frequency='2' ORDER BY `name`") or die(mysql_error());
+	<?php
+	$dailyRes = mysql_query("SELECT * FROM actions WHERE charid='" . $row['id'] . "' AND name!='' AND frequency='2' ORDER BY `name`") or die(mysql_error());
 
-								
-								while ($dailyRow = mysql_fetch_array($dailyRes)) {
-									$dailyRowBG = 0;
-									?>
+
+	while ($dailyRow = mysql_fetch_array($dailyRes)) {
+		$dailyRowBG = 0;
+		?>
 									<table style="font-family: Verdana,Arial,sans-serif;border:#000 solid 1px;width:auto;width:300px;" cellspacing="0" cellpadding='2px'>
 										<tr style="background-color:#483D8B;">
 											<td style='width:300px;'>
-												<span class="dailyName"><?php echo $dailyRow['name']; ?></span><span class="dailyClass"><?php echo $dailyRow['actionclass']; $dailyRowBG++; ?></span>
+												<span class="dailyName"><?php echo $dailyRow['name']; ?></span><span class="dailyClass"><?php echo $dailyRow['actionclass'];
+							$dailyRowBG++; ?></span>
 											</td>
 										</tr>
 										<tr style="background-color:#E3E3E3;">
 											<td>
-												<span class="dailyDesc"><?php echo $dailyRow['description']; $dailyRowBG++; ?></span>
+												<span class="dailyDesc"><?php echo $dailyRow['description'];
+							$dailyRowBG++; ?></span>
 											</td>
 										</tr>
 										<tr style="background-color:#D1D1D1;">
 											<td>
-												<span class="dailyFreq">Daily &diams;&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['power']; $dailyRowBG++; ?></span>
+												<span class="dailyFreq">Daily &diams;&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['power'];
+							$dailyRowBG++; ?></span>
 											</td>
 										</tr>
 										<tr style="background-color:#E3E3E3;">
 											<td>
-												<span class="dailyFreq"><?php switch($dailyRow['actiontype']) { case 0: echo "Standard"; break; case 1: echo "Minor"; break; case 2: echo "Move"; break; case 3: echo "Free"; break; case 4: echo "Interrupt"; break; } $dailyRowBG++; ?> &diams;&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['rangetype'] ?></span>
+												<span class="dailyFreq"><?php switch ($dailyRow['actiontype']) {
+								case 0: echo "Standard";
+									break;
+								case 1: echo "Minor";
+									break;
+								case 2: echo "Move";
+									break;
+								case 3: echo "Free";
+									break;
+								case 4: echo "Interrupt";
+									break;
+							} $dailyRowBG++; ?> &diams;&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['rangetype'] ?></span>
 											</td>
 										</tr>
-										<?php 
-										if($dailyRow['target'] != "") {
-											if($dailyRowBG % 2 == "0") {
+										<?php
+										if ($dailyRow['target'] != "") {
+											if ($dailyRowBG % 2 == "0") {
 												$bg = "#D1D1D1";
 											} else {
 												$bg = "#E3E3E3";
 											}
-										?>
-										<tr style="background-color:<?php echo $bg; ?>;">
-											<td>
-												<span class="dailyFreq">Target:&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['target']; ?></span>
-											</td>
-										</tr>
-										<?php 
-											$dailyRowBG++;
-										} 
-										if($dailyRow['attack'] != "") {
-											if($dailyRowBG % 2 == "0") {
-												$bg = "#D1D1D1";
-											} else {
-												$bg = "#E3E3E3";
-											}
-										?>
-										<tr style="background-color:<?php echo $bg; ?>;">
-											<td>
-												<span class="dailyFreq">Attack:&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['attack']; ?></span>
-											</td>
-										</tr>
-										<?php 
-											$dailyRowBG++;
-										} 
-										
-										if($dailyRow['hit'] != "") {
-											if($dailyRowBG % 2 == "0") {
-												$bg = "#D1D1D1";
-											} else {
-												$bg = "#E3E3E3";
-											}
-										?>
-										<tr style="background-color:<?php echo $bg; ?>;">
-											<td>
-												<span class="dailyFreq">Effect:&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['hit']; ?></span>
-											</td>
-										</tr>
-										<?php 
-											$dailyRowBG++;
-										} 
-										
-										if($dailyRow['miss'] != "") {
-											if($dailyRowBG % 2 == "0") {
-												$bg = "#D1D1D1";
-											} else {
-												$bg = "#E3E3E3";
-											}
-										?>
-										<tr style="background-color:<?php echo $bg; ?>;">
-											<td>
-												<span class="dailyFreq">Miss:&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['miss']; ?></span>
-											</td>
-										</tr>
-										<?php 
-											$dailyRowBG++;
-										} 
-										
-										if($dailyRow['special'] != "") {
-											if($dailyRowBG % 2 == "0") {
-												$bg = "#D1D1D1";
-											} else {
-												$bg = "#E3E3E3";
-											}
-										?>
-										<tr style="background-color:<?php echo $bg; ?>;">
-											<td>
-												<span class="dailyFreq">Special:&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['special']; ?></span>
-											</td>
-										</tr>
-										<?php 
-											$dailyRowBG++;
-										}
-										?>
+											?>
+											<tr style="background-color:<?php echo $bg; ?>;">
+												<td>
+													<span class="dailyFreq">Target:&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['target']; ?></span>
+												</td>
+											</tr>
+			<?php
+			$dailyRowBG++;
+		}
+		if ($dailyRow['attack'] != "") {
+			if ($dailyRowBG % 2 == "0") {
+				$bg = "#D1D1D1";
+			} else {
+				$bg = "#E3E3E3";
+			}
+			?>
+											<tr style="background-color:<?php echo $bg; ?>;">
+												<td>
+													<span class="dailyFreq">Attack:&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['attack']; ?></span>
+												</td>
+											</tr>
+			<?php
+			$dailyRowBG++;
+		}
+
+		if ($dailyRow['hit'] != "") {
+			if ($dailyRowBG % 2 == "0") {
+				$bg = "#D1D1D1";
+			} else {
+				$bg = "#E3E3E3";
+			}
+			?>
+											<tr style="background-color:<?php echo $bg; ?>;">
+												<td>
+													<span class="dailyFreq">Effect:&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['hit']; ?></span>
+												</td>
+											</tr>
+			<?php
+			$dailyRowBG++;
+		}
+
+		if ($dailyRow['miss'] != "") {
+			if ($dailyRowBG % 2 == "0") {
+				$bg = "#D1D1D1";
+			} else {
+				$bg = "#E3E3E3";
+			}
+			?>
+											<tr style="background-color:<?php echo $bg; ?>;">
+												<td>
+													<span class="dailyFreq">Miss:&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['miss']; ?></span>
+												</td>
+											</tr>
+			<?php
+			$dailyRowBG++;
+		}
+
+		if ($dailyRow['special'] != "") {
+			if ($dailyRowBG % 2 == "0") {
+				$bg = "#D1D1D1";
+			} else {
+				$bg = "#E3E3E3";
+			}
+			?>
+											<tr style="background-color:<?php echo $bg; ?>;">
+												<td>
+													<span class="dailyFreq">Special:&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['special']; ?></span>
+												</td>
+											</tr>
+			<?php
+			$dailyRowBG++;
+		}
+		?>
 									</table>
-								<br/>
-									<?php
-								}
-								?>
+									<br/>
+										<?php
+									}
+									?>
 							</div>
 						</div>
 						<div style="float: left;padding-left:50px;">
@@ -547,18 +576,18 @@ mysql_select_db("$db") or die(mysql_error());
 							<span class="statHeading">Feats & Traits: </span><a class="linkBtn" id="toggleFeat<?php echo $row['id']; ?>">(hide)</a><br />
 							<div id="feat<?php echo $row['id']; ?>">
 								<table style="font-family: Verdana,Arial,sans-serif;border-width:0px;width:auto;width:300px;padding-top:5px;" cellspacing="0">
-									<?php
-									$featRes = mysql_query("SELECT * FROM feats WHERE charid='" . $row['id'] . "' AND name!='' ORDER BY `name`") or die(mysql_error());
+	<?php
+	$featRes = mysql_query("SELECT * FROM feats WHERE charid='" . $row['id'] . "' AND name!='' ORDER BY `name`") or die(mysql_error());
 
-									$featRowBG = 0;
-									while ($featRow = mysql_fetch_array($featRes)) {
-										$featRowBG++;
-										if (($featRowBG % 2) == 1) {
-											$featRowColour = "#D1D1D1";
-										} else {
-											$featRowColour = "#E3E3E3";
-										}
-										?>
+	$featRowBG = 0;
+	while ($featRow = mysql_fetch_array($featRes)) {
+		$featRowBG++;
+		if (($featRowBG % 2) == 1) {
+			$featRowColour = "#D1D1D1";
+		} else {
+			$featRowColour = "#E3E3E3";
+		}
+		?>
 										<tr style="background-color:<?php echo $featRowColour; ?>;">
 											<td>
 												<span class="itemName"><?php echo $featRow['name']; ?></span>
@@ -569,128 +598,142 @@ mysql_select_db("$db") or die(mysql_error());
 												<span class="itemDesc"><?php echo $featRow['description']; ?></span>
 											</td>
 										</tr>
-										<?php
-									}
-									?>
+									<?php
+								}
+								?>
 								</table>
 							</div>
 							<br/>
 							<div id="atwill<?php echo $row['id']; ?>">
 
-								<?php
-								$dailyRes = mysql_query("SELECT * FROM actions WHERE charid='" . $row['id'] . "' AND name!='' AND frequency='0' ORDER BY `name`") or die(mysql_error());
+	<?php
+	$dailyRes = mysql_query("SELECT * FROM actions WHERE charid='" . $row['id'] . "' AND name!='' AND frequency='0' ORDER BY `name`") or die(mysql_error());
 
-								
-								while ($dailyRow = mysql_fetch_array($dailyRes)) {
-									$dailyRowBG = 0;
-									?>
+
+	while ($dailyRow = mysql_fetch_array($dailyRes)) {
+		$dailyRowBG = 0;
+		?>
 									<table style="font-family: Verdana,Arial,sans-serif;border:#000 solid 1px;width:auto;width:300px;" cellspacing="0" cellpadding='2px'>
 										<tr style="background-color:#228B22;">
 											<td style='width:300px;'>
-												<span class="dailyName"><?php echo $dailyRow['name']; ?></span><span class="dailyClass"><?php echo $dailyRow['actionclass']; $dailyRowBG++; ?></span>
+												<span class="dailyName"><?php echo $dailyRow['name']; ?></span><span class="dailyClass"><?php echo $dailyRow['actionclass'];
+		$dailyRowBG++; ?></span>
 											</td>
 										</tr>
 										<tr style="background-color:#E3E3E3;">
 											<td>
-												<span class="dailyDesc"><?php echo $dailyRow['description']; $dailyRowBG++; ?></span>
+												<span class="dailyDesc"><?php echo $dailyRow['description'];
+		$dailyRowBG++; ?></span>
 											</td>
 										</tr>
 										<tr style="background-color:#D1D1D1;">
 											<td>
-												<span class="dailyFreq">At-Will &diams;&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['power']; $dailyRowBG++; ?></span>
+												<span class="dailyFreq">At-Will &diams;&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['power'];
+								$dailyRowBG++; ?></span>
 											</td>
 										</tr>
 										<tr style="background-color:#E3E3E3;">
 											<td>
-												<span class="dailyFreq"><?php switch($dailyRow['actiontype']) { case 0: echo "Standard"; break; case 1: echo "Minor"; break; case 2: echo "Move"; break; case 3: echo "Free"; break; case 4: echo "Interrupt"; break; } $dailyRowBG++; ?> &diams;&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['rangetype'] ?></span>
+												<span class="dailyFreq"><?php switch ($dailyRow['actiontype']) {
+									case 0: echo "Standard";
+										break;
+									case 1: echo "Minor";
+										break;
+									case 2: echo "Move";
+										break;
+									case 3: echo "Free";
+										break;
+									case 4: echo "Interrupt";
+										break;
+								} $dailyRowBG++; ?> &diams;&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['rangetype'] ?></span>
 											</td>
 										</tr>
-										<?php 
-										if($dailyRow['target'] != "") {
-											if($dailyRowBG % 2 == "0") {
-												$bg = "#D1D1D1";
-											} else {
-												$bg = "#E3E3E3";
-											}
-										?>
-										<tr style="background-color:<?php echo $bg; ?>;">
-											<td>
-												<span class="dailyFreq">Target:&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['target']; ?></span>
-											</td>
-										</tr>
-										<?php 
-											$dailyRowBG++;
-										} 
-										
-										if($dailyRow['attack'] != "") {
-											if($dailyRowBG % 2 == "0") {
-												$bg = "#D1D1D1";
-											} else {
-												$bg = "#E3E3E3";
-											}
-										?>
-										<tr style="background-color:<?php echo $bg; ?>;">
-											<td>
-												<span class="dailyFreq">Attack:&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['attack']; ?></span>
-											</td>
-										</tr>
-										<?php 
-											$dailyRowBG++;
-										} 
-										
-										if($dailyRow['hit'] != "") {
-											if($dailyRowBG % 2 == "0") {
-												$bg = "#D1D1D1";
-											} else {
-												$bg = "#E3E3E3";
-											}
-										?>
-										<tr style="background-color:<?php echo $bg; ?>;">
-											<td>
-												<span class="dailyFreq">Effect:&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['hit']; ?></span>
-											</td>
-										</tr>
-										<?php 
-											$dailyRowBG++;
-										} 
-										
-										if($dailyRow['miss'] != "") {
-											if($dailyRowBG % 2 == "0") {
-												$bg = "#D1D1D1";
-											} else {
-												$bg = "#E3E3E3";
-											}
-										?>
-										<tr style="background-color:<?php echo $bg; ?>;">
-											<td>
-												<span class="dailyFreq">Miss:&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['miss']; ?></span>
-											</td>
-										</tr>
-										<?php 
-											$dailyRowBG++;
-										} 
-										
-										if($dailyRow['special'] != "") {
-											if($dailyRowBG % 2 == "0") {
-												$bg = "#D1D1D1";
-											} else {
-												$bg = "#E3E3E3";
-											}
-										?>
-										<tr style="background-color:<?php echo $bg; ?>;">
-											<td>
-												<span class="dailyFreq">Special:&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['special']; ?></span>
-											</td>
-										</tr>
-										<?php 
+		<?php
+		if ($dailyRow['target'] != "") {
+			if ($dailyRowBG % 2 == "0") {
+				$bg = "#D1D1D1";
+			} else {
+				$bg = "#E3E3E3";
+			}
+			?>
+											<tr style="background-color:<?php echo $bg; ?>;">
+												<td>
+													<span class="dailyFreq">Target:&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['target']; ?></span>
+												</td>
+											</tr>
+											<?php
 											$dailyRowBG++;
 										}
-										?>
+
+										if ($dailyRow['attack'] != "") {
+											if ($dailyRowBG % 2 == "0") {
+												$bg = "#D1D1D1";
+											} else {
+												$bg = "#E3E3E3";
+											}
+											?>
+											<tr style="background-color:<?php echo $bg; ?>;">
+												<td>
+													<span class="dailyFreq">Attack:&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['attack']; ?></span>
+												</td>
+											</tr>
+											<?php
+											$dailyRowBG++;
+										}
+
+										if ($dailyRow['hit'] != "") {
+											if ($dailyRowBG % 2 == "0") {
+												$bg = "#D1D1D1";
+											} else {
+												$bg = "#E3E3E3";
+											}
+											?>
+											<tr style="background-color:<?php echo $bg; ?>;">
+												<td>
+													<span class="dailyFreq">Effect:&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['hit']; ?></span>
+												</td>
+											</tr>
+											<?php
+											$dailyRowBG++;
+										}
+
+										if ($dailyRow['miss'] != "") {
+											if ($dailyRowBG % 2 == "0") {
+												$bg = "#D1D1D1";
+											} else {
+												$bg = "#E3E3E3";
+											}
+											?>
+											<tr style="background-color:<?php echo $bg; ?>;">
+												<td>
+													<span class="dailyFreq">Miss:&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['miss']; ?></span>
+												</td>
+											</tr>
+			<?php
+			$dailyRowBG++;
+		}
+
+		if ($dailyRow['special'] != "") {
+			if ($dailyRowBG % 2 == "0") {
+				$bg = "#D1D1D1";
+			} else {
+				$bg = "#E3E3E3";
+			}
+			?>
+											<tr style="background-color:<?php echo $bg; ?>;">
+												<td>
+													<span class="dailyFreq">Special:&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['special']; ?></span>
+												</td>
+											</tr>
+			<?php
+			$dailyRowBG++;
+		}
+		?>
 									</table>
-								<br/>
-									<?php
-								}
-								?>
+									<br/>
+										<?php
+									}
+									?>
 							</div>
 						</div>
 						<script>
@@ -740,127 +783,141 @@ mysql_select_db("$db") or die(mysql_error());
 												<span class="itemDesc"><?php echo $invRow['desc']; ?></span>
 											</td>
 										</tr>
-										<?php
-									}
-									?>
+		<?php
+	}
+	?>
 								</table>
 							</div>
 							<br/>
 							<div id="encounter<?php echo $row['id']; ?>">
 
-								<?php
-								$dailyRes = mysql_query("SELECT * FROM actions WHERE charid='" . $row['id'] . "' AND name!='' AND frequency='1' ORDER BY `name`") or die(mysql_error());
+	<?php
+	$dailyRes = mysql_query("SELECT * FROM actions WHERE charid='" . $row['id'] . "' AND name!='' AND frequency='1' ORDER BY `name`") or die(mysql_error());
 
-								
-								while ($dailyRow = mysql_fetch_array($dailyRes)) {
-									$dailyRowBG = 0;
-									?>
+
+	while ($dailyRow = mysql_fetch_array($dailyRes)) {
+		$dailyRowBG = 0;
+		?>
 									<table style="font-family: Verdana,Arial,sans-serif;border:#000 solid 1px;width:auto;width:300px;" cellspacing="0" cellpadding='2px'>
 										<tr style="background-color:#A0522D;">
 											<td style='width:300px;'>
-												<span class="dailyName"><?php echo $dailyRow['name']; ?></span><span class="dailyClass"><?php echo $dailyRow['actionclass']; $dailyRowBG++; ?></span>
+												<span class="dailyName"><?php echo $dailyRow['name']; ?></span><span class="dailyClass"><?php echo $dailyRow['actionclass'];
+								$dailyRowBG++; ?></span>
 											</td>
 										</tr>
 										<tr style="background-color:#E3E3E3;">
 											<td>
-												<span class="dailyDesc"><?php echo $dailyRow['description']; $dailyRowBG++; ?></span>
+												<span class="dailyDesc"><?php echo $dailyRow['description'];
+								$dailyRowBG++; ?></span>
 											</td>
 										</tr>
 										<tr style="background-color:#D1D1D1;">
 											<td>
-												<span class="dailyFreq">Encounter &diams;&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['power']; $dailyRowBG++; ?></span>
+												<span class="dailyFreq">Encounter &diams;&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['power'];
+								$dailyRowBG++; ?></span>
 											</td>
 										</tr>
 										<tr style="background-color:#E3E3E3;">
 											<td>
-												<span class="dailyFreq"><?php switch($dailyRow['actiontype']) { case 0: echo "Standard"; break; case 1: echo "Minor"; break; case 2: echo "Move"; break; case 3: echo "Free"; break; case 4: echo "Interrupt"; break; } $dailyRowBG++; ?> &diams;&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['rangetype'] ?></span>
+												<span class="dailyFreq"><?php switch ($dailyRow['actiontype']) {
+									case 0: echo "Standard";
+										break;
+									case 1: echo "Minor";
+										break;
+									case 2: echo "Move";
+										break;
+									case 3: echo "Free";
+										break;
+									case 4: echo "Interrupt";
+										break;
+								} $dailyRowBG++; ?> &diams;&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['rangetype'] ?></span>
 											</td>
 										</tr>
-										<?php 
-										if($dailyRow['target'] != "") {
-											if($dailyRowBG % 2 == "0") {
-												$bg = "#D1D1D1";
-											} else {
-												$bg = "#E3E3E3";
-											}
-										?>
-										<tr style="background-color:<?php echo $bg; ?>;">
-											<td>
-												<span class="dailyFreq">Target:&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['target']; ?></span>
-											</td>
-										</tr>
-										<?php 
-											$dailyRowBG++;
-										} 
-										if($dailyRow['attack'] != "") {
-											if($dailyRowBG % 2 == "0") {
-												$bg = "#D1D1D1";
-											} else {
-												$bg = "#E3E3E3";
-											}
-										?>
-										<tr style="background-color:<?php echo $bg; ?>;">
-											<td>
-												<span class="dailyFreq">Attack:&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['attack']; ?></span>
-											</td>
-										</tr>
-										<?php 
-											$dailyRowBG++;
-										} 
-										
-										if($dailyRow['hit'] != "") {
-											if($dailyRowBG % 2 == "0") {
-												$bg = "#D1D1D1";
-											} else {
-												$bg = "#E3E3E3";
-											}
-										?>
-										<tr style="background-color:<?php echo $bg; ?>;">
-											<td>
-												<span class="dailyFreq">Effect:&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['hit']; ?></span>
-											</td>
-										</tr>
-										<?php 
-											$dailyRowBG++;
-										} 
-										
-										if($dailyRow['miss'] != "") {
-											if($dailyRowBG % 2 == "0") {
-												$bg = "#D1D1D1";
-											} else {
-												$bg = "#E3E3E3";
-											}
-										?>
-										<tr style="background-color:<?php echo $bg; ?>;">
-											<td>
-												<span class="dailyFreq">Miss:&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['miss']; ?></span>
-											</td>
-										</tr>
-										<?php 
-											$dailyRowBG++;
-										} 
-										
-										if($dailyRow['special'] != "") {
-											if($dailyRowBG % 2 == "0") {
-												$bg = "#D1D1D1";
-											} else {
-												$bg = "#E3E3E3";
-											}
-										?>
-										<tr style="background-color:<?php echo $bg; ?>;">
-											<td>
-												<span class="dailyFreq">Special:&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['special']; ?></span>
-											</td>
-										</tr>
-										<?php 
+		<?php
+		if ($dailyRow['target'] != "") {
+			if ($dailyRowBG % 2 == "0") {
+				$bg = "#D1D1D1";
+			} else {
+				$bg = "#E3E3E3";
+			}
+			?>
+											<tr style="background-color:<?php echo $bg; ?>;">
+												<td>
+													<span class="dailyFreq">Target:&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['target']; ?></span>
+												</td>
+											</tr>
+											<?php
 											$dailyRowBG++;
 										}
+										if ($dailyRow['attack'] != "") {
+											if ($dailyRowBG % 2 == "0") {
+												$bg = "#D1D1D1";
+											} else {
+												$bg = "#E3E3E3";
+											}
+											?>
+											<tr style="background-color:<?php echo $bg; ?>;">
+												<td>
+													<span class="dailyFreq">Attack:&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['attack']; ?></span>
+												</td>
+											</tr>
+											<?php
+											$dailyRowBG++;
+										}
+
+										if ($dailyRow['hit'] != "") {
+											if ($dailyRowBG % 2 == "0") {
+												$bg = "#D1D1D1";
+											} else {
+												$bg = "#E3E3E3";
+											}
+											?>
+											<tr style="background-color:<?php echo $bg; ?>;">
+												<td>
+													<span class="dailyFreq">Effect:&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['hit']; ?></span>
+												</td>
+											</tr>
+										<?php
+										$dailyRowBG++;
+									}
+
+									if ($dailyRow['miss'] != "") {
+										if ($dailyRowBG % 2 == "0") {
+											$bg = "#D1D1D1";
+										} else {
+											$bg = "#E3E3E3";
+										}
 										?>
+											<tr style="background-color:<?php echo $bg; ?>;">
+												<td>
+													<span class="dailyFreq">Miss:&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['miss']; ?></span>
+												</td>
+											</tr>
+			<?php
+			$dailyRowBG++;
+		}
+
+		if ($dailyRow['special'] != "") {
+			if ($dailyRowBG % 2 == "0") {
+				$bg = "#D1D1D1";
+			} else {
+				$bg = "#E3E3E3";
+			}
+			?>
+											<tr style="background-color:<?php echo $bg; ?>;">
+												<td>
+													<span class="dailyFreq">Special:&nbsp;</span><span class="dailyPower"><?php echo $dailyRow['special']; ?></span>
+												</td>
+											</tr>
+			<?php
+			$dailyRowBG++;
+		}
+		?>
 									</table>
-								<br/>
-									<?php
-								}
-								?>
+									<br/>
+		<?php
+	}
+	?>
 							</div>
 						</div>
 						<script>
@@ -901,9 +958,9 @@ mysql_select_db("$db") or die(mysql_error());
 						});
 					</script>
 				</div><?php
-				$charCount++;
-			}
-			?>
+	$charCount++;
+}
+?>
 
 		</div>
 		<div id='sidebar'></div>
