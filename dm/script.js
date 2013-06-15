@@ -3,6 +3,9 @@ var dnd = {
 	feats: new Array(),
 	actions: new Array(),
 	init: function() {
+		$("#info").load("pages/info.php", function() {
+			$("#info").show();
+		});
 		$("#addChar").hide();
 		$("#editChar").hide();
 		$("#addEnemies").hide();
@@ -10,7 +13,9 @@ var dnd = {
 		$("#userList").hide();
 		$("#dmTools").hide();
 		$("#infoBtn").click(function() {
-			$("#info").show();
+			$("#info").load("pages/info.php", function() {
+				$("#info").show();
+			});
 			$("#addChar").hide();
 			$("#editChar").hide();
 			$("#addEnemies").hide();

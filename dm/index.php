@@ -40,7 +40,7 @@ if (isset($_SESSION['sid']) && isset($_SESSION['id'])) {
 		<span id='message' class='errMsg'></span>
 		<br/>
 		<div id='main'>
-			<div id='info'>Attacks are added and show on front page. This will become a list of useful shit, once someone writes it.</div>
+			<div id='info'></div>
 			<!-- Add Character Page -->
 			<div id='addChar'></div>
 			<!-- Edit Character Page -->

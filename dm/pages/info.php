@@ -1,0 +1,1 @@
+Attacks are added and show on front page. This will become a list of useful shit, once someone writes it.
