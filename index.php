@@ -149,7 +149,7 @@ mysql_select_db("$db") or die(mysql_error());
 							<br/>
 							<span class="charExpToLevel">EXP to Level: <?php echo getExpToLevel($exp); ?></span>
 							<br/>
-							<span class="charWeight">Capacity: <?php echo $weightRow['SUM(weight)']; ?>/<?php echo $row['maxweight'] ?></span>
+							<span class="charWeight">Encumbrance: <?php echo $weightRow['SUM(weight)']; ?>/<?php echo $row['maxweight'] ?></span>
 						</div>
 						<div style="float: right;">
 							<span class="charHP" style="color: <?php echo $hpcolour; ?>;"><?php
@@ -176,6 +176,7 @@ mysql_select_db("$db") or die(mysql_error());
 								</tr>
 							</table>
 							<br />
+							<br />
 							<table style="font-family: Verdana,Arial,sans-serif;border:0px;width:300px;padding-top:5px;">
 								<tr>
 									<th style="font-size:14px;width:33%;">Diety</th>
@@ -188,6 +189,8 @@ mysql_select_db("$db") or die(mysql_error());
 									<td><?php echo $row['languages']; ?></td>
 								</tr>
 							</table>
+							<br />
+							<br />
 							<table style="font-family: Verdana,Arial,sans-serif;border:0px;width:300px;padding-top:5px;">
 								<tr>
 									<th style="font-size:14px;width:50%;">Resists</th>

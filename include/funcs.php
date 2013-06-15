@@ -87,7 +87,7 @@ function getLevel($exp) {
 
 function getExpToLevel($exp) {
 	if($exp < 1000) {
-		return $exp;
+		return 1000 - $exp;
 	} else if($exp < 2250) {
 		return 2250 - $exp;
 	} else if($exp < 3750) {
