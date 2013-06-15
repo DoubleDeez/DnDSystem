@@ -79,7 +79,7 @@ if (isset($_SESSION['sid']) && isset($_SESSION['id'])) {
 				</div>
 				<br />
 				<div style="float:left;padding-right:50px;">
-					<input type="hidden" id="editid" />
+					<input type="hidden" id="editid" value="0" />
 					<label style="float:left;" for="name">Name: </label>
 					<input style="float:right;" type="text" id="editname" class="editChar" />
 					<br style="clear:both;" />

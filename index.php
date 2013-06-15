@@ -164,7 +164,7 @@ $setRow = mysql_fetch_assoc($setRes);
 							<br/>
 							<span class="charExpToLevel">EXP to Level: <?php echo getExpToLevel($exp); ?></span>
 							<br/>
-							<span class="charWeight">Encumbrance: <?php echo $weightRow['weight']; ?>/<?php echo $row['maxweight'] ?></span>
+							<span class="charWeight">Encumbrance: <?php echo $weightRow['weight']*1; ?>/<?php echo $row['maxweight']*1 ?></span>
 						</div>
 						<div style="float: right;">
 							<span class="charHP" style="color: <?php echo $hpcolour; ?>;"><?php

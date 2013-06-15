@@ -467,6 +467,11 @@ var dnd = {
 				$('#addActionAction').trigger('click');
 			}
 		});
+		$("#editChar").keydown(function(e) {
+			if($("#editid").val() === "0") {
+				alert("Click edit to load a character first!");
+			}
+		});
 		$("#dmEXPAction").click(function() {
 			var dataD = {
 				exp: $("#dmEXP").val()
