@@ -125,17 +125,10 @@ var dnd = {
 							hswind: $("#edithswind").is(":checked"),
 							disable: $("#editdisable").is(":checked")
 						};
-						for (var i = 0; i < dnd.inventory.length; i++) {
-							var item = dnd.inventory[i];
-							item.name = $("#invName" + item.id).val();
-							item.desc = $("#invDesc" + item.id).val();
-							item.quantity = $("#invQuantity" + item.id).val();
-							dnd.inventory[i] = item;
-						}
 						$("#editCharAction").attr("disabled", "disabled");
 						$.post("calls/editChar.php", JSON.stringify(dataD), function(data, status) {
 							$("#editCharList").load("calls/charList.php?id=" + id + "&r=" + rank, function() {
-								$("#edit" + $("#invAddCharID").val()).trigger("click");
+								$("#edit" + $("#editid").val()).trigger("click");
 							});
 							$("#editCharMessage").html(data);
 							$("#editCharMessage").fadeOut(0);
@@ -147,22 +140,6 @@ var dnd = {
 								});
 							}, 10000);
 							$("#editCharAction").removeAttr("disabled");
-						});
-						$.post("calls/editInv.php", JSON.stringify(dnd.inventory), function(data, status) {
-							$("#editCharList").load("calls/charList.php?id=" + id + "&r=" + rank, function() {
-								$("#edit" + $("#invAddCharID").val()).trigger("click");
-							});
-
-							$("#editInvMessage").html(data);
-							$("#editInvMessage").fadeOut(0);
-							$("#editInvMessage").fadeIn();
-							window.setTimeout(function() {
-								$("#editInvMessage").fadeOut(null, function() {
-									$("#editInvMessage").html("");
-									$("#editInvMessage").fadeIn();
-								});
-							}, 10000);
-							$("#editInvAction").removeAttr("disabled");
 						});
 					});
 					$("#addInvAction").click(function() {
@@ -580,6 +557,25 @@ var dnd = {
 							});
 						}, 10000);
 						$("#dmAddTime").removeAttr("disabled");
+					});
+				});
+				$("#dmSettings").click(function() {
+					var dataD = {
+						init: $("#dmInit").is(":checked")
+					};
+					$("#dmSettings").attr("disabled", "disabled");
+					$.post("calls/dmSettings.php", JSON.stringify(dataD), function(data, status) {
+						$("#message").html(data);
+						$("#message").fadeOut(0);
+						$("#message").fadeIn();
+						$("#dmToolsBtn").trigger("click");
+						window.setTimeout(function() {
+							$("#message").fadeOut(null, function() {
+								$("#message").html("");
+								$("#message").fadeIn();
+							});
+						}, 10000);
+						$("#dmSettings").removeAttr("disabled");
 					});
 				});
 			});

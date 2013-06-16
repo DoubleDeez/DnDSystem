@@ -7,17 +7,17 @@ mysql_select_db("$db") or die(mysql_error());
 ?>
 
 <div style="float:left;">
-	<h4>Split EXP among all active characters:</h4>
+	<h3>Split EXP among all active characters:</h3>
 	<label for="dmEXP">EXP Amount: </label>
 	<input type="text" id="dmEXP" />
 	<input type="button" id="dmEXPAction" value="Add EXP" />
 </div>
 <div style="float:left;padding-left:50px;">
-	<h4>Reset Encounter Initiatives:</h4>
+	<h3>Reset Encounter Initiatives:</h3>
 	<input type="button" id="dmInitAction" value="Reset Initiatives" />
 </div>
 <div style="float:left;padding-left:50px;">
-	<h4>Set the owner of a character:</h4>
+	<h3>Set the owner of a character:</h3>
 	<label for="dmOwner">Owner:</label>
 	<select id="dmOwner">
 		<?php
@@ -79,5 +79,14 @@ mysql_select_db("$db") or die(mysql_error());
 	<input type="text" id="dmAddMin"  size="1" value="0"/>:
 	<input type="text" id="dmAddSec"  size="1" value="0"/>&nbsp;
 	<input type="button" id="dmAddTime" value="Add" />
+</div>
+<br style="clear:both;"/>
+<br/>
+<div style="float:left;">
+	<h3>Settings:</h3>
+	<label for="dmInit">Show Initiative Bar: </label>
+	<input type="checkbox" id="dmInit" <?php echo ($setRow['initiative'] == "1") ? "checked='checked'": "";?>/>
+	<br/><br/>
+	<input type="button" id="dmSettings" value="Apply" />
 </div>
 <br style="clear:both;"/>

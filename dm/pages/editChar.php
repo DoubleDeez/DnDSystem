@@ -66,16 +66,24 @@
 	<input style="float:right;" type="text" id="editresist" class="editChar" />
 	<br style="clear:both;" />
 	<label style="float:left;" for="editac">AC: </label>
-	<input style="float:right;" type="text" id="editac" class="editChar" />
+	<input style="float:right;" type="text" id="editactemp" size="4" class="editChar" />
+	<span style="float:right;">&nbsp;&plus;&nbsp;</span>
+	<input style="float:right;" type="text" id="editac" size="4" class="editChar" />
 	<br style="clear:both;" />
 	<label style="float:left;" for="editfort">Fortitude: </label>
-	<input style="float:right;" type="text" id="editfort" class="editChar" />
+	<input style="float:right;" type="text" id="editforttemp" size="4" class="editChar" />
+	<span style="float:right;">&nbsp;&plus;&nbsp;</span>
+	<input style="float:right;" type="text" id="editfort" size="4" class="editChar" />
 	<br style="clear:both;" />
 	<label style="float:left;" for="editreflex">Reflex: </label>
-	<input style="float:right;" type="text" id="editreflex" class="editChar" />
+	<input style="float:right;" type="text" id="editreflextemp" size="4" class="editChar" />
+	<span style="float:right;">&nbsp;&plus;&nbsp;</span>
+	<input style="float:right;" type="text" id="editreflex" size="4" class="editChar" />
 	<br style="clear:both;" />
 	<label style="float:left;" for="editwill">Will: </label>
-	<input style="float:right;" type="text" id="editwill" class="editChar" />
+	<input style="float:right;" type="text" id="editwilltemp" size="4" class="editChar" />
+	<span style="float:right;">&nbsp;&plus;&nbsp;</span>
+	<input style="float:right;" type="text" id="editwill" size="4" class="editChar" />
 	<br style="clear:both;" />
 	<label style="float:left;" for="editstr">Base Strength: </label>
 	<input style="float:right;" type="text" id="editstr" class="editChar" />
