@@ -195,6 +195,7 @@ $setRow = mysql_fetch_assoc($setRes);
 					$weightRow = mysql_fetch_assoc($weightRes);
 					?>
 					<div class="charInfo">
+						<img style="float: left;padding-right: 10px;" src="<?php echo $row['avatar'] ?>" width="100" height="100" />
 						<div style="float: left;">
 							<span class="charName"><?php echo $row['name']; ?></span>&nbsp;<a class="linkBtn toggleChar" id="toggleChar<?php echo $row['id']; ?>">(collapse)</a>
 							<br/>

@@ -106,6 +106,7 @@ var dnd = {
 							resist: $("#editresist").val(),
 							align: $("#editalign").val(),
 							diet: $("#editdiet").val(),
+							avatar: $("#editavatar").val(),
 							acr: $("#editacr").val(),
 							arc: $("#editarc").val(),
 							ath: $("#editath").val(),

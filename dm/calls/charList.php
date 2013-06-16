@@ -69,6 +69,7 @@ if ($_GET['r'] >= 10) {
 				$("#editclass").val("<?php echo $row['class']; ?>");
 				$("#edithp").val("<?php echo $row['hp']; ?>");
 				$("#editmaxhp").val("<?php echo $row['maxhp']; ?>");
+				$("#editavatar").val("<?php echo $row['avatar']; ?>");
 				$("#editac").val("<?php echo $row['ac']; ?>");
 				$("#editfort").val("<?php echo $row['fortitude']; ?>");
 				$("#editreflex").val("<?php echo $row['reflex']; ?>");

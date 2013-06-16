@@ -51,6 +51,9 @@
 	<label style="float:left;" for="edithsleft">Healing Surges Remaining: </label>
 	<input style="float:right;" type="text" id="edithsleft" class="editChar" />
 	<br style="clear:both;" />
+	<label style="float:left;" for="editavatar">Avatar URL: </label>
+	<input style="float:right;" type="text" id="editavatar" class="editChar" />
+	<br style="clear:both;" />
 	<label style="float:left;" for="edithswind">Second Wind Available? </label>
 	<input style="float:right;" type="checkbox" id="edithswind" class="editChar" />
 	<br style="clear:both;" />
