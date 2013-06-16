@@ -240,9 +240,9 @@ $setRow = mysql_fetch_assoc($setRes);
 									<th style="font-size:14px;width:34%;">Languages</th>
 								</tr>
 								<tr>
-									<td><?php echo $row['diety']; ?></td>
-									<td><?php echo $row['alignment']; ?></td>
-									<td><?php echo $row['languages']; ?></td>
+									<td style="vertical-align:top;"><?php echo $row['diety']; ?></td>
+									<td style="vertical-align:top;"><?php echo $row['alignment']; ?></td>
+									<td style="vertical-align:top;"><?php echo $row['languages']; ?></td>
 								</tr>
 							</table>
 							<br />
@@ -253,8 +253,8 @@ $setRow = mysql_fetch_assoc($setRes);
 									<th style="font-size:14px;width:50%;">Vulnerable</th>
 								</tr>
 								<tr>
-									<td><?php echo $row['resist']; ?></td>
-									<td><?php echo $row['vulnerable']; ?></td>
+									<td style="vertical-align:top;"><?php echo $row['resist']; ?></td>
+									<td style="vertical-align:top;"><?php echo $row['vulnerable']; ?></td>
 								</tr>
 							</table>
 							<br />
