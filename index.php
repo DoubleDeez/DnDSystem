@@ -267,10 +267,10 @@ $setRow = mysql_fetch_assoc($setRes);
 									<th style="font-size:14px;width:25%;">Will</th>
 								</tr>
 								<tr>
-									<td><?php echo $row['ac']; ?></td>
-									<td><?php echo $row['fortitude']; ?></td>
-									<td><?php echo $row['reflex']; ?></td>
-									<td><?php echo $row['will']; ?></td>
+									<td><?php echo $row['ac'] . (($row['actemp'] > 0)? " + ".$row['actemp'] : (($row['actemp'] < 0)? " - ".substr($row['actemp'], 1) : "")); ?></td>
+									<td><?php echo $row['fortitude'] . (($row['fortitudetemp'] > 0)? " + ".$row['fortitudetemp'] : (($row['fortitudetemp'] < 0)? " - ".substr($row['fortitudetemp'], 1) : "")); ?></td>
+									<td><?php echo $row['reflex'] . (($row['reflextemp'] > 0)? " + ".$row['reflextemp'] : (($row['reflextemp'] < 0)? " - ".substr($row['reflextemp'], 1) : "")); ?></td>
+									<td><?php echo $row['will'] . (($row['willtemp'] > 0)? " + ".$row['willtemp'] : (($row['willtemp'] < 0)? " - ".substr($row['willtemp'], 1) : "")); ?></td>
 								</tr>
 							</table>
 							<br />

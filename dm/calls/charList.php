@@ -73,6 +73,10 @@ if ($_GET['r'] >= 10) {
 				$("#editfort").val("<?php echo $row['fortitude']; ?>");
 				$("#editreflex").val("<?php echo $row['reflex']; ?>");
 				$("#editwill").val("<?php echo $row['will']; ?>");
+				$("#editactemp").val("<?php echo $row['actemp']; ?>");
+				$("#editforttemp").val("<?php echo $row['fortitudetemp']; ?>");
+				$("#editreflextemp").val("<?php echo $row['reflextemp']; ?>");
+				$("#editwilltemp").val("<?php echo $row['willtemp']; ?>");
 				$("#editexp").val("<?php echo $row['exp']; ?>");
 				$("#editmaxweight").val("<?php echo $row['maxweight']; ?>");
 				$("#edittemphp").val("<?php echo $row['temphp']; ?>");
