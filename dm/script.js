@@ -526,7 +526,7 @@ var dnd = {
 						ownerid: $("#dmOwner").val(),
 						charid: $("#dmChar").val()
 					};
-					$("#dmOwnerActioon").attr("disabled", "disabled");
+					$("#dmOwnerAction").attr("disabled", "disabled");
 					$.post("calls/changeOwner.php", JSON.stringify(dataD), function(data, status) {
 						$("#message").html(data);
 						$("#message").fadeOut(0);
@@ -538,6 +538,48 @@ var dnd = {
 							});
 						}, 10000);
 						$("#dmOwnerAction").removeAttr("disabled");
+					});
+				});
+				$("#dmSetTime").click(function() {
+					var dataD = {
+						hour: $("#dmSetHour").val(),
+						min: $("#dmSetMin").val(),
+						sec: $("#dmSetSec").val()
+					};
+					$("#dmSetTime").attr("disabled", "disabled");
+					$.post("calls/setTime.php", JSON.stringify(dataD), function(data, status) {
+						$("#message").html(data);
+						$("#message").fadeOut(0);
+						$("#message").fadeIn();
+						$("#dmToolsBtn").trigger("click");
+						window.setTimeout(function() {
+							$("#message").fadeOut(null, function() {
+								$("#message").html("");
+								$("#message").fadeIn();
+							});
+						}, 10000);
+						$("#dmSetTime").removeAttr("disabled");
+					});
+				});
+				$("#dmAddTime").click(function() {
+					var dataD = {
+						hour: $("#dmAddHour").val(),
+						min: $("#dmAddMin").val(),
+						sec: $("#dmAddSec").val()
+					};
+					$("#dmAddTime").attr("disabled", "disabled");
+					$.post("calls/addTime.php", JSON.stringify(dataD), function(data, status) {
+						$("#message").html(data);
+						$("#message").fadeOut(0);
+						$("#message").fadeIn();
+						$("#dmToolsBtn").trigger("click");
+						window.setTimeout(function() {
+							$("#message").fadeOut(null, function() {
+								$("#message").html("");
+								$("#message").fadeIn();
+							});
+						}, 10000);
+						$("#dmAddTime").removeAttr("disabled");
 					});
 				});
 			});
